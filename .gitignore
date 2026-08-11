@@ -9,3 +9,6 @@ assets/_original/
 # Hilfsdateien
 _test*.html
 _mess.html
+
+# Der fertig gepackte Ordner fuer FileZilla - wird jedes Mal neu gebaut
+_hochladen/

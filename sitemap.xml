@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Inhaltsverzeichnis für Google und Co. Bei neuen Seiten hier ergänzen. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://robschman.at/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://robschman.at/impressum.html</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://robschman.at/datenschutz.html</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>0.3</priority>
+  </url>
+</urlset>

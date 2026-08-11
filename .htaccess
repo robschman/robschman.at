@@ -1,0 +1,80 @@
+# ============================================================================
+# Server-Einstellungen für robschman.at (IONOS, Apache)
+#
+# Diese Datei ist unsichtbar (der Punkt am Anfang). In FileZilla muss man
+# versteckte Dateien einblenden, um sie zu sehen:
+#     Server -> "Verzeichnislisten filtern" bzw.
+#     Ansicht -> "Versteckte Dateien anzeigen"
+#
+# Alles steht in <IfModule>-Klammern: Kann der Server etwas davon nicht,
+# überspringt er den Block einfach, statt einen Fehler zu werfen.
+# ============================================================================
+
+
+# ---------------------------------------------------------------------------
+# 1. IMMER https
+# Wer http://robschman.at eintippt, wird auf https:// weitergeleitet.
+# WICHTIG: Erst einschalten, wenn das SSL-Zertifikat bei IONOS aktiv ist.
+# Sonst landet man in einer Endlosschleife.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+# 2. Dateien komprimiert ausliefern
+# Text wird vor dem Senden zusammengepackt. Das Stylesheet schrumpft dadurch
+# von rund 45 KB auf etwa 9 KB - die Seite ist am Handy spürbar schneller.
+# Bilder und Schriften sind schon gepackt, die bleiben außen vor.
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+# 3. Zwischenspeicher im Browser
+# Wer die Seite ein zweites Mal aufruft, lädt nicht alles neu.
+#
+#   Schriften und Bilder: 1 Jahr  - die ändern sich praktisch nie
+#   Stylesheet und Skript: 1 Tag  - damit deine Änderungen schnell ankommen
+#   HTML-Seiten:           1 Std. - sonst sehen Besucher alte Texte
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType font/woff2       "access plus 1 year"
+  ExpiresByType image/jpeg       "access plus 1 year"
+  ExpiresByType image/png        "access plus 1 year"
+  ExpiresByType image/svg+xml    "access plus 1 year"
+  ExpiresByType text/css         "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+  ExpiresByType text/html        "access plus 1 hour"
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+# 4. Ein paar Sicherheits-Kopfzeilen
+# Kosten nichts und verhindern ein paar bekannte Angriffsarten.
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Verbietet fremden Seiten, robschman.at in einen Rahmen zu stecken
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Verhindert, dass der Browser Dateitypen selbst errät
+  Header always set X-Content-Type-Options "nosniff"
+  # Gibt beim Klick auf einen fremden Link nur die Domain weiter, nicht die Seite
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Diese Seite braucht weder Kamera noch Mikrofon noch Standort
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+
+# ---------------------------------------------------------------------------
+# 5. Standardseite
+# ---------------------------------------------------------------------------
+DirectoryIndex index.html
