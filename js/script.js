@@ -487,7 +487,6 @@ function grossansichtAktivieren() {
     if (!schicht) return;
     schicht.remove();
     schicht = null;
-    document.body.classList.remove('rs-gross-offen');
     if (herkunft) herkunft.focus();     // Fokus zurueck, wichtig fuer Tastatur
     herkunft = null;
   }
@@ -517,7 +516,6 @@ function grossansichtAktivieren() {
     });
 
     document.body.appendChild(schicht);
-    document.body.classList.add('rs-gross-offen');
     schicht.querySelector('.rs-gross__zu').focus();
 
     // Sobald das Bild geladen ist: Hochformat kleiner halten, und den

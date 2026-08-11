@@ -295,9 +295,9 @@ html {
   text-size-adjust: 100%;
 }
 
-/* Beim Antippen zeigt iPhone-Safari sonst einen grauen Kasten ueber dem
-   Element. Ein dezenter gruener Schimmer passt besser zur Marke. */
-a, button { -webkit-tap-highlight-color: rgba(74, 222, 128, 0.18); }
+/* Der gruene Tipp-Schimmer ist wieder draussen: Er war einer der Verdaechtigen,
+   als auf dem iPhone die Beschriftung gruener Knoepfe verschwand. Schoenheit
+   ist kein Grund, ein Risiko einzugehen - der graue Standard tut es auch. */
 
 body {
   margin: 0;
@@ -493,8 +493,12 @@ code, kbd, samp, pre {
   border: var(--border-hairline) solid var(--_bd); border-radius: var(--radius-md);
   background: var(--_bg); color: var(--_fg); cursor: pointer; text-decoration: none;
   white-space: nowrap;
+  /* "color" steht bewusst NICHT in dieser Liste. Eine Farbe weich zu
+     ueberblenden, die aus verschachtelten Variablen kommt, brachte
+     iPhone-Safari durcheinander - der Text verschwand. Hintergrund und
+     Rahmen zu ueberblenden reicht voellig. */
   transition: background var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
-    color var(--dur) var(--ease-out), transform var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
     box-shadow var(--dur) var(--ease-out); }
 .rs-btn:hover { text-decoration: none; }
 .rs-btn:focus-visible { outline: var(--border-thick) solid var(--focus-ring); outline-offset: 2px; }
@@ -502,10 +506,25 @@ code, kbd, samp, pre {
 .rs-btn--sm { font-size: 13px; padding: 8px 14px; }
 .rs-btn--md { font-size: 14px; padding: 11px 20px; }
 .rs-btn--lg { font-size: 16px; padding: 15px 28px; }
+
+/* ---- WICHTIG: Schriftfarbe des gruenen Knopfes fest verdrahten ----
+   Vorher hing sie an einer dreistufigen Kette:
+       color -> --_fg -> --on-accent -> --on-green -> #0B0B0B
+   Reisst die Kette beim Neuzeichnen (iPhone-Safari macht das beim Antippen
+   und beim Schliessen der Grossansicht), faellt "color" auf "erben" zurueck
+   und erbt Weiss. Weiss auf Gruen hat 1,6:1 - der Knopf sah dann leer aus.
+   Hier steht die Farbe deshalb direkt, ohne Umweg, und zusaetzlich als
+   -webkit-text-fill-color, das Safari nicht wegwirft. */
+.rs-btn--primary { color: #0B0B0B; -webkit-text-fill-color: #0B0B0B; }
 .rs-btn--primary:hover { --_bg: var(--accent-hover); box-shadow: var(--shadow-accent); }
 .rs-btn--primary:active { --_bg: var(--accent-active); box-shadow: none; }
-.rs-btn--secondary { --_bg: transparent; --_fg: var(--text); --_bd: var(--line-strong); }
-.rs-btn--secondary:hover { --_bd: var(--accent); --_fg: var(--accent); background: var(--surface-hover); }
+/* In den Terracotta-Flaechen sind Knoepfe weiss mit terracottafarbener Schrift */
+.theme-terra .rs-btn--primary { color: #C0392B; -webkit-text-fill-color: #C0392B; }
+
+.rs-btn--secondary { --_bg: transparent; --_fg: var(--text); --_bd: var(--line-strong);
+  color: var(--text); -webkit-text-fill-color: var(--text); }
+.rs-btn--secondary:hover { --_bd: var(--accent); background: var(--surface-hover);
+  color: var(--accent); -webkit-text-fill-color: var(--accent); }
 .rs-btn--block { display: flex; width: 100%; }
 
 /* --- Status-Badge --------------------------------------------------------
@@ -829,9 +848,12 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 
 /* Die Grossansicht selbst */
 .rs-gross { position: fixed; inset: 0; z-index: var(--z-overlay);
-  /* fast deckend plus Unschaerfe - sonst liest man den Text dahinter mit */
-  background: rgba(11,11,11,0.97);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  /* Deckend statt durchscheinend mit Unschaerfe.
+     Die Unschaerfe (backdrop-filter) sah zwar schoener aus, brachte aber
+     iPhone-Safari beim Schliessen aus dem Tritt: Danach war die Beschriftung
+     des gruenen Knopfes in der Kopfzeile weg. Deckend ist unauffaellig
+     genauso gut und kann nicht schiefgehen. */
+  background: #0B0B0B;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: var(--sp-4); padding: var(--sp-7) var(--sp-4) var(--sp-5);
   animation: rs-auf var(--dur) var(--ease-out); }
@@ -868,8 +890,12 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .rs-gross__zu:hover { border-color: var(--accent); color: var(--accent); }
 .rs-gross__zu:focus-visible { outline: var(--border-thick) solid var(--focus-ring);
   outline-offset: 2px; }
-/* Solange die Grossansicht offen ist, soll die Seite dahinter nicht scrollen */
-body.rs-gross-offen { overflow: hidden; }
+/* Die Seite dahinter wird NICHT mehr am Scrollen gehindert.
+   Frueher stand hier "overflow: hidden". Das aendert am Handy mitten im
+   Betrieb die Seitenhoehe, worauf die klebende Kopfzeile neu gezeichnet
+   wird - und dabei ging die Knopfbeschriftung verloren. Die Grossansicht
+   liegt ohnehin fest ueber allem, ein bisschen Scrollen dahinter stoert
+   niemanden. */
 
 /* Hinweis fuer den Fall, dass JavaScript ausgeschaltet ist */
 .cs-noscript { border: 1px solid var(--line); border-radius: var(--radius-md);
