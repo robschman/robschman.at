@@ -104,21 +104,28 @@ Die Seite liegt bei **IONOS** — im selben Webhosting-Paket wie der US-Aktien-S
 also ohne zusätzlichen Vertrag. Hochgeladen wird per **FileZilla**, genau wie du es
 von der Screener-Landingpage kennst.
 
-**Was hochgehört** (alles außer den Hilfsordnern):
+**Du musst nicht überlegen, welche Datei mitmuss.** Dieser Befehl packt genau das
+Richtige in einen Ordner `_hochladen` und öffnet ihn im Finder:
 
 ```
-index.html   impressum.html   datenschutz.html
-css/         js/              assets/
+cd "/Users/robschmansimac/Claude Projekte/robschman programming/website"
 ```
 
-**Was NICHT hochgehört:**
+```
+bash _tools/hochladen-vorbereiten.sh
+```
 
-- `assets/_original/` — die Roh-Screenshots, 22 MB, werden auf dem Server nicht gebraucht
-- `_tools/` — die Hilfsskripte laufen nur bei dir am Mac
-- `README.md`, `.gitignore`, `.git/`
+Dann in FileZilla den **Inhalt** von `_hochladen` in den Webordner ziehen — fertig.
 
-Am einfachsten lädst du beim ersten Mal alles hoch und später nur noch die Dateien,
-die du geändert hast.
+Weggelassen werden dabei automatisch: die 22 MB Roh-Screenshots (`assets/_original/`),
+die Hilfsskripte (`_tools/`), dieser README und die Versionsverwaltung.
+
+> **Achtung:** `.htaccess` beginnt mit einem Punkt und ist deshalb unsichtbar.
+> In FileZilla unter **Server → „Verzeichnislisten filtern"** müssen versteckte
+> Dateien sichtbar sein, sonst wird sie nicht mitkopiert — und dann greift weder
+> die https-Weiterleitung noch die Komprimierung.
+
+Später reicht es, nur die geänderten Dateien hochzuladen.
 
 ### Vorher lokal sichern (empfehlenswert)
 
