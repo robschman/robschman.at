@@ -100,37 +100,15 @@ Dann am iPhone im Browser aufrufen: `http://<diese-IP>:8123`
 
 ## So veröffentliche ich Änderungen
 
-Die Seite liegt bei **IONOS** — im selben Webhosting-Paket wie der US-Aktien-Screener,
-also ohne zusätzlichen Vertrag. Hochgeladen wird per **FileZilla**, genau wie du es
-von der Screener-Landingpage kennst.
+Die Seite liegt auf **GitHub Pages**. Veröffentlichen heißt: Änderungen in Git
+sichern und hochladen. Zwei Wege:
 
-**Du musst nicht überlegen, welche Datei mitmuss.** Dieser Befehl packt genau das
-Richtige in einen Ordner `_hochladen` und öffnet ihn im Finder:
+### Bequem: mit deinem eigenen GitHub Uploader
 
-```
-cd "/Users/robschmansimac/Claude Projekte/robschman programming/website"
-```
+Du hast dir dafür ein Programm gebaut — genau dieses steht auf der Seite, die es
+veröffentlicht. Ordner auswählen, Knopf drücken, fertig.
 
-```
-bash _tools/hochladen-vorbereiten.sh
-```
-
-Dann in FileZilla den **Inhalt** von `_hochladen` in den Webordner ziehen — fertig.
-
-Weggelassen werden dabei automatisch: die 22 MB Roh-Screenshots (`assets/_original/`),
-die Hilfsskripte (`_tools/`), dieser README und die Versionsverwaltung.
-
-> **Achtung:** `.htaccess` beginnt mit einem Punkt und ist deshalb unsichtbar.
-> In FileZilla unter **Server → „Verzeichnislisten filtern"** müssen versteckte
-> Dateien sichtbar sein, sonst wird sie nicht mitkopiert — und dann greift weder
-> die https-Weiterleitung noch die Komprimierung.
-
-Später reicht es, nur die geänderten Dateien hochzuladen.
-
-### Vorher lokal sichern (empfehlenswert)
-
-Der Ordner ist auch ein Git-Ordner. Damit hast du jede Änderung nachvollziehbar und
-kannst zurück, wenn etwas schiefgeht:
+### Oder im Terminal
 
 ```
 cd "/Users/robschmansimac/Claude Projekte/robschman programming/website"
@@ -144,15 +122,21 @@ git add -A
 git commit -m "Was du geändert hast"
 ```
 
-Das bleibt auf deinem Mac — es geht nichts ins Internet.
+```
+git push
+```
+
+Nach etwa einer Minute ist die Änderung unter robschman.at live.
+
+> **Was NICHT im Internet landet**, weil es in `.gitignore` steht oder mit einem
+> Unterstrich beginnt: `assets/_original/` (die 22 MB Roh-Screenshots),
+> `_tools/` (die Hilfsskripte) und `_hochladen/`. Darum musst du dich nicht kümmern.
 
 ### Besucherzahlen ansehen
 
-**analytics.ionos.de** → Domain `robschman.at`. Die Statistik ist cookielos und wird
-aus den Server-Protokollen erstellt; sie zählt ab dem Tag, an dem du sie im
-IONOS-Konto einschaltest.
-
----
+**dash.cloudflare.com → Web Analytics → robschman.at.** Cookielos, zählt ab dem
+Tag, an dem der Zähler eingeschaltet wurde. Denselben Dienst nutzt schon
+beautyroutine.app.
 
 ## Was wo liegt
 
@@ -164,8 +148,9 @@ css/styles.css        Alle Gestaltung, in 9 kommentierte Blöcke geteilt
 js/script.js          >>> HIER die Programm-Liste pflegen <<<
 assets/fonts/         Die Schriften (liegen lokal, nicht bei Google)
 assets/screenshots/   Die aufbereiteten Bilder der Programme
-assets/_original/     Die Roh-Screenshots (nur am Mac, nicht hochladen)
-_tools/               Hilfsskripte für Bilder (nur am Mac, nicht hochladen)
+CNAME                 Sagt GitHub, welche Domain zur Seite gehört
+assets/_original/     Die Roh-Screenshots (bleiben am Mac)
+_tools/               Hilfsskripte (bleiben am Mac)
 ```
 
 ---
@@ -176,10 +161,13 @@ _tools/               Hilfsskripte für Bilder (nur am Mac, nicht hochladen)
 Seite sie von Google laden, ginge die IP-Adresse jedes Besuchers dorthin — in
 Österreich datenschutzrechtlich heikel. Lokal ist es sauber und schneller.
 
-**Kein Formular, kein Newsletter, kein Besucherzähler.** Deshalb bleibt die
-Datenschutzerklärung kurz und es braucht weder Cookie-Banner noch
-Auftragsverarbeitungsvertrag. Kontakt läuft ausschließlich über
-`info@robschman.at`.
+**Kein Formular, kein Newsletter.** Es werden bewusst keine Adressen gesammelt —
+das erspart Double-Opt-In und einen weiteren Eintrag in der Datenschutzerklärung.
+Kontakt läuft ausschließlich über `info@robschman.at`.
+
+**Der Besucherzähler ist cookielos.** Cloudflare Web Analytics speichert keine
+IP-Adressen und setzt keine Cookies. Deshalb braucht die Seite kein
+Cookie-Fenster. Es ist die einzige Datei, die von einem fremden Server kommt.
 
 **Unter jedem E-Mail-Knopf steht die Adresse zum Kopieren.** Ein `mailto`-Link tut
 am Computer gar nichts, wenn dort kein Mailprogramm eingerichtet ist. Ohne diese
