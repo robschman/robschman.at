@@ -56,7 +56,8 @@ QUALITAET = 88             # JPEG-Qualitaet: 88 ist scharf und trotzdem klein
 # ---------------------------------------------------------------------------
 BILDER = [
     dict(ziel="kontro-io.jpg",
-         quelle="Bildschirmfoto 2026-08-11 um 16.11.32.png",
+         # helle Fassung (11.08.2026) - wirkt fuer ein Buchhaltungsprogramm serioeser
+         quelle="Bildschirmfoto 2026-08-11 um 22.03.27.png",
          # links ausrichten, damit Logo und Navigation erhalten bleiben
          art="quer", vorschnitt=None, anker="links"),
 

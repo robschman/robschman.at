@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
      role="img" aria-label="robschman">
-  <!-- Quadratische Variante der Wortmarke: gruene Kachel mit dunklem "rs_".
+  <!-- Quadratische Variante der Wortmarke: gruene Kachel mit dunklem "rp_" (robschman programming).
        Moderne Browser nehmen dieses SVG (immer scharf), aeltere die PNG-Fassungen
        favicon-32.png und apple-touch-icon.png. -->
   <rect width="64" height="64" fill="#4ADE80"/>
   <text x="32" y="41"
         font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
         font-size="29" font-weight="700" letter-spacing="-1.6"
-        text-anchor="middle" fill="#0B0B0B">rs_</text>
+        text-anchor="middle" fill="#0B0B0B">rp_</text>
 </svg>

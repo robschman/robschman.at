@@ -63,7 +63,7 @@ const PROGRAMME = [
     bild: 'kontro-io.jpg',
     alt: 'Kontro.io: Jahresübersicht mit Einnahmen, Ausgaben, Gewinn-Balken und Monatstabelle',
     form: 'quer',
-    hell: false,
+    hell: true,
     hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
   },
   {
