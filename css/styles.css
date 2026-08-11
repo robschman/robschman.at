@@ -417,8 +417,18 @@ code, kbd, samp, pre {
 .rs-claim--stack { flex-direction: column; gap: 0.06em; }
 .rs-claim--sm { font-size: var(--fs-h4); }
 .rs-claim--md { font-size: var(--fs-h2); }
-.rs-claim--lg { font-size: var(--fs-h1); }
-.rs-claim--xl { font-size: var(--fs-display); }
+
+/* WICHTIG — warum hier "min(...)" steht:
+   Der Claim darf nicht umbrechen, "Oder machen lassen." muss in EINER Zeile
+   stehen. Also muss stattdessen die Schrift kleiner werden, sobald der
+   Bildschirm schmal wird — sonst laeuft der Satz rechts aus dem Bild und man
+   kann die Seite seitlich schieben.
+   Die Rechnung: der laengste Teil hat 19 Zeichen. In JetBrains Mono ist ein
+   Zeichen 0,575-mal so breit wie hoch, macht das 10,9-fache der Schriftgroesse.
+   Bei "8,7vw minus 4px" passt er auf jede Breite - vom kleinen iPhone bis zum
+   grossen Bildschirm. Auf breiten Bildschirmen gewinnt der feste Wert. */
+.rs-claim--lg { font-size: min(var(--fs-h1),      calc(8.7vw - 4px)); }
+.rs-claim--xl { font-size: min(var(--fs-display), calc(8.7vw - 4px)); }
 
 /* --- Abschnitts-Ueberschrift --------------------------------------------- */
 .rs-sh { display: flex; flex-direction: column; gap: var(--sp-3);
@@ -788,14 +798,7 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 @media (max-width: 700px) {
   .rs-terra { padding-block: var(--sp-8); }
 
-  /* Der Claim darf nicht umbrechen ("Oder machen lassen." muss in EINER Zeile
-     stehen) - deshalb muss stattdessen die Schrift kleiner werden, sonst laeuft
-     sie am Handy rechts aus dem Bild.
-     Die Rechnung: der laengste Teil hat 19 Zeichen, in JetBrains Mono ist ein
-     Zeichen 0,575 mal so breit wie hoch -> er braucht das 10,9-fache der
-     Schriftgroesse. Bei 8,7vw minus 4px passt er auf jedes Handy. */
-  .rs-claim--lg { font-size: min(var(--fs-h1),      calc(8.7vw - 4px)); }
-  .rs-claim--xl { font-size: min(var(--fs-display), calc(8.7vw - 4px)); }
+  /* (Die Schriftgroesse des Claims wird in Block 5 fuer alle Breiten geregelt.) */
 
   /* Ueber-mich-Text kompakter, damit er auf einen Bildschirm passt */
   .cs-about__text { font-size: var(--fs-body); line-height: 1.55; margin-bottom: var(--sp-3); }
