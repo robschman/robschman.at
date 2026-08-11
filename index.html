@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>robschman — Kaufen. Mieten. Oder machen lassen.</title>
+<meta name="description" content="Kleine, nuetzliche Programme fuer Vereine, kleine Betriebe und Privatpersonen: Buchhaltung, Aktien-Screener, Diktier-Werkzeug, Turnierverwaltung. Fertig zum Kaufen, monatlich zum Mieten oder eigens fuer dich gebaut.">
+<meta name="author" content="Robert Thalhammer">
+<meta name="theme-color" content="#0B0B0B">
+
+<!-- Vorschau in WhatsApp, Facebook, LinkedIn ... -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_AT">
+<meta property="og:site_name" content="robschman">
+<meta property="og:url" content="https://robschman.at/">
+<meta property="og:title" content="robschman — Kaufen. Mieten. Oder machen lassen.">
+<meta property="og:description" content="Kleine, nuetzliche Programme fuer Vereine, kleine Betriebe und Privatpersonen. Mehrere davon sind heute im Einsatz.">
+<meta property="og:image" content="https://robschman.at/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="robschman — Kaufen. Mieten. Oder machen lassen.">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Symbole fuer Browser-Tab und Home-Bildschirm -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="canonical" href="https://robschman.at/">
+
+<!-- Die Schriften liegen lokal und werden vorab geladen, damit beim ersten
+     Aufbau nichts nachspringt. Nichts wird von Google geholt. -->
+<link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- Erste Station bei Tastaturbedienung: sichtbar, sobald man Tab drueckt -->
+<a class="u-skip" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- =====================================================================
+     1 — KOPFZEILE (bleibt beim Scrollen oben)
+     ===================================================================== -->
+<header class="rs-header">
+  <div class="rs-header__in">
+    <a class="rs-wm rs-wm--md" href="#top" aria-label="robschman — zum Seitenanfang">robschman<span
+      class="rs-wm__dot" aria-hidden="true">_</span></a>
+    <a class="rs-btn rs-btn--primary rs-btn--sm" href="#kontakt">Schreib mir</a>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <!-- ===================================================================
+       2 — HERO
+       Kein Countdown, kein erfundenes Startdatum. Nur ein ehrlicher Hinweis.
+       =================================================================== -->
+  <section id="top" class="cs-hero">
+    <div class="u-container">
+
+      <p class="cs-hero__badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>
+        </svg>
+        Vorschau · robschman.at
+      </p>
+
+      <div class="cs-hero__wm">
+        <h1 class="rs-wm rs-wm--xl">robschman<span class="rs-wm__dot" aria-hidden="true">_</span></h1>
+      </div>
+
+      <p class="rs-claim rs-claim--lg rs-claim--stack cs-hero__claim">
+        <span class="rs-claim__part">Kaufen<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Mieten<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Oder machen lassen<span class="rs-claim__dot">.</span></span>
+      </p>
+
+      <p class="u-lead cs-hero__lead">
+        Kleine, nützliche Programme für Vereine, kleine Betriebe und alle, die ein konkretes
+        Alltagsproblem haben — fertig zum Kaufen, monatlich zum Mieten oder eigens für dich gebaut.
+      </p>
+
+      <div class="cs-hero__actions">
+        <a class="rs-btn rs-btn--primary rs-btn--lg" href="#programme">Programme ansehen</a>
+
+        <!-- mailto-Button: darunter steht die Adresse zum Kopieren (Pflicht-Rückfall) -->
+        <div>
+          <a class="rs-btn rs-btn--secondary rs-btn--lg"
+             href="mailto:info@robschman.at?subject=Bitte%20informieren&amp;body=Hallo%20Robert%2C%20bitte%20informiere%20mich%2C%20sobald%20robschman.at%20online%20ist.">Sag
+             mir Bescheid, wenn’s online geht</a>
+          <p class="rs-copy" style="margin-top:var(--sp-2)">
+            <span class="rs-copy__mail">info@robschman.at</span>
+            <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+                    aria-label="info@robschman.at in die Zwischenablage kopieren">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span class="rs-copy__label">Kopieren</span>
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <p class="cs-hero__note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        Die vollständige Seite kommt bald — hier ein Vorgeschmack.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       3 — KURZ-ERKLÄRUNG: was robschman ist
+       =================================================================== -->
+  <section id="was" class="cs-sec cs-sec--raised">
+    <div class="u-container">
+      <div class="cs-explain">
+        <p class="cs-explain__text">
+          robschman baut kleine Programme, die ein konkretes Problem lösen: Auswertungen,
+          Automatisierungen, Web- und iPhone-Apps. Kein Agentur-Aufwand, keine Monatsprojekte —
+          ein Werkzeug, das ab dem ersten Tag Arbeit abnimmt.
+        </p>
+        <ul class="cs-explain__list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Kaufen</b> — einmal zahlen, herunterladen, fertig.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Mieten</b> — dasselbe Programm im Monatsabo.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Machen lassen</b> — etwas Eigenes, auf Anfrage gebaut.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       4 — PRODUKTVORSCHAU
+       Die Karten baut js/script.js aus der Liste PROGRAMME.
+       Willst du etwas ändern: dorthin, nicht hierher.
+       =================================================================== -->
+  <section id="programme" class="cs-sec">
+    <div class="u-container">
+      <header class="rs-sh">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Produktvorschau</p>
+        <h2 class="rs-sh__title">Das ist schon da</h2>
+        <p class="rs-sh__sub">
+          Drei Programme sind öffentlich zu sehen, die übrigen laufen täglich im Einsatz und
+          werden gerade für den Verkauf fertig gemacht. Sag mir, welches du brauchst — dann kommt es zuerst.
+        </p>
+      </header>
+
+      <!-- Hier hinein setzt das Skript die drei Gruppen mit ihren Karten -->
+      <div id="programm-liste"></div>
+
+      <noscript>
+        <p class="cs-noscript">
+          Für die Programm-Vorschau braucht es JavaScript. Schreib mir einfach an
+          <a href="mailto:info@robschman.at">info@robschman.at</a> — ich schicke dir gern eine
+          Übersicht per E-Mail.
+        </p>
+      </noscript>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       5 — CLAIM-BLOCK (Terracotta, erste von genau zwei farbigen Flächen)
+       Nur der Claim. Kein Fließtext, kein Button — Terracotta ist nie anklickbar.
+       =================================================================== -->
+  <section id="claim" class="rs-terra theme-terra">
+    <div class="rs-terra__in">
+      <p class="rs-claim rs-claim--xl rs-claim--stack">
+        <span class="rs-claim__part">Kaufen<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Mieten<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Oder machen lassen<span class="rs-claim__dot">.</span></span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       6 — MACHEN LASSEN
+       =================================================================== -->
+  <section id="custom" class="cs-sec cs-sec--raised">
+    <div class="u-container">
+      <div class="cs-split">
+        <header class="rs-sh" style="margin-bottom:0">
+          <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Machen lassen</p>
+          <h2 class="rs-sh__title">Du brauchst etwas Eigenes?</h2>
+          <p class="rs-sh__sub">
+            Beschreib mir dein Problem in ein paar Sätzen — ich sage dir ehrlich, ob sich ein
+            Programm dafür lohnt und was es kostet.
+          </p>
+        </header>
+        <div class="cs-split__aside">
+          <a class="rs-btn rs-btn--primary rs-btn--lg"
+             href="mailto:info@robschman.at?subject=Projekt-Anfrage">Projekt anfragen</a>
+          <p class="rs-copy">
+            <span class="rs-copy__mail">info@robschman.at</span>
+            <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+                    aria-label="info@robschman.at in die Zwischenablage kopieren">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span class="rs-copy__label">Kopieren</span>
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       7 — BEREITS UMGESETZT (Referenz, bewusst außerhalb des Karten-Rasters)
+       =================================================================== -->
+  <section id="referenz" class="cs-sec">
+    <div class="u-container">
+      <header class="rs-sh">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Bereits umgesetzt</p>
+        <h2 class="rs-sh__title">Eine Auftragsarbeit, die läuft</h2>
+      </header>
+
+      <article class="rs-ref">
+        <div>
+          <div class="rs-ref__client">Auftragsarbeit für einen Sportverein</div>
+          <h3 class="rs-ref__title">VTW Turnierplanung</h3>
+          <p class="rs-ref__desc">
+            Turnierplan, Spielstände und Live-Anzeige fürs Volleyballturnier — anpassbar auf
+            Fußball, Tennis und jede eigene Mannschaft.
+          </p>
+          <span class="rs-status rs-status--soon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"/></svg>
+            Umgesetzt
+          </span>
+        </div>
+        <div class="u-shot">
+          <img src="assets/screenshots/vtw-turnierplanung.jpg" width="1200" height="749" loading="lazy"
+               alt="VTW Turnierplanung: Publikums-Anzeige mit laufender Partie, den vier Gruppentabellen und den letzten Ergebnissen">
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       8 — WUNSCH-BLOCK
+       =================================================================== -->
+  <section id="wunsch" class="cs-sec cs-sec--raised">
+    <div class="u-container">
+      <div class="cs-wish">
+        <svg class="cs-wish__icon" width="26" height="26" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+          <path d="M9 18h6"/><path d="M10 22h4"/>
+        </svg>
+        <div>
+          <h2 class="cs-wish__title">Dir fehlt ein Programm?</h2>
+          <p class="cs-wish__text">
+            Sag mir, was es können soll. Auch halbfertige Ideen sind willkommen.
+          </p>
+        </div>
+        <div class="cs-wish__cta">
+          <a class="rs-btn rs-btn--secondary rs-btn--lg"
+             href="mailto:info@robschman.at?subject=Wunsch">Wunsch äußern</a>
+          <p class="rs-copy">
+            <span class="rs-copy__mail">info@robschman.at</span>
+            <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+                    aria-label="info@robschman.at in die Zwischenablage kopieren">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span class="rs-copy__label">Kopieren</span>
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       9 — ÜBER MICH (Terracotta, zweite und letzte farbige Fläche)
+       =================================================================== -->
+  <section id="ueber" class="rs-terra theme-terra">
+    <div class="rs-terra__in rs-terra__in--narrow">
+      <h2 class="cs-about__eyebrow">Über mich</h2>
+      <p class="cs-about__text">
+        Gelernt habe ich Radio- und Fernsehmechaniker. Fürs Programmieren habe ich mich immer
+        interessiert — wirklich umsetzen konnte ich es erst, seit mir KI die Werkzeuge dafür in
+        die Hand gibt.
+      </p>
+      <p class="cs-about__text">
+        Seitdem baue ich kleine Programme, die im Alltag wirklich etwas abnehmen: für Vereine,
+        kleine Betriebe und Privatpersonen. Mehrere davon sind heute im Einsatz.
+      </p>
+      <p class="cs-about__text">
+        Was ich aus dem Handwerk mitgenommen habe: Es kommt auf die Details an. Ein Programm ist
+        für mich erst fertig, wenn es sich richtig anfühlt — nicht, wenn es läuft.
+      </p>
+      <p class="cs-about__text">
+        Nebenbei arbeite ich als Personal Trainer. Der Sport ist mein Ausgleich zum Schreibtisch.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       10 — KONTAKT
+       Bewusst schwarz und nicht Terracotta: nur so darf der wichtigste
+       Button der Seite grün sein.
+       Kein Formular, kein Newsletter, kein fremder Dienst — nur eine Adresse.
+       =================================================================== -->
+  <section id="kontakt" class="cs-sec">
+    <div class="u-container">
+      <header class="rs-sh rs-sh--center">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Kontakt</p>
+        <h2 class="rs-sh__title">Schreib mir, was du brauchst</h2>
+        <p class="rs-sh__sub">
+          Eine E-Mail genügt. Kein Formular, kein Newsletter, keine Weitergabe deiner Adresse.
+        </p>
+      </header>
+
+      <div class="cs-contact__box">
+        <a class="cs-contact__mail" href="mailto:info@robschman.at">info@robschman.at</a>
+
+        <p class="rs-copy" style="justify-content:center">
+          <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+                    aria-label="info@robschman.at in die Zwischenablage kopieren">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="rs-copy__label">Adresse kopieren</span>
+          </button>
+        </p>
+
+        <div class="cs-contact__cta">
+          <a class="rs-btn rs-btn--primary rs-btn--lg"
+             href="mailto:info@robschman.at?subject=Anfrage%20%C3%BCber%20robschman.at">E-Mail schreiben</a>
+        </div>
+
+        <p class="rs-pledge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20"/><path d="M12 6v6l4 2"/>
+          </svg>
+          Antwort innerhalb von 24 Stunden an Werktagen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- =====================================================================
+     11 — FUSSZEILE
+     ===================================================================== -->
+<footer class="rs-footer">
+  <div class="rs-footer__in">
+
+    <div>
+      <span class="rs-wm rs-wm--md">robschman<span class="rs-wm__dot" aria-hidden="true">_</span></span>
+      <p class="rs-claim rs-claim--sm rs-footer__claim">
+        <span class="rs-claim__part">Kaufen<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Mieten<span class="rs-claim__dot">.</span></span><span
+              class="rs-claim__part">Oder machen lassen<span class="rs-claim__dot">.</span></span>
+      </p>
+      <a class="rs-footer__mail" href="mailto:info@robschman.at">info@robschman.at</a>
+    </div>
+
+    <div class="rs-footer__cols">
+      <div>
+        <p class="rs-footer__h">Rechtliches</p>
+        <ul class="rs-footer__list">
+          <li><a class="rs-footer__link" href="impressum.html">Impressum &amp; Offenlegung</a></li>
+          <li><a class="rs-footer__link" href="datenschutz.html">Datenschutzerklärung</a></li>
+          <li><span class="rs-footer__link rs-footer__link--soon">AGB (folgt)</span></li>
+          <li><span class="rs-footer__link rs-footer__link--soon">Widerrufsbelehrung (folgt)</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="rs-footer__h">Kontakt</p>
+        <ul class="rs-footer__list">
+          <li><a class="rs-footer__link" href="mailto:info@robschman.at">info@robschman.at</a></li>
+          <li><span class="rs-footer__link rs-footer__link--soon">2630 Ternitz, Österreich</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Haftungs- und Abgrenzungshinweise: sichtbar, nicht kleingedruckt versteckt -->
+    <div class="rs-footer__legal">
+      <p class="rs-footer__fine">
+        Der EÜH-Antragsassistent ist eine reine Ausfüll-Hilfe und ausdrücklich
+        <strong>keine Rechtsberatung</strong>.
+      </p>
+      <p class="rs-footer__fine">
+        US Aktien Screener und Kontro.io sind Werkzeuge zur eigenen Recherche und Aufbereitung —
+        <strong>keine Anlage- und keine Steuerberatung</strong>.
+      </p>
+      <p class="rs-footer__fine">
+        Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG — es wird keine Umsatzsteuer ausgewiesen.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Meldung „Adresse kopiert" für Screenreader (für das Auge steht sie am Button) -->
+<p id="kopier-meldung" class="u-nur-vorlesen" role="status" aria-live="polite"></p>
+
+<script src="js/script.js"></script>
+</body>
+</html>

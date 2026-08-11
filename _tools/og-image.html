@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>OG-Bild</title>
+<!--
+  Vorlage fuer assets/og-image.png (1200x630) - das Bild, das in WhatsApp,
+  Facebook und LinkedIn als Vorschau erscheint.
+  Uebernommen aus dem Design-System: desing/.../guidelines/og-image.card.html
+  Neu erzeugen mit:  bash _tools/bilder-erzeugen.sh
+-->
+<style>
+@font-face { font-family:'JetBrains Mono'; font-weight:400 700; font-display:block;
+  src:url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2'); }
+@font-face { font-family:'Montserrat'; font-weight:400 700; font-display:block;
+  src:url('../assets/fonts/montserrat-latin.woff2') format('woff2'); }
+
+html,body { margin:0; padding:0; background:#0B0B0B; }
+.og { width:1200px; height:630px; background:#0B0B0B; box-sizing:border-box;
+  padding:72px; display:flex; flex-direction:column; justify-content:space-between;
+  position:relative; overflow:hidden; }
+.og::after { content:""; position:absolute; left:0; right:0; bottom:0; height:8px; background:#4ADE80; }
+.wm { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:44px;
+  letter-spacing:-.045em; color:#F5F5F5; line-height:1; }
+.wm span { color:#4ADE80; }
+.claim { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:92px;
+  line-height:1.04; letter-spacing:-.035em; color:#F5F5F5; margin:0; }
+.claim b { color:#4ADE80; font-weight:700; }
+.foot { display:flex; justify-content:space-between; align-items:flex-end; }
+.mail { font-family:'JetBrains Mono',monospace; font-size:24px; color:#4ADE80; }
+.dom { font-family:'Montserrat',sans-serif; font-weight:600; font-size:20px;
+  letter-spacing:.12em; text-transform:uppercase; color:#8A8A8A; }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="wm">robschman<span>_</span></div>
+  <p class="claim">Kaufen.<br>Mieten.<br>Oder machen lassen<b>.</b></p>
+  <div class="foot">
+    <span class="mail">info@robschman.at</span>
+    <span class="dom">robschman.at</span>
+  </div>
+</div>
+</body>
+</html>

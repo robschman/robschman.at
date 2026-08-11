@@ -1,0 +1,11 @@
+# Mac-Systemdateien
+.DS_Store
+
+# Die Roh-Screenshots (bis zu 4 MB je Bild). Sie werden fuer die Website nicht
+# gebraucht - dort liegen die aufbereiteten Fassungen in assets/screenshots/.
+# Auf dem Mac bleiben sie liegen, sie wandern nur nicht mit ins Internet.
+assets/_original/
+
+# Hilfsdateien
+_test*.html
+_mess.html

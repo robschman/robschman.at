@@ -1,0 +1,814 @@
+/* ============================================================================
+   robschman.at — Stylesheet der Coming-soon-Seite
+   ============================================================================
+
+   AUFBAU DIESER DATEI (in dieser Reihenfolge, weil spaeter Stehendes gewinnt)
+
+     BLOCK 1  Schriften         lokal eingebunden, nichts von Google
+     BLOCK 2  Basis-Tokens      Farben, Schriftgroessen, Abstaende
+     BLOCK 3  Marken-Tokens     Gruen, Terracotta, Bernstein
+     BLOCK 4  Grundregeln       Element-Vorgaben + Hilfsklassen (u-...)
+     BLOCK 5  Bausteine         Button, Karte, Badge, Header, Footer (rs-...)
+     BLOCK 6  Seiten-Layout     die Abschnitte dieser Seite (cs-...)
+     BLOCK 7  Screenshots       Darstellung der Programm-Bilder
+     BLOCK 8  Rechtsseiten      Impressum und Datenschutz
+
+   Bloecke 2 bis 6 stammen unveraendert aus dem Design-System
+   (Ordner "desing/robschman Design System"). Wenn dort etwas geaendert wird,
+   gehoert es auch hier herein.
+
+   WICHTIGE REGEL AUS DEM DESIGN-SYSTEM
+   Farben immer ueber Klassen setzen, nie ueber Element-Namen wie "div span".
+   Sonst ueberschreiben allgemeine Regeln spaeter die genauen.
+   ========================================================================= */
+
+
+/* ==========================================================================
+   BLOCK 1 — SCHRIFTEN (lokal)
+   --------------------------------------------------------------------------
+   Beide Schriften liegen als Datei in assets/fonts/ und werden NICHT von
+   Google nachgeladen. Grund: Beim Nachladen wandert die IP-Adresse jedes
+   Besuchers zu Google — in Oesterreich datenschutzrechtlich heikel.
+
+   Es sind "variable" Schriften: EINE Datei deckt alle Staerken von 400 bis
+   700 ab. Deshalb steht unten "font-weight: 400 700" statt einer Zahl.
+   Je Schrift gibt es zwei Dateien: "latin" (normale Zeichen inkl. Umlauten)
+   und "latin-ext" (seltene Sonderzeichen). Der Browser laedt nur, was er
+   tatsaechlich braucht.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/montserrat-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/montserrat-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* ==========================================================================
+   BLOCK 2 — BASIS-TOKENS
+   Farben, Schriftgroessen, Abstaende. Diese Werte gelten fuer alles.
+   Willst du z. B. die Seite heller machen, aenderst du hier EINEN Wert.
+   ========================================================================== */
+
+:root {
+  /* --- Dunkle Flaechen. Nie reines Schwarz — das flimmert weniger. --- */
+  --ink-900: #0B0B0B;   /* Seitenhintergrund */
+  --ink-850: #101010;   /* leicht abgesetztes Band */
+  --ink-800: #141414;   /* Karten */
+  --ink-750: #1A1A1A;   /* Karte beim Drueberfahren, Screenshot-Fassung */
+  --ink-700: #1F1F1F;
+  --ink-600: #262626;   /* Trennlinien, Rahmen */
+  --ink-500: #383838;   /* kraeftiger Rahmen */
+
+  /* --- Helle Flaechen --- */
+  --paper-100: #F5F5F5;
+  --paper-200: #E8E8E8;
+  --paper-300: #D6D6D6;
+
+  /* --- Grautoene (Kontrastwerte gegen den Seitenhintergrund) --- */
+  --gray-400: #A3A3A3;  /* 9,0:1 — zweitrangiger Text */
+  --gray-500: #8A8A8A;  /* 6,4:1 — Labels, Kleingedrucktes */
+  --gray-600: #6B6B6B;  /* 3,9:1 — nur grosse Schrift */
+  --gray-700: #4D4D4D;  /* 3,9:1 als Linie — deaktiviert, Rahmen */
+
+  /* --- Namen statt Zahlen: so heissen die Farben im restlichen CSS --- */
+  --bg:            var(--ink-900);
+  --bg-raised:     var(--ink-850);
+  --surface:       var(--ink-800);
+  --surface-alt:   var(--ink-750);
+  --surface-hover: var(--ink-700);
+  --line:          var(--ink-600);
+  --line-strong:   var(--ink-500);
+
+  --text:          var(--paper-100); /* 18,4:1 — Fliesstext */
+  --text-muted:    var(--gray-500);  /*  6,4:1 */
+  --text-soft:     var(--gray-400);  /*  9,0:1 */
+  --text-disabled: var(--gray-700);
+
+  /* --- Schriftfamilie fuer Fliesstext --- */
+  --font-sans: 'Montserrat', -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* --- Ueberschriften (JetBrains Mono). Kleinere Werte fuers Handy weiter unten. --- */
+  --fs-display: 72px; --lh-display: 1.02; --ls-display: -0.03em;
+  --fs-h1: 52px;      --lh-h1: 1.06;      --ls-h1: -0.025em;
+  --fs-h2: 38px;      --lh-h2: 1.12;      --ls-h2: -0.02em;
+  --fs-h3: 27px;      --lh-h3: 1.2;       --ls-h3: -0.015em;
+  --fs-h4: 20px;      --lh-h4: 1.3;       --ls-h4: -0.01em;
+  --fs-h5: 16px;      --lh-h5: 1.4;       --ls-h5: 0em;
+  --fs-h6: 14px;      --lh-h6: 1.4;       --ls-h6: 0.02em;
+  --fs-stat: 44px;    --lh-stat: 1.0;     --ls-stat: -0.02em;
+
+  /* --- Fliesstext --- */
+  --fs-lead: 19px;    --lh-lead: 1.6;
+  --fs-body: 16px;    --lh-body: 1.65;
+  --fs-body-sm: 14px; --lh-body-sm: 1.6;
+  --fs-caption: 12px; --lh-caption: 1.45;
+  --fs-code: 13px;    --lh-code: 1.6;
+
+  --ls-label: 0.12em;   /* fuer GROSSGESCHRIEBENE Labels */
+  --ls-button: 0.02em;
+  --ls-body: 0em;
+
+  /* --- Abstaende: alles ein Vielfaches von 4 --- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 128px;
+
+  --section-y: 96px;         /* Abstand zwischen den Abschnitten (Computer) */
+  --section-y-sm: 64px;      /* dasselbe am Handy */
+  --gutter: 20px;            /* Seitenrand */
+  --container: 1120px;       /* maximale Breite des Inhalts */
+  --container-narrow: 680px; /* angenehme Lesebreite fuer Text */
+
+  /* --- Ecken: scharfe Marke, kaum gerundet --- */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;     /* Standard: Buttons, Karten */
+  --radius-lg: 8px;     /* nur Bilder */
+  --radius-pill: 999px; /* nur Badges */
+
+  --border-hairline: 1px;
+  --border-thick: 2px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.5);
+  --shadow-lg: 0 20px 56px rgba(0,0,0,0.6);
+
+  /* --- Screenshot-Fassung: damit helle App-Bilder kein Loch in die Seite reissen --- */
+  --shot-frame: 1px solid var(--line-strong);
+  --shot-radius: var(--radius-lg);
+  --shot-pad: 10px;                              /* dunkles Passepartout */
+  --shot-plate: var(--ink-750);                  /* Farbe des Passepartouts */
+  --shot-shadow: 0 18px 44px rgba(0,0,0,0.62);
+  --shot-inset: inset 0 0 0 1px rgba(255,255,255,0.06);
+
+  /* --- Bewegung: ruhig, kein Federn --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 110ms;
+  --dur: 170ms;
+  --dur-slow: 300ms;
+
+  /* --- Feste Seitenverhaeltnisse: verhindern Springen beim Laden --- */
+  --ratio-shot: 16 / 10;
+  --ratio-video: 16 / 9;
+  --ratio-portrait: 4 / 5;
+  --ratio-square: 1 / 1;
+
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-toast: 300;
+}
+
+/* Handy zuerst gedacht: ab hier werden die grossen Schriften kleiner */
+@media (max-width: 700px) {
+  :root {
+    --fs-display: 40px; --ls-display: -0.02em;
+    --fs-h1: 32px;      --ls-h1: -0.02em;
+    --fs-h2: 26px;
+    --fs-h3: 21px;
+    --fs-h4: 18px;
+    --fs-stat: 32px;
+    --fs-lead: 17px;
+    --section-y: var(--section-y-sm);
+  }
+}
+
+
+/* ==========================================================================
+   BLOCK 3 — MARKEN-TOKENS
+   Hier stehen die Farben, die robschman ausmachen.
+
+   DIE WICHTIGSTE REGEL DER MARKE:
+     GRUEN heisst "das kann man anklicken".
+     TERRACOTTA ist NIE anklickbar — kein Button, kein Link.
+   ========================================================================== */
+
+:root {
+  --font-display: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* --- Gruen = Interaktion --- */
+  --green-500:  #4ADE80;  /* 11,3:1 auf dem Hintergrund — ueberall erlaubt */
+  --green-600:  #22C55E;  /* beim Drueberfahren */
+  --green-700:  #16A34A;  /* beim Klicken */
+  --green-tint: rgba(74,222,128,0.12);
+  --on-green:   #0B0B0B;  /* Schrift AUF Gruen — niemals weiss (nur 1,6:1) */
+
+  /* --- Terracotta: nur ganz klein (Fehler) oder ganz gross (Abschnitt) --- */
+  --terra-500:  #C0392B;  /* 3,62:1 — Flaechen und Rahmen, nie Text */
+  --terra-text: #E04231;  /* 4,68:1 — Fehlertext */
+  --on-terra:   #F5F5F5;  /* 4,99:1 — Schrift auf Terracotta */
+
+  /* --- Bernstein: Hinweise und der Status "Beta" --- */
+  --warn-500:   #F5A524;  /* 9,64:1 */
+  --warn-tint:  rgba(245,165,36,0.12);
+
+  --accent:        var(--green-500);
+  --accent-hover:  var(--green-600);
+  --accent-active: var(--green-700);
+  --accent-tint:   var(--green-tint);
+  --on-accent:     var(--on-green);
+  --accent-text:   var(--green-500);
+
+  --terra:      var(--terra-500);
+  --warn:       var(--warn-500);
+  --focus-ring: var(--green-500);
+
+  /* Der einzige farbige Schatten der ganzen Seite: gruener Schein am Hauptbutton */
+  --shadow-accent: 0 6px 24px rgba(74,222,128,0.22);
+}
+
+/* In einem Terracotta-Abschnitt kippen alle Farben um: Buttons werden WEISS,
+   nicht gruen. Gruen auf Terracotta hat nur 3,12:1 und ist zu schlecht lesbar. */
+.theme-terra {
+  --bg:            var(--terra-500);
+  --bg-raised:     var(--terra-500);
+  --surface:       rgba(0,0,0,0.10);
+  --surface-hover: rgba(255,255,255,0.10);
+  --line:          rgba(245,245,245,0.34);
+  --line-strong:   rgba(245,245,245,0.70);
+  --text:          var(--on-terra);
+  --text-muted:    rgba(245,245,245,0.78);
+  --text-soft:     rgba(245,245,245,0.86);
+  --accent:        var(--on-terra);
+  --accent-hover:  #FFFFFF;
+  --accent-active: #E6E6E6;
+  --accent-text:   var(--on-terra);
+  --on-accent:     var(--terra-500);
+  --focus-ring:    var(--on-terra);
+  --shadow-accent: none;
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* ==========================================================================
+   BLOCK 4 — GRUNDREGELN UND HILFSKLASSEN
+   ========================================================================== */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: var(--ls-h2);
+  line-height: var(--lh-h2);
+}
+h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: var(--ls-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: var(--ls-h3); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-h4); }
+h5 { font-size: var(--fs-h5); line-height: var(--lh-h5); letter-spacing: var(--ls-h5); }
+h6 { font-size: var(--fs-h6); line-height: var(--lh-h6); letter-spacing: var(--ls-h6); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+img { max-width: 100%; }
+
+/* Gruen = anklickbar. Das ist die Grundlage der ganzen Farblogik. */
+a { color: var(--accent); text-decoration: none; transition: color var(--dur) var(--ease-out); }
+a:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Sichtbarer Rahmen bei Tastaturbedienung. NIEMALS wegnehmen —
+   ohne ihn kann man die Seite ohne Maus nicht bedienen. */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: var(--border-thick) solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: var(--fs-code);
+  line-height: var(--lh-code);
+}
+
+/* --- Hilfsklassen (u- = "utility") --- */
+.u-display { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: var(--ls-display); }
+.u-lead { font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text-soft); }
+.u-body { font-size: var(--fs-body); line-height: var(--lh-body); }
+.u-small { font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); }
+.u-caption { font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--text-muted); }
+.u-label { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-caption);
+  text-transform: uppercase; letter-spacing: var(--ls-label); color: var(--text-muted); }
+.u-mono { font-family: var(--font-mono); }
+.u-accent { color: var(--accent); }
+.u-muted { color: var(--text-muted); }
+
+/* Screenshot-Fassung: dunkles Passepartout um jedes Programm-Bild.
+   Ohne das wirken helle App-Oberflaechen wie ein Loch in der schwarzen Seite. */
+.u-shot { display: block; background: var(--shot-plate); padding: var(--shot-pad);
+  border: var(--shot-frame); border-radius: var(--shot-radius);
+  box-shadow: var(--shot-shadow), var(--shot-inset); }
+/* "height: auto" ist hier PFLICHT: Im HTML stehen bei den Bildern width und
+   height (das reserviert beim Laden den Platz, damit nichts springt). Ohne
+   "height: auto" wuerde der Browser diese Hoehe woertlich nehmen und das
+   Seitenverhaeltnis 16:10 ignorieren — die Bilder waeren dann riesig. */
+.u-shot > img, .u-shot > video { display: block; width: 100%; height: auto;
+  aspect-ratio: var(--ratio-shot);
+  object-fit: cover; border-radius: var(--radius-sm); background: var(--surface); }
+
+/* Layout */
+.u-container { width: 100%; max-width: var(--container); margin-inline: auto;
+  padding-inline: var(--gutter); }
+.u-narrow { max-width: var(--container-narrow); }
+.u-section { padding-block: var(--section-y); }
+
+/* Nur fuer Screenreader sichtbar (z. B. die Meldung "Adresse kopiert") */
+.u-nur-vorlesen {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* "Zum Inhalt springen" — erste Station bei der Tastaturbedienung */
+.u-skip {
+  position: absolute; left: var(--gutter); top: -60px; z-index: 999;
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: 14px;
+  padding: 12px 20px; border-radius: var(--radius-md);
+  transition: top var(--dur) var(--ease-out);
+}
+.u-skip:focus { top: 12px; text-decoration: none; color: var(--on-accent); }
+
+/* Wer Bewegung ausgeschaltet hat, bekommt keine Animationen */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+
+/* ==========================================================================
+   BLOCK 5 — BAUSTEINE   (rs- = robschman)
+   ========================================================================== */
+
+/* --- Wortmarke: "robschman" wird IMMER klein geschrieben ------------------ */
+.rs-wm { display: inline-flex; align-items: baseline; font-family: var(--font-display);
+  font-weight: 700; letter-spacing: -0.045em; color: var(--text); text-decoration: none;
+  line-height: 1; padding: 0.4em; text-transform: lowercase; }
+.rs-wm:hover { text-decoration: none; color: var(--text); }
+.rs-wm__dot { color: var(--accent); margin-left: 0.06em; }   /* der gruene Cursor */
+.rs-wm--sm { font-size: 18px; }
+.rs-wm--md { font-size: 26px; }
+.rs-wm--lg { font-size: var(--fs-h1); }
+.rs-wm--xl { font-size: var(--fs-display); letter-spacing: -0.05em; }
+
+/* --- Claim-Dreiklang ----------------------------------------------------- */
+.rs-claim { display: flex; flex-wrap: wrap; font-family: var(--font-display); font-weight: 700;
+  color: var(--text); letter-spacing: -0.025em; line-height: 1.08; margin: 0; gap: 0 0.5em; }
+.rs-claim__part { white-space: nowrap; display: inline-flex; align-items: baseline; }
+.rs-claim__part:last-child .rs-claim__dot { color: var(--accent); }
+.rs-claim--stack { flex-direction: column; gap: 0.06em; }
+.rs-claim--sm { font-size: var(--fs-h4); }
+.rs-claim--md { font-size: var(--fs-h2); }
+.rs-claim--lg { font-size: var(--fs-h1); }
+.rs-claim--xl { font-size: var(--fs-display); }
+
+/* --- Abschnitts-Ueberschrift --------------------------------------------- */
+.rs-sh { display: flex; flex-direction: column; gap: var(--sp-3);
+  margin-bottom: var(--sp-6); max-width: var(--container-narrow); }
+.rs-sh--center { align-items: center; text-align: center; margin-inline: auto; }
+.rs-sh__eyebrow { display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-weight: 500; font-size: 12px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent); margin: 0; }
+.rs-sh__rule { display: inline-block; width: 22px; height: 1px; background: currentColor; }
+.rs-sh__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2);
+  line-height: var(--lh-h2); letter-spacing: var(--ls-h2); color: var(--text); margin: 0; }
+.rs-sh__sub { font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text-soft); margin: 0; }
+
+/* --- Button -------------------------------------------------------------- */
+.rs-btn { --_bg: var(--accent); --_fg: var(--on-accent); --_bd: transparent;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  font-family: var(--font-sans); font-weight: var(--fw-semibold); letter-spacing: var(--ls-button);
+  border: var(--border-hairline) solid var(--_bd); border-radius: var(--radius-md);
+  background: var(--_bg); color: var(--_fg); cursor: pointer; text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out), transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out); }
+.rs-btn:hover { text-decoration: none; }
+.rs-btn:focus-visible { outline: var(--border-thick) solid var(--focus-ring); outline-offset: 2px; }
+.rs-btn:active { transform: translateY(1px); }
+.rs-btn--sm { font-size: 13px; padding: 8px 14px; }
+.rs-btn--md { font-size: 14px; padding: 11px 20px; }
+.rs-btn--lg { font-size: 16px; padding: 15px 28px; }
+.rs-btn--primary:hover { --_bg: var(--accent-hover); box-shadow: var(--shadow-accent); }
+.rs-btn--primary:active { --_bg: var(--accent-active); box-shadow: none; }
+.rs-btn--secondary { --_bg: transparent; --_fg: var(--text); --_bd: var(--line-strong); }
+.rs-btn--secondary:hover { --_bd: var(--accent); --_fg: var(--accent); background: var(--surface-hover); }
+.rs-btn--block { display: flex; width: 100%; }
+
+/* --- Status-Badge --------------------------------------------------------
+   Nie nur Farbe: jedes Badge traegt zusaetzlich ein Zeichen UND Klartext.
+   Gruen und Terracotta sind fuer farbenblinde Menschen nicht unterscheidbar. */
+.rs-status { display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--radius-pill);
+  border: var(--border-hairline) solid currentColor; background: transparent;
+  white-space: nowrap; line-height: 1; }
+.rs-status--ok   { color: var(--accent); }      /* Online, Einsatzbereit */
+.rs-status--beta { color: var(--warn); }        /* Beta */
+.rs-status--soon { color: var(--text-muted); }  /* Umgesetzt */
+.rs-status svg { flex: none; }
+
+/* --- Produktkarte -------------------------------------------------------- */
+.rs-pcard { display: flex; flex-direction: column; gap: var(--sp-3);
+  background: var(--surface); border: var(--border-hairline) solid var(--line);
+  border-radius: var(--radius-md); padding: var(--sp-5); height: 100%;
+  transition: border-color var(--dur) var(--ease-out), background var(--dur) var(--ease-out); }
+.rs-pcard:hover { border-color: var(--line-strong); background: var(--surface-alt); }
+.rs-pcard:focus-within { border-color: var(--accent); }
+.rs-pcard__media { margin-bottom: var(--sp-2); }
+.rs-pcard__top { display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--sp-3); }
+/* min-width:0 erlaubt der linken Haelfte zu schrumpfen, statt die Karte
+   aufzublaehen; overflow-wrap bricht notfalls ein sehr langes Wort um. */
+.rs-pcard__top > div { min-width: 0; }
+.rs-pcard__name { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h4);
+  line-height: var(--lh-h4); letter-spacing: var(--ls-h4); color: var(--text); margin: 0;
+  overflow-wrap: break-word; }
+.rs-pcard__cat { font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted);
+  margin-top: 4px; }
+.rs-pcard__benefit { font-size: var(--fs-body-sm); line-height: var(--lh-body-sm);
+  color: var(--text-soft); margin: 0; }
+/* Rechtlich heikle Programme tragen ihren Abgrenzungssatz auf der Karte selbst */
+.rs-pcard__note { display: flex; gap: 6px; align-items: flex-start; font-size: var(--fs-caption);
+  line-height: var(--lh-caption); color: var(--text-muted);
+  border-top: var(--border-hairline) solid var(--line); padding-top: var(--sp-3); margin: 0; }
+.rs-pcard__note svg { flex: none; margin-top: 1px; color: var(--warn); }
+.rs-pcard__actions { display: flex; flex-direction: column; align-items: flex-start;
+  gap: var(--sp-2); margin-top: auto; padding-top: var(--sp-3); }
+
+/* --- Referenzkarte (VTW Turnierplanung) ---------------------------------- */
+.rs-ref { display: grid; gap: var(--sp-5); align-items: center; background: var(--surface);
+  border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md);
+  padding: var(--sp-5); }
+@media (min-width: 760px) { .rs-ref { grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); } }
+.rs-ref__client { font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: var(--sp-2); }
+.rs-ref__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h3);
+  line-height: var(--lh-h3); letter-spacing: var(--ls-h3); color: var(--text);
+  margin: 0 0 var(--sp-3); }
+.rs-ref__desc { font-size: var(--fs-body-sm); line-height: var(--lh-body-sm);
+  color: var(--text-soft); margin: 0 0 var(--sp-4); }
+
+/* --- Terracotta-Abschnitt ------------------------------------------------
+   Genau ZWEI auf der ganzen Seite: der Claim-Block und "Ueber mich".
+   Die farbige Flaeche ist eine Pause im langen Dunkel. */
+.rs-terra { background: var(--terra-500); color: var(--on-terra); padding-block: var(--section-y); }
+.rs-terra__in { width: 100%; max-width: var(--container); margin-inline: auto;
+  padding-inline: var(--gutter); }
+.rs-terra__in--narrow { max-width: var(--container-narrow); }
+
+/* --- Kopfzeile (bleibt beim Scrollen oben) ------------------------------- */
+.rs-header { position: sticky; top: 0; z-index: var(--z-header);
+  background: rgba(11,11,11,0.82); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: var(--border-hairline) solid var(--line); }
+.rs-header__in { display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-4); height: 64px; width: 100%; max-width: var(--container);
+  margin-inline: auto; padding-inline: var(--gutter); }
+
+/* --- Fusszeile ----------------------------------------------------------- */
+.rs-footer { border-top: var(--border-hairline) solid var(--line); background: var(--bg);
+  padding-block: var(--sp-8) var(--sp-6); }
+.rs-footer__in { width: 100%; max-width: var(--container); margin-inline: auto;
+  padding-inline: var(--gutter); display: grid; gap: var(--sp-7); }
+@media (min-width: 820px) { .rs-footer__in { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); } }
+.rs-footer__claim { margin-top: var(--sp-4); color: var(--text-muted); }
+.rs-footer__mail { display: inline-block; margin-top: var(--sp-4);
+  font-family: var(--font-mono); font-size: 15px; color: var(--accent); }
+.rs-footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--sp-6); }
+.rs-footer__h { font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted);
+  margin: 0 0 var(--sp-3); }
+.rs-footer__list { list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: var(--sp-2); }
+.rs-footer__link { font-size: var(--fs-body-sm); color: var(--text-soft); text-decoration: none; }
+.rs-footer__link:hover { color: var(--accent); }
+/* Platzhalter und Nur-Text-Zeilen (AGB folgt, Anschrift): nicht anklickbar.
+   Farbe --text-muted statt --text-disabled: letzteres haette nur 2,3:1 und
+   waere damit unter dem Mindestkontrast. --text-muted hat 6,4:1.
+   Dass es kein Link ist, erkennt man am Wort "(folgt)", nicht an der Farbe. */
+.rs-footer__link--soon { color: var(--text-muted); cursor: default; }
+.rs-footer__legal { grid-column: 1 / -1;
+  border-top: var(--border-hairline) solid var(--line); padding-top: var(--sp-5);
+  display: flex; flex-direction: column; gap: var(--sp-2); }
+.rs-footer__fine { font-size: var(--fs-caption); line-height: var(--lh-caption);
+  color: var(--text-muted); margin: 0; max-width: 70ch; }
+
+/* --- Antwortzeit-Zusage -------------------------------------------------- */
+.rs-pledge { display: inline-flex; align-items: center; gap: var(--sp-2);
+  font-size: var(--fs-body-sm); color: var(--text-soft); line-height: 1.4; margin: 0; }
+.rs-pledge svg { flex: none; color: var(--accent); }
+
+/* --- E-Mail-Rueckfall unter jedem mailto-Button --------------------------
+   PFLICHT, kein Beiwerk: Ein mailto-Link tut am Computer GAR NICHTS, wenn dort
+   kein Mailprogramm eingerichtet ist. Ohne diese Zeile gehen genau dort
+   Anfragen verloren. Deshalb steht die Adresse immer sichtbar daneben. */
+.rs-copy { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin: 0; }
+.rs-copy__mail { font-family: var(--font-mono); font-size: 13px; color: var(--text-soft);
+  user-select: all; }                       /* ein Klick markiert die ganze Adresse */
+.rs-copy__btn { display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: 0; padding: 3px 5px; cursor: pointer;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.04em; color: var(--accent); border-radius: var(--radius-sm);
+  transition: color var(--dur) var(--ease-out), background var(--dur) var(--ease-out); }
+.rs-copy__btn:hover { background: var(--accent-tint); color: var(--accent-hover); }
+.rs-copy__btn svg { flex: none; }
+.rs-copy__btn[data-kopiert="ja"] { color: var(--accent); }
+
+
+/* ==========================================================================
+   BLOCK 6 — SEITEN-LAYOUT   (cs- = coming soon)
+   ========================================================================== */
+
+section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verdeckt */
+
+.cs-sec { padding-block: var(--section-y); }
+.cs-sec--raised { background: var(--bg-raised);
+  border-block: var(--border-hairline) solid var(--line); }
+
+/* --- Hero ---------------------------------------------------------------- */
+.cs-hero { padding-block: var(--sp-9) var(--section-y); }
+.cs-hero__badge { display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em;
+  color: var(--accent); border: 1px solid var(--line); border-radius: var(--radius-pill);
+  padding: 5px 12px; margin: 0 0 var(--sp-6); }
+.cs-hero__wm { display: block; }
+.cs-hero .cs-hero__wm .rs-wm { margin-left: -0.4em; }   /* Schutzraum optisch ausgleichen */
+.cs-hero__claim { margin: var(--sp-5) 0 0; color: var(--text); }
+.cs-hero__lead { max-width: 60ch; margin: var(--sp-5) 0 0; }
+.cs-hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-5);
+  margin-top: var(--sp-7); align-items: flex-start; }
+.cs-hero__note { display: flex; align-items: center; gap: 8px; margin: var(--sp-6) 0 0;
+  font-size: var(--fs-body-sm); color: var(--text-muted); }
+.cs-hero__note svg { flex: none; }
+
+/* --- Kurz-Erklaerung ----------------------------------------------------- */
+.cs-explain { display: grid; gap: var(--sp-6); }
+@media (min-width: 820px) {
+  .cs-explain { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--sp-8); }
+}
+.cs-explain__text { margin: 0; font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text); }
+.cs-explain__list { list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: var(--sp-3); }
+.cs-explain__list li { display: flex; gap: 10px; align-items: flex-start;
+  font-size: var(--fs-body-sm); color: var(--text-soft); }
+.cs-explain__list svg { flex: none; color: var(--accent); margin-top: 2px; }
+.cs-explain__list b { color: var(--text); font-weight: 600; }
+
+/* --- Produkt-Grid --------------------------------------------------------
+   "minmax(0,1fr)" statt nur "1fr" ist wichtig: Sonst macht ein langes Wort
+   (z. B. "EÜH-Antragsassistent") die ganze Spalte breiter als der Bildschirm,
+   und die Seite laesst sich seitlich schieben. Mit minmax(0,...) bleibt die
+   Spalte so breit wie erlaubt und der Text bricht um. */
+.cs-grid { display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px)  { .cs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 1000px) { .cs-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+/* Die drei Gruppen: ein Besucher soll auf einen Blick sehen, ob etwas
+   fuer ihn dabei ist — statt neun ungeordnete Karten zu ueberfliegen. */
+.cs-gruppe + .cs-gruppe { margin-top: var(--sp-7); }
+.cs-gruppe__titel { display: flex; align-items: center; gap: var(--sp-3);
+  font-family: var(--font-display); font-weight: 500; font-size: 12px;
+  letter-spacing: var(--ls-label); text-transform: uppercase;
+  color: var(--text-muted);                 /* 6,4:1 — ausreichend lesbar */
+  margin: 0 0 var(--sp-4); }
+.cs-gruppe__titel::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* --- Machen lassen ------------------------------------------------------- */
+.cs-split { display: grid; gap: var(--sp-6); align-items: end; }
+@media (min-width: 820px) { .cs-split { grid-template-columns: minmax(0,1.4fr) auto; } }
+.cs-split__aside { padding-bottom: var(--sp-6); display: flex; flex-direction: column;
+  align-items: flex-start; gap: var(--sp-2); }
+
+/* --- Wunsch-Block -------------------------------------------------------- */
+.cs-wish { display: grid; gap: var(--sp-4); align-items: center;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: var(--sp-6); }
+@media (min-width: 820px) {
+  .cs-wish { grid-template-columns: auto minmax(0,1fr) auto; gap: var(--sp-5); }
+}
+.cs-wish__icon { color: var(--accent); flex: none; }
+.cs-wish__title { font-size: var(--fs-h3); line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3); margin: 0 0 6px; }
+.cs-wish__text { margin: 0; font-size: var(--fs-body-sm); color: var(--text-soft); }
+.cs-wish__cta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+
+/* --- Ueber mich (Terracotta) --------------------------------------------- */
+.cs-about__eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 12px;
+  letter-spacing: .12em; text-transform: uppercase; margin: 0 0 var(--sp-4);
+  color: var(--text-muted); }
+.cs-about__text { margin: 0 0 var(--sp-4); font-size: var(--fs-lead);
+  line-height: var(--lh-lead); color: var(--text); }
+.cs-about__text:last-child { margin-bottom: 0; }
+
+/* --- Kontakt ------------------------------------------------------------- */
+.cs-contact__box { display: flex; flex-direction: column; align-items: center; gap: var(--sp-4);
+  border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface);
+  padding: var(--sp-8) var(--sp-5); text-align: center; }
+.cs-contact__mail { font-family: var(--font-mono); font-weight: 700;
+  font-size: clamp(20px, 4vw, 34px); letter-spacing: -.02em; color: var(--accent);
+  word-break: break-word; }
+.cs-contact__cta { margin-top: var(--sp-2); display: flex; flex-direction: column;
+  align-items: center; gap: var(--sp-3); }
+
+
+/* ==========================================================================
+   BLOCK 7 — DARSTELLUNG DER SCREENSHOTS
+   --------------------------------------------------------------------------
+   Die Bilder sind sehr unterschiedlich: manche hell, manche dunkel, manche
+   quer, manche hochkant. Vier Regeln fassen sie zu einem ruhigen Bild zusammen.
+   ========================================================================== */
+
+/* REGEL 1 — Eine Fassung fuer alle.
+   Jedes Bild sitzt in .u-shot (siehe Block 4) und hat 16:10. Nichts wird
+   gestaucht: die Bilder wurden vorher zugeschnitten, nicht verzerrt. */
+
+/* REGEL 2 — Helle Screenshots brauchen mehr Abgrenzung als dunkle.
+   Sie bekommen einen helleren Rahmen und werden leicht abgedunkelt, damit sie
+   nicht aus der schwarzen Seite herausleuchten. Faehrt man mit der Maus
+   darueber, kommt die volle Helligkeit zurueck. */
+.u-shot--hell { border-color: var(--gray-700); }        /* #4D4D4D — 3,9:1 auf Schwarz */
+.u-shot--hell img { filter: brightness(.93);
+  transition: filter var(--dur) var(--ease-out); }
+.rs-pcard:hover .u-shot--hell img,
+.rs-ref:hover  .u-shot--hell img { filter: none; }
+
+/* REGEL 3 — Hochformat wird nicht in den Querformat-Rahmen gequetscht.
+   Handy-Bilder und fast quadratische Fenster stehen zentriert auf einer
+   neutralen dunklen Flaeche ("Buehne") — im selben 16:10-Rahmen wie alle
+   anderen, damit die Karten gleich hoch bleiben. */
+.rs-buehne { position: relative; aspect-ratio: var(--ratio-shot);
+  background: var(--surface);                /* #141414 — Text darauf 16,4:1 */
+  border-radius: var(--radius-sm); overflow: hidden;
+  display: flex; justify-content: center; align-items: center; }
+
+/* Handy: steht oben an und laeuft unten aus dem Bild — wirkt absichtlich
+   statt winzig, und man erkennt sofort ein Telefon. */
+.rs-buehne__bild--handy { display: block; width: 33%; height: auto;
+  align-self: flex-start; margin-top: 7%;
+  border-radius: 13px 13px 0 0;
+  box-shadow: 0 0 0 1px rgba(245,245,245,0.16), 0 14px 34px rgba(0,0,0,0.62); }
+
+/* Fast quadratisches Fenster: vollstaendig zu sehen, mittig, mit Schatten */
+.rs-buehne__bild--fenster { display: block; width: auto; height: auto;
+  max-width: 82%; max-height: 88%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px rgba(245,245,245,0.12), 0 12px 30px rgba(0,0,0,0.58); }
+
+/* Sonderfall Beautyroutine: die App gehoert zur Landingpage "Cosy Vibe".
+   Deshalb steht das iPhone hier vor der eigenen Website — beide Bilder in
+   einer Karte, ohne dass die Karte anders hoch wird als die uebrigen.
+   Der Hintergrund ist stark abgedunkelt, damit das Telefon vorne bleibt. */
+.rs-buehne__hg { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; }
+.rs-buehne .rs-buehne__hg { filter: brightness(.42) saturate(.85); }
+.rs-buehne--hintergrund::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(11,11,11,.10), rgba(11,11,11,.55)); }
+.rs-buehne--hintergrund .rs-buehne__bild--handy { position: relative; z-index: 1; }
+
+/* REGEL 4 — Fehlt ein Bild, entsteht keine Luecke, sondern ein sauberer
+   Platzhalter mit dem Anfangsbuchstaben des Programms.
+   Wird aktuell nicht gebraucht (alle neun Programme haben ein Bild). */
+.rs-buehne--leer { background: var(--surface-alt); flex-direction: column; gap: 6px; }
+.rs-buehne__initial { font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(32px, 9vw, 54px); line-height: 1; color: var(--text-disabled); }
+.rs-buehne__hinweis { font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-disabled); }
+
+/* Hinweis fuer den Fall, dass JavaScript ausgeschaltet ist */
+.cs-noscript { border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: var(--sp-5); margin: 0; color: var(--text-soft); }
+
+
+/* ==========================================================================
+   BLOCK 8 — RECHTSSEITEN (Impressum, Datenschutz)
+   Schlicht gehalten: nur Lesbarkeit zaehlt.
+   ========================================================================== */
+
+.rechts { padding-block: var(--sp-8) var(--section-y); }
+.rechts__zurueck { display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 13px; margin-bottom: var(--sp-6); }
+.rechts h1 { margin-bottom: var(--sp-6); }
+.rechts h2 { font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-h4);
+  margin: var(--sp-7) 0 var(--sp-3); color: var(--text); }
+.rechts h3 { font-size: var(--fs-h5); margin: var(--sp-5) 0 var(--sp-2); color: var(--text); }
+.rechts p, .rechts li { font-size: var(--fs-body-sm); line-height: 1.7; color: var(--text-soft); }
+.rechts ul { margin: 0 0 1em; padding-left: 1.2em; }
+.rechts li { margin-bottom: 6px; }
+.rechts__stand { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+  margin-top: var(--sp-8); padding-top: var(--sp-4);
+  border-top: var(--border-hairline) solid var(--line); }
+
+/* Der Anschriften-Block am Ende — bewusst ganz unten, nicht zuoberst */
+.rechts__anbieter { border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: var(--sp-5); margin-top: var(--sp-5); }
+.rechts__anbieter dl { display: grid; gap: var(--sp-2) var(--sp-5); margin: 0; }
+@media (min-width: 620px) { .rechts__anbieter dl { grid-template-columns: 190px minmax(0,1fr); } }
+.rechts__anbieter dt { font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted);
+  padding-top: 3px; }
+.rechts__anbieter dd { margin: 0; font-size: var(--fs-body-sm); color: var(--text); }
+@media (max-width: 619px) { .rechts__anbieter dd { margin-bottom: var(--sp-3); } }
+
+
+/* ==========================================================================
+   BLOCK 9 — HANDY-FEINSCHLIFF
+   --------------------------------------------------------------------------
+   ABWEICHUNG VOM DESIGN-SYSTEM, BEWUSST:
+   Dort sind Terracotta-Abschnitte am Handy auf eine Bildschirmhoehe gedeckelt
+   ("max-height: 100svh; overflow: hidden"). Der Ueber-mich-Text hat vier
+   Absaetze und wuerde damit ABGESCHNITTEN.
+   Loesung: kleinere Schrift und engere Abstaende, damit der Text von selbst
+   auf einen Bildschirm passt — aber KEIN hartes Abschneiden. Lieber ein
+   kleines Stueck laenger als ein halber Satz.
+   ========================================================================== */
+
+@media (max-width: 700px) {
+  .rs-terra { padding-block: var(--sp-8); }
+
+  /* Der Claim darf nicht umbrechen ("Oder machen lassen." muss in EINER Zeile
+     stehen) - deshalb muss stattdessen die Schrift kleiner werden, sonst laeuft
+     sie am Handy rechts aus dem Bild.
+     Die Rechnung: der laengste Teil hat 19 Zeichen, in JetBrains Mono ist ein
+     Zeichen 0,575 mal so breit wie hoch -> er braucht das 10,9-fache der
+     Schriftgroesse. Bei 8,7vw minus 4px passt er auf jedes Handy. */
+  .rs-claim--lg { font-size: min(var(--fs-h1),      calc(8.7vw - 4px)); }
+  .rs-claim--xl { font-size: min(var(--fs-display), calc(8.7vw - 4px)); }
+
+  /* Ueber-mich-Text kompakter, damit er auf einen Bildschirm passt */
+  .cs-about__text { font-size: var(--fs-body); line-height: 1.55; margin-bottom: var(--sp-3); }
+  .cs-about__eyebrow { margin-bottom: var(--sp-3); }
+
+  /* Hero am Handy etwas kompakter starten */
+  .cs-hero { padding-block: var(--sp-7) var(--section-y); }
+  .cs-hero__actions { gap: var(--sp-4); }
+
+  /* Buttons am Handy ueber die volle Breite — leichter zu treffen */
+  .cs-hero__actions .rs-mailto, .cs-hero__actions > * { width: 100%; }
+  .cs-hero__actions .rs-btn { width: 100%; }
+
+  /* Kontaktbereich braucht am Handy weniger Innenabstand */
+  .cs-contact__box { padding: var(--sp-6) var(--sp-4); }
+}
