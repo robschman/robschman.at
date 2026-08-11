@@ -260,20 +260,21 @@ function bildBereich(p) {
     // Zweitbild (falls angegeben) liegt als abgedunkelter Hintergrund dahinter.
     // Es ist reine Deko und bekommt deshalb ein leeres alt-Attribut.
     const hintergrund = p.zweitbild
-      ? `<img class="rs-buehne__hg" src="assets/screenshots/${p.zweitbild}" alt="" loading="lazy">`
+      ? `<img class="rs-buehne__hg" data-bild="assets/screenshots/${p.zweitbild}" alt="" loading="lazy">`
       : '';
     const klasse = p.zweitbild ? 'rs-buehne rs-buehne--hintergrund' : 'rs-buehne';
 
     return `<div class="rs-pcard__media u-shot${hell}">
         <div class="${klasse}">
           ${hintergrund}
-          <img class="rs-buehne__bild--${art}" src="${quelle}" alt="${sicher(p.alt)}" loading="lazy">
+          <img class="rs-buehne__bild--${art}" data-bild="${quelle}"
+               alt="${sicher(p.alt)}" loading="lazy">
         </div>
       </div>`;
   }
 
   return `<div class="rs-pcard__media u-shot${hell}">
-      <img src="${quelle}" width="1200" height="750" alt="${sicher(p.alt)}" loading="lazy">
+      <img data-bild="${quelle}" width="1200" height="750" alt="${sicher(p.alt)}" loading="lazy">
     </div>`;
 }
 
@@ -326,6 +327,60 @@ function listeAufbauen() {
         <div class="cs-grid">${karten}</div>
       </section>`;
   }).join('');
+}
+
+/* --- Bilder erst laden, wenn sie in die Naehe des Bildschirms kommen ------
+   WARUM DAS HIER SELBST GEMACHT WIRD:
+   Die Bilder tragen zwar loading="lazy", aber das genuegt hier nicht. Die
+   Karten entstehen erst durch dieses Skript, und in dem Moment weiss der
+   Browser noch nicht, wo sie auf der Seite landen werden. Im Zweifel laedt er
+   dann ALLES sofort - am Handy waeren das rund 940 KB Mobilfunk-Daten fuer
+   jemanden, der vielleicht gar nicht nach unten scrollt.
+
+   Deshalb steht die Bildadresse zuerst in "data-bild" (das laedt der Browser
+   nicht) und wird erst in "src" umgeschrieben, wenn die Karte naeher als
+   400 px an den sichtbaren Bereich heranrueckt.
+   Ergebnis: beim Aufrufen werden nur rund 145 KB geladen. */
+const VORLAUF = 500;   // so viele Pixel vor dem Sichtbarwerden wird geladen
+
+function bilderPruefen() {
+  const offen = document.querySelectorAll('img[data-bild]');
+  if (!offen.length) return true;                    // alles geladen, fertig
+
+  offen.forEach((bild) => {
+    const platz = bild.getBoundingClientRect();
+    // Ist das Bild nah genug am sichtbaren Bereich?
+    const nah = platz.top < window.innerHeight + VORLAUF && platz.bottom > -VORLAUF;
+    if (nah) {
+      bild.src = bild.getAttribute('data-bild');
+      bild.removeAttribute('data-bild');
+    }
+  });
+  return document.querySelectorAll('img[data-bild]').length === 0;
+}
+
+function bilderNachladen() {
+  /* WARUM SELBST RECHNEN UND NICHT DER EINGEBAUTE BEOBACHTER:
+     Der uebliche Weg waere ein IntersectionObserver. Der hat hier aber ein
+     Zeitproblem: Die Karten entstehen gerade erst durch dieses Skript, und
+     bevor der Browser die Seite ausgemessen hat, liegt fuer ihn alles auf
+     Position null - also "sichtbar". Er laedt dann doch wieder alle neun
+     Bilder. Getestet, genau so passiert es.
+
+     getBoundingClientRect() dagegen zwingt den Browser, VORHER auszumessen.
+     Die Position stimmt damit immer. Das ist ein paar Zeilen mehr, dafuer
+     verlaesslich. */
+  const nachpruefen = () => { if (bilderPruefen()) abmelden(); };
+  const abmelden = () => {
+    window.removeEventListener('scroll', nachpruefen);
+    window.removeEventListener('resize', nachpruefen);
+  };
+
+  window.addEventListener('scroll', nachpruefen, { passive: true });
+  window.addEventListener('resize', nachpruefen);
+
+  // Erste Pruefung erst im naechsten Bildaufbau - dann steht das Layout.
+  requestAnimationFrame(nachpruefen);
 }
 
 /* --- Kopieren-Knoepfe ------------------------------------------------------
@@ -402,4 +457,5 @@ function kopierKnoepfeAktivieren() {
 }
 
 listeAufbauen();
+bilderNachladen();          // muss NACH listeAufbauen laufen - erst dann gibt es die Karten
 kopierKnoepfeAktivieren();

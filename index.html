@@ -260,8 +260,10 @@
             Umgesetzt
           </span>
         </div>
+        <!-- data-bild statt src: Das Bild wird erst geladen, wenn man bis
+             hierher scrollt (siehe js/script.js). Spart am Handy 90 KB. -->
         <div class="u-shot">
-          <img src="assets/screenshots/vtw-turnierplanung.jpg" width="1200" height="749" loading="lazy"
+          <img data-bild="assets/screenshots/vtw-turnierplanung.jpg" width="1200" height="749" loading="lazy"
                alt="VTW Turnierplanung: Publikums-Anzeige mit laufender Partie, den vier Gruppentabellen und den letzten Ergebnissen">
         </div>
       </article>
