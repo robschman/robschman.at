@@ -100,7 +100,30 @@ Dann am iPhone im Browser aufrufen: `http://<diese-IP>:8123`
 
 ## So veröffentliche ich Änderungen
 
-Die Seite liegt auf GitHub Pages. Nach dem Ändern:
+Die Seite liegt bei **IONOS** — im selben Webhosting-Paket wie der US-Aktien-Screener,
+also ohne zusätzlichen Vertrag. Hochgeladen wird per **FileZilla**, genau wie du es
+von der Screener-Landingpage kennst.
+
+**Was hochgehört** (alles außer den Hilfsordnern):
+
+```
+index.html   impressum.html   datenschutz.html
+css/         js/              assets/
+```
+
+**Was NICHT hochgehört:**
+
+- `assets/_original/` — die Roh-Screenshots, 22 MB, werden auf dem Server nicht gebraucht
+- `_tools/` — die Hilfsskripte laufen nur bei dir am Mac
+- `README.md`, `.gitignore`, `.git/`
+
+Am einfachsten lädst du beim ersten Mal alles hoch und später nur noch die Dateien,
+die du geändert hast.
+
+### Vorher lokal sichern (empfehlenswert)
+
+Der Ordner ist auch ein Git-Ordner. Damit hast du jede Änderung nachvollziehbar und
+kannst zurück, wenn etwas schiefgeht:
 
 ```
 cd "/Users/robschmansimac/Claude Projekte/robschman programming/website"
@@ -114,11 +137,13 @@ git add -A
 git commit -m "Was du geändert hast"
 ```
 
-```
-git push
-```
+Das bleibt auf deinem Mac — es geht nichts ins Internet.
 
-Nach etwa einer Minute ist die Änderung unter robschman.at live.
+### Besucherzahlen ansehen
+
+**analytics.ionos.de** → Domain `robschman.at`. Die Statistik ist cookielos und wird
+aus den Server-Protokollen erstellt; sie zählt ab dem Tag, an dem du sie im
+IONOS-Konto einschaltest.
 
 ---
 
@@ -130,11 +155,10 @@ impressum.html        Impressum und Offenlegung
 datenschutz.html      Datenschutzerklärung
 css/styles.css        Alle Gestaltung, in 9 kommentierte Blöcke geteilt
 js/script.js          >>> HIER die Programm-Liste pflegen <<<
-CNAME                 Sagt GitHub, welche Domain zur Seite gehört
 assets/fonts/         Die Schriften (liegen lokal, nicht bei Google)
 assets/screenshots/   Die aufbereiteten Bilder der Programme
-assets/_original/     Die Roh-Screenshots (nur am Mac, nicht im Internet)
-_tools/               Hilfsskripte für Bilder
+assets/_original/     Die Roh-Screenshots (nur am Mac, nicht hochladen)
+_tools/               Hilfsskripte für Bilder (nur am Mac, nicht hochladen)
 ```
 
 ---

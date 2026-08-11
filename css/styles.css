@@ -398,16 +398,46 @@ code, kbd, samp, pre {
    BLOCK 5 — BAUSTEINE   (rs- = robschman)
    ========================================================================== */
 
-/* --- Wortmarke: "robschman" wird IMMER klein geschrieben ------------------ */
-.rs-wm { display: inline-flex; align-items: baseline; font-family: var(--font-display);
+/* --- Wortmarke -----------------------------------------------------------
+   "robschman" wird IMMER klein geschrieben, mit gruenem Cursor dahinter.
+   Darunter steht gesperrt "programming" (der volle Markenname).
+
+   Aufbau im HTML:
+     <span class="rs-wm rs-wm--md">robschman<span class="rs-wm__dot">_</span>
+       <span class="rs-wm__sub">programming</span></span>
+
+   Die Wortmarke ist ein BLOCK (kein inline-flex mehr), weil "programming" in
+   einer zweiten Zeile darunter sitzt. */
+.rs-wm { display: inline-block; font-family: var(--font-display);
   font-weight: 700; letter-spacing: -0.045em; color: var(--text); text-decoration: none;
   line-height: 1; padding: 0.4em; text-transform: lowercase; }
 .rs-wm:hover { text-decoration: none; color: var(--text); }
 .rs-wm__dot { color: var(--accent); margin-left: 0.06em; }   /* der gruene Cursor */
+
+/* Der Zusatz "programming" - klein, weit gesperrt, in der Markenfarbe Gruen.
+   Groesse und Sperrung sind relativ (em), damit sie in jeder Groesse mitwachsen.
+
+   Das "max(10px, ...)" ist wichtig: In der Kopfzeile ist die Wortmarke nur 26 px
+   gross, ein Viertel davon waeren 6 px - das kann niemand mehr lesen. Deshalb
+   wird der Zusatz nie kleiner als 10 px. Im Hero (72 px) greift die Untergrenze
+   nicht, dort sind es 17 px. */
+.rs-wm__sub { display: block; color: var(--accent);
+  font-size: max(10px, 0.235em); font-weight: 500; letter-spacing: 0.32em;
+  text-transform: lowercase; margin-top: 0.45em; padding-left: 0.08em; }
+
 .rs-wm--sm { font-size: 18px; }
 .rs-wm--md { font-size: 26px; }
 .rs-wm--lg { font-size: var(--fs-h1); }
 .rs-wm--xl { font-size: var(--fs-display); letter-spacing: -0.05em; }
+
+/* Auf der Terracotta-Flaeche wird aus dem Gruen Weiss (Gruen auf Terracotta
+   erreicht nur 3,12:1). Das erledigt --accent in .theme-terra automatisch. */
+
+/* Am Handy wird die Kopfzeile sonst zu hoch: Zusatz etwas enger anlegen. */
+@media (max-width: 700px) {
+  .rs-header .rs-wm { padding-block: 0.25em; }
+  .rs-header .rs-wm__sub { margin-top: 0.35em; letter-spacing: 0.28em; }
+}
 
 /* --- Claim-Dreiklang ----------------------------------------------------- */
 .rs-claim { display: flex; flex-wrap: wrap; font-family: var(--font-display); font-weight: 700;
