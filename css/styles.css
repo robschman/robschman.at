@@ -796,6 +796,81 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .rs-buehne__hinweis { font-family: var(--font-mono); font-size: 11px;
   letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-disabled); }
 
+/* --------------------------------------------------------------------------
+   BILD ANTIPPEN -> GROSSANSICHT
+   Am Handy sind die Kartenbilder nur rund 335 px breit. Wer Einzelheiten
+   sehen will, musste bisher mit zwei Fingern hineinzoomen - und blieb dann
+   in dieser Ansicht haengen, weil iPhone-Safari den Zoom behaelt.
+   Ein Tipp aufs Bild oeffnet es jetzt formatfuellend. Damit braucht niemand
+   mehr zu zoomen.
+   -------------------------------------------------------------------------- */
+
+/* Der Bildbereich ist ein Knopf - damit er auch mit der Tastatur erreichbar
+   ist. Die folgenden Zeilen nehmen ihm nur das Knopf-Aussehen. */
+.rs-pcard__media, .rs-ref__media {
+  position: relative; display: block; width: 100%;
+  font: inherit; color: inherit; text-align: left;
+  -webkit-appearance: none; appearance: none; cursor: zoom-in; }
+.rs-pcard__media:focus-visible, .rs-ref__media:focus-visible {
+  outline: var(--border-thick) solid var(--focus-ring); outline-offset: 3px; }
+
+/* Kleines Lupen-Zeichen unten rechts im Bild */
+.rs-lupe { position: absolute; right: 18px; bottom: 18px;
+  width: 32px; height: 32px; border-radius: var(--radius-md);
+  background: rgba(11,11,11,0.74); color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity var(--dur) var(--ease-out); }
+.rs-pcard:hover .rs-lupe, .rs-ref:hover .rs-lupe,
+.rs-pcard__media:focus-visible .rs-lupe,
+.rs-ref__media:focus-visible .rs-lupe { opacity: 1; }
+/* Am Handy gibt es kein "Drueberfahren" - dort steht die Lupe immer da,
+   sonst weiss niemand, dass man tippen kann. */
+@media (pointer: coarse) { .rs-lupe { opacity: 1; } }
+
+/* Die Grossansicht selbst */
+.rs-gross { position: fixed; inset: 0; z-index: var(--z-overlay);
+  /* fast deckend plus Unschaerfe - sonst liest man den Text dahinter mit */
+  background: rgba(11,11,11,0.97);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--sp-4); padding: var(--sp-7) var(--sp-4) var(--sp-5);
+  animation: rs-auf var(--dur) var(--ease-out); }
+@keyframes rs-auf { from { opacity: 0 } to { opacity: 1 } }
+/* Die Buehne, auf der das Bild liegt.
+   WICHTIG am Handy: Ein Querformat-Bild kann auf einem hochkant gehaltenen
+   Telefon hoechstens 375 px breit werden - das waere kaum groesser als auf
+   der Karte und damit nutzlos. Deshalb wird das Bild so hoch wie moeglich
+   gemacht und darf breiter sein als der Bildschirm. Man wischt dann seitlich
+   darueber. Auf dem Computer passt es ohnehin ganz hinein. */
+.rs-gross__buehne { width: 100%; overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; display: flex; }
+/* "margin: auto" statt "justify-content: center": So sitzt das Bild mittig,
+   wenn es hineinpasst - und beginnt am linken Rand, wenn es breiter ist.
+   Mit justify-content bliebe die linke Bildkante unerreichbar. */
+.rs-gross__bild { display: block; height: 70vh; width: auto; max-width: none;
+  margin: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+  background: var(--surface); }
+/* Hochformat-Bilder (Handy-Aufnahmen) passen immer - die nicht aufblaehen */
+.rs-gross__bild--hoch { max-width: 92vw; height: auto; max-height: 70vh; }
+
+.rs-gross__wisch { display: none; align-items: center; gap: 7px; margin: 0;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
+  color: var(--accent); }
+.rs-gross__wisch--an { display: inline-flex; }
+.rs-gross__text { margin: 0; max-width: 62ch; text-align: center;
+  font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--text-soft); }
+.rs-gross__zu { position: absolute; top: var(--sp-4); right: var(--sp-4);
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--surface); border: var(--border-hairline) solid var(--line-strong);
+  border-radius: var(--radius-md); color: var(--text); cursor: pointer;
+  font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: 14px;
+  padding: 11px 16px; }
+.rs-gross__zu:hover { border-color: var(--accent); color: var(--accent); }
+.rs-gross__zu:focus-visible { outline: var(--border-thick) solid var(--focus-ring);
+  outline-offset: 2px; }
+/* Solange die Grossansicht offen ist, soll die Seite dahinter nicht scrollen */
+body.rs-gross-offen { overflow: hidden; }
+
 /* Hinweis fuer den Fall, dass JavaScript ausgeschaltet ist */
 .cs-noscript { border: 1px solid var(--line); border-radius: var(--radius-md);
   background: var(--surface); padding: var(--sp-5); margin: 0; color: var(--text-soft); }

@@ -216,19 +216,23 @@
 
 
 <!-- =====================================================================
-     BESUCHERZÄHLER — Cloudflare Web Analytics
+     BESUCHERZAEHLER - Cloudflare Web Analytics
      ---------------------------------------------------------------------
      Cookielos, speichert keine IP-Adresse, erstellt keine Nutzerprofile.
-     Deshalb braucht es dafür kein Cookie-Fenster.
+     Deshalb braucht es dafuer kein Cookie-Fenster.
 
-     NOCH NICHT AKTIV. So schaltest du ihn ein:
-       1. dash.cloudflare.com -> Web Analytics -> "Add a site"
-       2. robschman.at eintragen
-       3. Cloudflare zeigt dir einen Schnipsel mit einem Token
-       4. unten DEIN_TOKEN durch diesen Token ersetzen
-       5. die vier Zeichen <!-- und --> um die script-Zeile entfernen
-     Das Token ist kein Geheimnis, es steht ohnehin im Quelltext der Seite.
-     Dasselbe läuft bei dir schon für beautyroutine.app.
+     NOCH NICHT AKTIV - und solange er nicht laeuft, steht in der
+     Datenschutzerklaerung ausdruecklich, dass es keinen Zaehler gibt.
+
+     Zum Einschalten: dash.cloudflare.com, Web Analytics, Seite hinzufuegen.
+     Cloudflare zeigt dann ein Token. Das gehoert unten anstelle von
+     DEIN_TOKEN hinein, und die Kommentarklammern um die script-Zeile
+     muessen weg. Danach den Absatz in der Datenschutzerklaerung ergaenzen.
+
+     ACHTUNG fuer spaeter: In einem HTML-Kommentar darf NIE die
+     Zeichenfolge aus Bindestrich-Bindestrich-Groesserzeichen vorkommen.
+     Sie beendet den Kommentar sofort, und der Rest erscheint als Text
+     auf der Seite. Genau das ist hier einmal passiert.
      ===================================================================== -->
 <!--
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js"

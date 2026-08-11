@@ -197,6 +197,10 @@ const ZEICHEN = {
            'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'],
   extern: ['M15 3h6v6', 'M10 14 21 3',
            'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6'],
+  lupe:   ['M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16', 'm21 21-4.35-4.35',
+           'M11 8v6', 'M8 11h6'],
+  kreuz:  ['M18 6 6 18', 'M6 6l12 12'],
+  pfeile: ['m8 7-5 5 5 5', 'm16 7 5 5-5 5', 'M3 12h18'],
 };
 
 function svg(name, groesse = 14, strich = 1.75) {
@@ -254,6 +258,11 @@ function bildBereich(p) {
 
   const quelle = 'assets/screenshots/' + p.bild;
 
+  // Lupen-Zeichen unten rechts: zeigt, dass man das Bild antippen kann
+  const lupe = `<span class="rs-lupe" aria-hidden="true">
+      ${svg('lupe', 16)}
+    </span>`;
+
   if (p.form === 'handy' || p.form === 'fenster') {
     const art = p.form === 'handy' ? 'handy' : 'fenster';
 
@@ -264,18 +273,24 @@ function bildBereich(p) {
       : '';
     const klasse = p.zweitbild ? 'rs-buehne rs-buehne--hintergrund' : 'rs-buehne';
 
-    return `<div class="rs-pcard__media u-shot${hell}">
+    return `<button type="button" class="rs-pcard__media u-shot${hell}"
+              data-gross="${quelle}" data-grossalt="${sicher(p.alt)}"
+              aria-label="Bildschirmfoto von ${sicher(p.name)} groß anzeigen">
         <div class="${klasse}">
           ${hintergrund}
           <img class="rs-buehne__bild--${art}" data-bild="${quelle}"
                alt="${sicher(p.alt)}" loading="lazy">
         </div>
-      </div>`;
+        ${lupe}
+      </button>`;
   }
 
-  return `<div class="rs-pcard__media u-shot${hell}">
+  return `<button type="button" class="rs-pcard__media u-shot${hell}"
+            data-gross="${quelle}" data-grossalt="${sicher(p.alt)}"
+            aria-label="Bildschirmfoto von ${sicher(p.name)} groß anzeigen">
       <img data-bild="${quelle}" width="1200" height="750" alt="${sicher(p.alt)}" loading="lazy">
-    </div>`;
+      ${lupe}
+    </button>`;
 }
 
 /* Der Knopf am Ende der Karte - haengt am Status */
@@ -456,6 +471,81 @@ function kopierKnoepfeAktivieren() {
   });
 }
 
+/* --- Bild antippen, gross ansehen ----------------------------------------
+   WARUM ES DAS GIBT:
+   Am Handy sind die Kartenbilder nur rund 335 px breit. Wer etwas genauer
+   sehen wollte, musste mit zwei Fingern hineinzoomen - und blieb dann in
+   dieser Zoomstufe haengen, weil iPhone-Safari sie sich merkt, sogar ueber
+   "Neu laden" hinweg. Ein Tipp aufs Bild loest das an der Wurzel.
+
+   Geschlossen wird mit: Knopf, Escape-Taste, oder Tippen daneben. */
+function grossansichtAktivieren() {
+  let schicht = null;         // die eingeblendete Flaeche
+  let herkunft = null;        // welcher Knopf hat sie geoeffnet (fuer den Fokus)
+
+  function schliessen() {
+    if (!schicht) return;
+    schicht.remove();
+    schicht = null;
+    document.body.classList.remove('rs-gross-offen');
+    if (herkunft) herkunft.focus();     // Fokus zurueck, wichtig fuer Tastatur
+    herkunft = null;
+  }
+
+  function oeffnen(knopf) {
+    schliessen();
+    herkunft = knopf;
+    const bild = knopf.getAttribute('data-gross');
+    const text = knopf.getAttribute('data-grossalt') || '';
+
+    schicht = document.createElement('div');
+    schicht.className = 'rs-gross';
+    schicht.setAttribute('role', 'dialog');
+    schicht.setAttribute('aria-modal', 'true');
+    schicht.setAttribute('aria-label', 'Bildschirmfoto in groß');
+    schicht.innerHTML =
+      `<button type="button" class="rs-gross__zu">${svg('kreuz', 16)}Schließen</button>` +
+      `<div class="rs-gross__buehne">` +
+        `<img class="rs-gross__bild" src="${bild}" alt="${sicher(text)}">` +
+      `</div>` +
+      `<p class="rs-gross__wisch">${svg('pfeile', 14)}Seitlich wischen</p>` +
+      `<p class="rs-gross__text">${sicher(text)}</p>`;
+
+    // Tippen auf die dunkle Flaeche daneben schliesst ebenfalls
+    schicht.addEventListener('click', (e) => {
+      if (e.target === schicht || e.target.closest('.rs-gross__zu')) schliessen();
+    });
+
+    document.body.appendChild(schicht);
+    document.body.classList.add('rs-gross-offen');
+    schicht.querySelector('.rs-gross__zu').focus();
+
+    // Sobald das Bild geladen ist: Hochformat kleiner halten, und den
+    // Wisch-Hinweis nur zeigen, wenn das Bild wirklich breiter ist.
+    const grossbild = schicht.querySelector('.rs-gross__bild');
+    const fertig = () => {
+      if (grossbild.naturalHeight > grossbild.naturalWidth) {
+        grossbild.classList.add('rs-gross__bild--hoch');
+      }
+      const buehne = schicht.querySelector('.rs-gross__buehne');
+      if (buehne.scrollWidth > buehne.clientWidth + 4) {
+        schicht.querySelector('.rs-gross__wisch').classList.add('rs-gross__wisch--an');
+      }
+    };
+    grossbild.complete ? fertig() : grossbild.addEventListener('load', fertig);
+  }
+
+  document.addEventListener('click', (e) => {
+    const knopf = e.target.closest('[data-gross]');
+    if (knopf) oeffnen(knopf);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') schliessen();
+  });
+}
+
 listeAufbauen();
 bilderNachladen();          // muss NACH listeAufbauen laufen - erst dann gibt es die Karten
 kopierKnoepfeAktivieren();
+grossansichtAktivieren();
