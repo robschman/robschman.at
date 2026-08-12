@@ -61,7 +61,8 @@ const PROGRAMME = [
     status: 'einsatzbereit',
     link: null,
     bild: 'kontro-io.jpg',
-    alt: 'Kontro.io: Jahresübersicht mit Einnahmen, Ausgaben, Gewinn-Balken und Monatstabelle',
+    alt: 'Kontro.io: Jahresübersicht mit Einnahmen, Ausgaben und Gewinn, Balken zur '
+       + 'Sozialversicherungs-Grenze, Fristen-Erinnerungen und Monatstabelle',
     form: 'quer',
     hell: true,
     hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',

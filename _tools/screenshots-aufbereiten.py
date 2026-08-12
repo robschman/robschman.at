@@ -56,8 +56,10 @@ QUALITAET = 88             # JPEG-Qualitaet: 88 ist scharf und trotzdem klein
 # ---------------------------------------------------------------------------
 BILDER = [
     dict(ziel="kontro-io.jpg",
-         # helle Fassung (11.08.2026) - wirkt fuer ein Buchhaltungsprogramm serioeser
-         quelle="Bildschirmfoto 2026-08-11 um 22.03.27.png",
+         # DEMO-Fassung (12.08.2026) - zeigt echte Zahlen, gefuellten Gewinn-Balken,
+         # Fristen und Projekte statt lauter Nullen. Und: es sind erfundene
+         # Demo-Daten, nicht Roberts echte Geschaeftszahlen.
+         quelle="Bildschirmfoto 2026-08-12 um 22.30.23.png",
          # links ausrichten, damit Logo und Navigation erhalten bleiben
          art="quer", vorschnitt=None, anker="links"),
 
