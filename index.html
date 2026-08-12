@@ -34,6 +34,25 @@
 <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
+
+<!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
+     Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
+     Referenzblock eine persönliche Überschrift statt der allgemeinen.
+
+     Warum das Skript hier oben steht und nicht unten bei den anderen:
+     Es muss laufen, BEVOR der Browser das erste Mal zeichnet. Sonst sähe
+     man kurz die falsche Überschrift aufblitzen. Es setzt nur eine Klasse,
+     alles Weitere macht das Stylesheet.
+
+     Es wird nichts gespeichert, nichts gezählt und nichts weitergegeben —
+     die Seite schaut nur nach, was in der Adresszeile steht. -->
+<script>
+  try {
+    if (new URLSearchParams(location.search).get('von') === 'vtw') {
+      document.documentElement.classList.add('von-vtw');
+    }
+  } catch (e) { /* uralte Browser: dann eben die Standard-Überschrift */ }
+</script>
 </head>
 
 <body>
@@ -128,9 +147,22 @@
        =================================================================== -->
   <section id="referenz" class="cs-sec">
     <div class="u-container">
-      <header class="rs-sh">
+
+      <!-- ZWEI ÜBERSCHRIFTEN, es wird immer nur EINE angezeigt.
+           Standard: für alle normalen Besucher.
+           Die zweite erscheint nur, wenn die Adresse ?von=vtw enthält —
+           also bei Leuten, die aus der Turnierplanungs-App herkommen.
+           Welche gezeigt wird, entscheidet die Regel in css/styles.css,
+           gesteuert vom kurzen Skript oben im Kopf der Seite. -->
+      <header class="rs-sh cs-ref__standard">
         <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Bereits umgesetzt</p>
         <h2 class="rs-sh__title">Eine Auftragsarbeit, die läuft</h2>
+      </header>
+
+      <header class="rs-sh cs-ref__vtw">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Bereits umgesetzt</p>
+        <h2 class="rs-sh__title">Du kommst von der Turnierplanung?</h2>
+        <p class="rs-sh__sub">Die habe ich gebaut. Hier siehst du, was sonst noch geht.</p>
       </header>
 
       <article class="rs-ref">

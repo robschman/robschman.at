@@ -897,6 +897,19 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
    liegt ohnehin fest ueber allem, ein bisschen Scrollen dahinter stoert
    niemanden. */
 
+/* --------------------------------------------------------------------------
+   BEGRUESSUNG FUER BESUCHER AUS DER VTW-TURNIERPLANUNG
+   Die Turnierplanungs-App verlinkt auf   robschman.at/?von=vtw
+   Dann traegt das kurze Skript im Kopf der Seite die Klasse "von-vtw" ein,
+   und hier wird umgeschaltet: persoenliche Ueberschrift statt allgemeiner.
+
+   Standard ist die allgemeine - so sieht sie auch jemand ohne JavaScript
+   und jeder, der die Seite normal aufruft.
+   -------------------------------------------------------------------------- */
+.cs-ref__vtw { display: none; }
+.von-vtw .cs-ref__standard { display: none; }
+.von-vtw .cs-ref__vtw { display: flex; }
+
 /* Hinweis fuer den Fall, dass JavaScript ausgeschaltet ist */
 .cs-noscript { border: 1px solid var(--line); border-radius: var(--radius-md);
   background: var(--surface); padding: var(--sp-5); margin: 0; color: var(--text-soft); }
