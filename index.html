@@ -33,6 +33,97 @@
      Aufbau nichts nachspringt. Nichts wird von Google geholt. -->
 <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- =====================================================================
+     STRUKTURIERTE DATEN (JSON-LD) — eingefügt 18.08.2026
+     ---------------------------------------------------------------------
+     Unsichtbar. Sagt Google, Bing und den KI-Suchmaschinen in Maschinenform,
+     wer hier was anbietet. Genau daraus bauen ChatGPT, Perplexity und Googles
+     KI-Antworten ihre Aussagen — ohne diesen Block müssen sie raten.
+
+     PFLEGE: Die Programmliste steht doppelt — sichtbar in js/script.js, in
+     Maschinenform hier. Kommt ein Programm dazu oder weg, BEIDE Stellen
+     ändern, sonst widersprechen sich Seite und Datenblock.
+
+     Keine Straßenanschrift: Die steht im Impressum, wo sie hingehört.
+     ===================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://robschman.at/#anbieter",
+      "name": "robschman programming",
+      "alternateName": "robschman",
+      "slogan": "Kaufen. Mieten. Oder machen lassen.",
+      "description": "Kleine, nützliche Programme für Vereine, kleine Betriebe und Privatpersonen — fertig zum Kaufen, monatlich zum Mieten oder eigens gebaut. Mehrere davon sind bereits im täglichen Einsatz.",
+      "url": "https://robschman.at/",
+      "email": "info@robschman.at",
+      "image": "https://robschman.at/assets/og-image.png",
+      "inLanguage": "de-AT",
+      "founder": { "@id": "https://robschman.at/#robert" },
+      "provider": { "@id": "https://robschman.at/#robert" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ternitz",
+        "postalCode": "2630",
+        "addressRegion": "Niederösterreich",
+        "addressCountry": "AT"
+      },
+      "areaServed": { "@type": "Country", "name": "Österreich" },
+      "serviceType": [
+        "Softwareentwicklung",
+        "Individualsoftware für kleine Betriebe und Vereine",
+        "Mac-Programme",
+        "Web-Anwendungen",
+        "iPhone-Apps"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Programme",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Kontro.io", "applicationCategory": "FinanceApplication", "operatingSystem": "macOS", "description": "Belege ablegen, den Rest macht das Programm: sortiert nach Monat und Kategorie, trennt einmalige von wiederkehrenden Posten und zeigt, was schon bezahlt ist." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Blitztext", "applicationCategory": "BusinessApplication", "operatingSystem": "macOS", "description": "Diktier-Werkzeug für den Mac: sprechen statt tippen." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "ToDo Sidebar", "applicationCategory": "BusinessApplication", "operatingSystem": "macOS", "description": "Aufgabenliste, die immer am Bildschirmrand mitläuft." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "US Aktien Screener", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "url": "https://us-aktien-screener.com/", "description": "Filtert rund 585 Aktien des S&P 500 nach fünf Kennzahlen. Keine Anlageberatung." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "YT Scanner", "applicationCategory": "MultimediaApplication", "operatingSystem": "macOS", "description": "Wertet YouTube-Videos aus und zieht die Kernaussagen heraus." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Beauty Routine App", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS", "url": "https://beautyroutine.app/", "description": "iPhone-App für die tägliche Pflegeroutine, mit eigener Landingpage und Produktempfehlungen (CozyVibe)." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "EÜH-Antragsassistent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://fussfessel-hilfe.at/", "description": "Mehrsprachiger Assistent für den Antrag auf elektronisch überwachten Hausarrest. Keine Rechtsberatung." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "GitHub Uploader", "applicationCategory": "DeveloperApplication", "operatingSystem": "macOS", "description": "Dateien per Doppelklick veröffentlichen, ohne Terminal." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "VTW Turnierplanung", "applicationCategory": "BusinessApplication", "description": "Auftragsarbeit: vollständige Turnierverwaltung, seit mehreren Turnieren im Einsatz." } }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://robschman.at/#robert",
+      "name": "Robert Thalhammer",
+      "jobTitle": "Softwareentwickler",
+      "email": "info@robschman.at",
+      "url": "https://robschman.at/",
+      "knowsLanguage": "de",
+      "knowsAbout": [
+        "Individualsoftware für kleine Betriebe",
+        "Vereinssoftware",
+        "Mac-Programme",
+        "Web-Anwendungen",
+        "iPhone-Apps",
+        "Belegverwaltung und Buchhaltungswerkzeuge",
+        "Aktienanalyse-Werkzeuge"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://robschman.at/#website",
+      "url": "https://robschman.at/",
+      "name": "robschman programming",
+      "inLanguage": "de-AT",
+      "publisher": { "@id": "https://robschman.at/#anbieter" }
+    }
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="css/styles.css">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
