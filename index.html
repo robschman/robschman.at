@@ -139,7 +139,10 @@
      die Seite schaut nur nach, was in der Adresszeile steht. -->
 <script>
   try {
-    if (new URLSearchParams(location.search).get('von') === 'vtw') {
+    // "startsWith" statt "===": Die Turnier-APP verlinkt mit ?von=vtw,
+    // die Turnier-WEBSITE mit ?von=vtw-web. Beide sollen die Begrüßung sehen.
+    var von = new URLSearchParams(location.search).get('von') || '';
+    if (von.indexOf('vtw') === 0) {
       document.documentElement.classList.add('von-vtw');
     }
   } catch (e) { /* uralte Browser: dann eben die Standard-Überschrift */ }
