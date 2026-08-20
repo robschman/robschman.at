@@ -595,23 +595,19 @@
      Cookielos, speichert keine IP-Adresse, erstellt keine Nutzerprofile.
      Deshalb braucht es dafuer kein Cookie-Fenster.
 
-     NOCH NICHT AKTIV - und solange er nicht laeuft, steht in der
-     Datenschutzerklaerung ausdruecklich, dass es keinen Zaehler gibt.
+     AKTIV seit 18.08.2026.
 
-     Zum Einschalten: dash.cloudflare.com, Web Analytics, Seite hinzufuegen.
-     Cloudflare zeigt dann ein Token. Das gehoert unten anstelle von
-     DEIN_TOKEN hinein, und die Kommentarklammern um die script-Zeile
-     muessen weg. Danach den Absatz in der Datenschutzerklaerung ergaenzen.
+     Zaehler und Datenschutzerklaerung gehoeren zusammen: Wird der Zaehler
+     hier abgeschaltet, muss in datenschutz.html wieder stehen, dass keine
+     Statistik gefuehrt wird - und umgekehrt.
 
      ACHTUNG fuer spaeter: In einem HTML-Kommentar darf NIE die
      Zeichenfolge aus Bindestrich-Bindestrich-Groesserzeichen vorkommen.
      Sie beendet den Kommentar sofort, und der Rest erscheint als Text
      auf der Seite. Genau das ist hier einmal passiert.
      ===================================================================== -->
-<!--
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-        data-cf-beacon='{"token": "DEIN_TOKEN"}'></script>
--->
+<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
 
 </body>
 </html>
