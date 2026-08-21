@@ -720,6 +720,71 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .cs-split__aside { padding-bottom: var(--sp-6); display: flex; flex-direction: column;
   align-items: flex-start; gap: var(--sp-2); }
 
+/* Ablauf in vier Schritten.
+   Die Ziffern sind gruen wie die Haken in der Kurz-Erklaerung: ein Akzent, keine
+   Flaeche. Gruene FLAECHEN bleiben den Knoepfen vorbehalten (Design-Regel 1). */
+.cs-ablauf { list-style: none; margin: var(--sp-7) 0 0; padding: 0;
+  display: grid; gap: var(--sp-5); counter-reset: schritt; }
+@media (min-width: 720px) { .cs-ablauf { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 1040px) { .cs-ablauf { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+.cs-ablauf li { display: grid; grid-template-columns: auto minmax(0,1fr);
+  gap: var(--sp-3); align-items: start; }
+.cs-ablauf__nr { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h4);
+  color: var(--accent); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.cs-ablauf__txt b { display: block; color: var(--text); font-weight: 600;
+  font-size: var(--fs-body); margin-bottom: 2px; }
+.cs-ablauf__txt span { display: block; font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm); color: var(--text-soft); }
+
+/* Preisstufen. Der Betrag steht NICHT in Gruen: Gruen heisst auf dieser Seite
+   anklickbar, und ein Preis ist keine Schaltflaeche. */
+.cs-preise { margin: var(--sp-7) 0 0; display: grid; gap: var(--sp-4);
+  grid-template-columns: minmax(0,1fr); }
+@media (min-width: 720px) { .cs-preise { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.cs-preis { border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: var(--sp-5);
+  display: flex; flex-direction: column; gap: var(--sp-2); }
+.cs-preis__art { font-family: var(--font-display); font-weight: 500; font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+.cs-preis__wert { font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fs-h3); line-height: 1.1; letter-spacing: var(--ls-h3);
+  color: var(--text); margin: 0; }
+.cs-preis__bsp { margin: 0; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm);
+  color: var(--text-soft); }
+.cs-preis__dauer { margin: auto 0 0; padding-top: var(--sp-3);
+  border-top: 1px solid var(--line); font-size: var(--fs-caption);
+  line-height: var(--lh-caption); color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px; }
+.cs-preis__dauer svg { flex: none; }
+
+/* Hinweis direkt unter den Preisen: "ab 690" soll niemanden abschrecken, der nur
+   eine Kleinigkeit braucht. Steht bewusst VOR den anderen Hinweisen und ist als
+   einziger Block hier abgesetzt, damit ihn auch sieht, wer nur ueberfliegt. */
+.cs-preis-tipp { margin: var(--sp-5) 0 0; display: grid; gap: var(--sp-4);
+  align-items: start; border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface); padding: var(--sp-5); }
+@media (min-width: 720px) {
+  .cs-preis-tipp { grid-template-columns: auto minmax(0,1fr); gap: var(--sp-5); }
+}
+.cs-preis-tipp__icon { color: var(--accent); flex: none; }
+.cs-preis-tipp__title { font-family: var(--font-display); font-weight: 700;
+  font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-h4);
+  margin: 0 0 6px; color: var(--text); }
+.cs-preis-tipp__text { margin: 0; font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm); color: var(--text-soft); }
+
+/* Zeile unter den Preisen: Anpassung, Nachbetreuung, Serverplatz, Pflichthinweise */
+.cs-preis-fuss { margin: var(--sp-5) 0 0; display: grid; gap: var(--sp-4);
+  grid-template-columns: minmax(0,1fr); }
+@media (min-width: 820px) {
+  .cs-preis-fuss { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+.cs-preis-fuss p { margin: 0; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm);
+  color: var(--text-soft); }
+.cs-preis-fuss b { color: var(--text); font-weight: 600; }
+.cs-preis-fein { margin: var(--sp-5) 0 0; font-size: var(--fs-caption);
+  line-height: var(--lh-caption); color: var(--text-muted); max-width: 78ch; }
+
 /* --- Wunsch-Block -------------------------------------------------------- */
 .cs-wish { display: grid; gap: var(--sp-4); align-items: center;
   border: 1px solid var(--line); border-radius: var(--radius-md);

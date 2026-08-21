@@ -173,7 +173,9 @@
 
   <!-- ===================================================================
        2 — HERO
-       Kein Countdown, kein erfundenes Startdatum. Nur ein ehrlicher Hinweis.
+       Seit 21.08.2026 keine Vorschau mehr: Der Hinweis "kommt bald" ist weg, der
+       Warteknopf ist ein Anfrage-Knopf. Statt eines Versprechens steht hier eine
+       Tatsache.
        =================================================================== -->
   <section id="top" class="cs-hero">
     <div class="u-container">
@@ -183,7 +185,7 @@
              stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>
         </svg>
-        Vorschau · robschman.at
+        Softwareentwicklung · Ternitz, Niederösterreich
       </p>
 
       <div class="cs-hero__wm">
@@ -207,8 +209,7 @@
         <!-- mailto-Button: darunter steht die Adresse zum Kopieren (Pflicht-Rückfall) -->
         <div>
           <a class="rs-btn rs-btn--secondary rs-btn--lg"
-             href="mailto:info@robschman.at?subject=Bitte%20informieren&amp;body=Hallo%20Robert%2C%20bitte%20informiere%20mich%2C%20sobald%20robschman.at%20online%20ist.">Sag
-             mir Bescheid, wenn’s online geht</a>
+             href="mailto:info@robschman.at?subject=Anfrage&amp;body=Hallo%20Robert%2C%0A%0Aich%20h%C3%A4tte%20folgendes%20Vorhaben%3A%0A%0A">Anfrage schreiben</a>
           <p class="rs-copy" style="margin-top:var(--sp-2)">
             <span class="rs-copy__mail">info@robschman.at</span>
             <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
@@ -229,7 +230,7 @@
              stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
         </svg>
-        Die vollständige Seite kommt bald — hier ein Vorgeschmack.
+        Neun Programme gebaut, mehrere davon täglich im Einsatz.
       </p>
 
     </div>
@@ -383,6 +384,13 @@
 
   <!-- ===================================================================
        7 — MACHEN LASSEN
+       ---------------------------------------------------------------
+       Seit 21.08.2026 der wichtigste Abschnitt der Seite: Ablauf, Richtpreise und
+       Dauer. Preise sind aus dem tatsaechlichen Aufwand frueherer Programme
+       gerechnet (siehe Was-ist-meine-Arbeit-wert_2026-08-21.html).
+       ACHTUNG: Hier darf NIE ein Kaufknopf stehen. Bestellt wird ueber Anfrage und
+       Angebot — sonst wird die Seite ein Fernabsatz-Shop und braucht AGB,
+       Widerrufsbelehrung und den Knopf "zahlungspflichtig bestellen".
        =================================================================== -->
   <section id="custom" class="cs-sec cs-sec--raised">
     <div class="u-container">
@@ -412,6 +420,107 @@
           </p>
         </div>
       </div>
+
+      <!-- Ablauf: die vier Fragen, die jeder hat, bevor er schreibt -->
+      <ol class="cs-ablauf">
+        <li>
+          <span class="cs-ablauf__nr" aria-hidden="true">1</span>
+          <span class="cs-ablauf__txt">
+            <b>Du schreibst mir</b>
+            <span>Ein paar Sätze zu deinem Problem genügen. Eine fertige Idee
+            brauchst du nicht.</span>
+          </span>
+        </li>
+        <li>
+          <span class="cs-ablauf__nr" aria-hidden="true">2</span>
+          <span class="cs-ablauf__txt">
+            <b>Wir reden darüber</b>
+            <span>Kostenlos und unverbindlich. Wenn sich ein Programm nicht lohnt,
+            sage ich dir das.</span>
+          </span>
+        </li>
+        <li>
+          <span class="cs-ablauf__nr" aria-hidden="true">3</span>
+          <span class="cs-ablauf__txt">
+            <b>Du bekommst ein Angebot</b>
+            <span>Fester Preis, fester Termin, schriftlich. Erst wenn du zustimmst,
+            fange ich an.</span>
+          </span>
+        </li>
+        <li>
+          <span class="cs-ablauf__nr" aria-hidden="true">4</span>
+          <span class="cs-ablauf__txt">
+            <b>Du bekommst dein Programm</b>
+            <span>Eingerichtet und erklärt. Rechnung kommt danach.</span>
+          </span>
+        </li>
+      </ol>
+
+      <!-- Richtpreise. Bewusst KEIN Kaufknopf: Bestellt wird per Angebot, damit
+           die Seite kein Fernabsatz-Shop wird (Entscheidung 21.08.2026). -->
+      <div class="cs-preise">
+        <article class="cs-preis">
+          <p class="cs-preis__art">Kleines Programm</p>
+          <p class="cs-preis__wert">ab 690 €</p>
+          <p class="cs-preis__bsp">Ein Werkzeug für eine einzelne Aufgabe. Etwa eine
+          Liste, die immer griffbereit ist, oder ein Helfer, der eine lästige
+          Handarbeit abnimmt.</p>
+          <p class="cs-preis__dauer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 1 bis 2 Wochen</p>
+        </article>
+        <article class="cs-preis">
+          <p class="cs-preis__art">Mittleres Programm</p>
+          <p class="cs-preis__wert">ab 1.490 €</p>
+          <p class="cs-preis__bsp">Mehrere Ansichten, eigene Daten, Auswertungen.
+          Etwas, mit dem regelmäßig gearbeitet wird.</p>
+          <p class="cs-preis__dauer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 bis 4 Wochen</p>
+        </article>
+        <article class="cs-preis">
+          <p class="cs-preis__art">Größeres Programm</p>
+          <p class="cs-preis__wert">ab 2.900 €</p>
+          <p class="cs-preis__bsp">Mehrere Geräte greifen gleichzeitig zu, Daten
+          werden verwaltet und ausgewertet — wie die Turnierverwaltung oben.</p>
+          <p class="cs-preis__dauer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 bis 10 Wochen</p>
+        </article>
+      </div>
+
+      <!-- Damit "ab 690" niemanden abschreckt, der nur eine Kleinigkeit braucht. -->
+      <div class="cs-preis-tipp">
+        <svg class="cs-preis-tipp__icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.75" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 8v8"/><path d="M8 12h8"/><circle cx="12" cy="12" r="9"/>
+        </svg>
+        <div>
+          <p class="cs-preis-tipp__title">Es geht auch kleiner</p>
+          <p class="cs-preis-tipp__text">
+            Die Beträge oben sind Richtwerte für richtige Programme. Wenn du nur eine
+            Kleinigkeit brauchst — etwas für dich allein oder für deinen Verein —
+            <b>dann frag trotzdem</b>. Bei kleinen Sachen werden wir uns beim Preis
+            sicher einig, und ich sage dir gleich, wenn es schneller und günstiger geht,
+            als du denkst.
+          </p>
+        </div>
+      </div>
+
+      <div class="cs-preis-fuss">
+        <p><b>Schon etwas Fertiges anpassen: ab 290 €.</b> Wenn eines der Programme
+        oben fast passt, baue ich es auf dich um — das ist deutlich günstiger und
+        schneller als etwas ganz Neues.</p>
+        <p><b>Wenn ein Server nötig ist:</b> Manche Programme brauchen einen Platz im
+        Netz, damit mehrere Geräte gleichzeitig darauf zugreifen können — so wie die
+        Turnierverwaltung oben. Den kannst du bei mir mieten, auch nur für die Tage,
+        an denen du ihn wirklich brauchst. Oder du bringst deinen eigenen mit.</p>
+        <p><b>Nach der Übergabe:</b> Fehler, die von Anfang an drin waren, behebe ich
+        kostenlos. Spätere Änderungswünsche rechne ich nach Aufwand ab. Es gibt kein
+        Abo und keine laufenden Kosten, solange du keine willst.</p>
+      </div>
+
+      <p class="cs-preis-fein">
+        Alle Beträge sind Richtwerte und Endpreise — das genaue Angebot bekommst du
+        nach dem Gespräch. Als Kleinunternehmer wird keine Umsatzsteuer ausgewiesen
+        (umsatzsteuerbefreit gemäß § 6 Abs. 1 Z 27 UStG).
+      </p>
+
     </div>
   </section>
 
@@ -553,8 +662,6 @@
         <ul class="rs-footer__list">
           <li><a class="rs-footer__link" href="impressum.html">Impressum &amp; Offenlegung</a></li>
           <li><a class="rs-footer__link" href="datenschutz.html">Datenschutzerklärung</a></li>
-          <li><span class="rs-footer__link rs-footer__link--soon">AGB (folgt)</span></li>
-          <li><span class="rs-footer__link rs-footer__link--soon">Widerrufsbelehrung (folgt)</span></li>
         </ul>
       </div>
       <div>
