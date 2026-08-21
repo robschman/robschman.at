@@ -444,8 +444,12 @@ code, kbd, samp, pre {
    (Design-Regel 1), ein gruenes Wort im Text saehe aus wie ein Link. Stattdessen
    dieselbe Optik wie das Logo — Mono, fett, heller als der Text, mit gruenem
    Cursor. Faellt genauso auf, ohne die Regel zu brechen. */
-.rs-wm--inline { font-size: 1em; line-height: inherit; color: var(--text);
-  vertical-align: baseline; }
+.rs-wm--inline { display: inline; font-size: 1em; line-height: inherit;
+  color: var(--text); vertical-align: baseline;
+  /* Der Schutzraum von 0.4em aus .rs-wm muss hier weg: Als inline-block mit
+     Innenabstand baut er die Zeilenbox hoeher als den uebrigen Text — genau das
+     hat am 21.08. die erste Zeile nach unten gedrueckt und sie eingerueckt. */
+  padding: 0; }
 .rs-wm--sm { font-size: 18px; }
 .rs-wm--md { font-size: 26px; }
 .rs-wm--lg { font-size: var(--fs-h1); }
@@ -692,7 +696,10 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 /* --- Kurz-Erklaerung ----------------------------------------------------- */
 .cs-explain { display: grid; gap: var(--sp-6); }
 @media (min-width: 820px) {
-  .cs-explain { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--sp-8); }
+  /* align-items: center — sonst haengt die Hakenliste oben am Rand, waehrend der
+     Text daneben vier Zeilen tief laeuft. */
+  .cs-explain { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--sp-8);
+    align-items: center; }
 }
 .cs-explain__text { margin: 0; font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text); }
 .cs-explain__list { list-style: none; margin: 0; padding: 0;
@@ -818,6 +825,25 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .cs-wish__cta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
 
 /* --- Ueber mich (Terracotta) --------------------------------------------- */
+/* Portraet neben dem Text (21.08.2026). Am Handy steht das Bild oben und bleibt
+   klein — ein Portrait in voller Breite wuerde den Abschnitt erschlagen. */
+.cs-about { display: grid; gap: var(--sp-6); justify-items: start; }
+@media (min-width: 720px) {
+  /* Die Textspalte wird auf Lesebreite begrenzt statt auf 1fr: Sonst laeuft der
+     Text ueber die ganze Containerbreite und wird unangenehm lang zu lesen —
+     oder er quetscht sich, wenn der Container schmal ist. So steht das Bild
+     links, der Text in ruhiger Breite daneben, rechts bleibt Luft. */
+  .cs-about { grid-template-columns: 200px minmax(0,58ch); gap: var(--sp-7);
+    align-items: start; }
+}
+.cs-about__foto { display: block; width: 150px; }
+@media (min-width: 720px) { .cs-about__foto { width: 200px; } }
+.cs-about__foto img { display: block; width: 100%; height: auto;
+  border-radius: var(--radius-md);
+  /* Der Terracotta-Grund ist kraeftig — ein feiner heller Rahmen loest das
+     Bild sauber davon ab, ohne einen Schatten zu brauchen. */
+  border: 1px solid rgba(245,245,245,.28); }
+.cs-about__inhalt { min-width: 0; }
 .cs-about__eyebrow { font-family: var(--font-display); font-weight: 500; font-size: 12px;
   letter-spacing: .12em; text-transform: uppercase; margin: 0 0 var(--sp-4);
   color: var(--text-muted); }
