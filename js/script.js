@@ -30,9 +30,9 @@ const GRUPPEN = [
      kategorie kleine Zeile unter dem Namen (z. B. "Mac-Programm")
      text      ein Satz: was hat der Nutzer davon
      status    'online'        -> gruenes Badge, Button "Ansehen" (braucht link)
-               'einsatzbereit' -> gruenes Badge, Button "Interesse anmelden"
+               'einsatzbereit' -> gruenes Badge, Button "Anfrage schreiben"
                'umgesetzt'     -> graues Badge, KEIN Button
-               'beta'          -> bernsteinfarbenes Badge, Button "Interesse anmelden"
+               'beta'          -> bernsteinfarbenes Badge, Button "Anfrage schreiben"
      link      nur bei status 'online' noetig, sonst null
      bild      Dateiname in assets/screenshots/ - oder null fuer Platzhalter
      alt       Bildbeschreibung fuer Blinde und Suchmaschinen (PFLICHT)
@@ -304,7 +304,7 @@ function aktion(p) {
   }
 
   return `<a class="rs-btn rs-btn--secondary rs-btn--sm"
-      href="${mailto('Interesse: ' + p.name)}">Interesse anmelden</a>
+      href="${mailto('Anfrage: ' + p.name)}">Anfrage schreiben</a>
     ${kopierZeile()}`;
 }
 
