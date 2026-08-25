@@ -362,6 +362,14 @@ code, kbd, samp, pre {
 .u-accent { color: var(--accent); }
 .u-muted { color: var(--text-muted); }
 
+/* Zeilenumbruch NUR auf schmalen Bildschirmen.
+   Als <br class="u-br-eng"> in eine Ueberschrift gesetzt: am Handy bricht
+   die Zeile genau dort um (z. B. nach dem Beistrich), am grossen Bildschirm
+   verschwindet der Umbruch und der Satz bleibt in einer Zeile. Ein
+   ausgeblendetes <br> erzeugt keinen Umbruch. */
+.u-br-eng { display: inline; }
+@media (min-width: 640px) { .u-br-eng { display: none; } }
+
 /* Screenshot-Fassung: dunkles Passepartout um jedes Programm-Bild.
    Ohne das wirken helle App-Oberflaechen wie ein Loch in der schwarzen Seite. */
 .u-shot { display: block; background: var(--shot-plate); padding: var(--shot-pad);
@@ -560,14 +568,22 @@ code, kbd, samp, pre {
 .rs-pcard:hover { border-color: var(--line-strong); background: var(--surface-alt); }
 .rs-pcard:focus-within { border-color: var(--accent); }
 .rs-pcard__media { margin-bottom: var(--sp-2); }
-.rs-pcard__top { display: flex; align-items: flex-start; justify-content: space-between;
+/* Das Status-Schild steht UNTER dem Namen, nicht daneben.
+   Grund: Daneben blieb fuer den Namen nur eine schmale Restspalte, und ein
+   langer Name wurde darin mitten im Wort zerteilt ("EÜH-Antragsassiste /
+   nt"). Untereinander hat der Name immer die volle Kartenbreite und bleibt
+   ganz. Bewusst fuer ALLE Karten gleich: waere es nur bei den langen Namen
+   so, stuenden in derselben Reihe manche Schilder rechts und manche
+   darunter, und die Beschreibungen begaennen auf verschiedener Hoehe. */
+.rs-pcard__top { display: flex; flex-direction: column; align-items: flex-start;
   gap: var(--sp-3); }
-/* min-width:0 erlaubt der linken Haelfte zu schrumpfen, statt die Karte
-   aufzublaehen; overflow-wrap bricht notfalls ein sehr langes Wort um. */
 .rs-pcard__top > div { min-width: 0; }
+/* hyphens: auto trennt notfalls an einer echten Silbengrenze MIT Trennstrich
+   ("EÜH-Antrags-/assistent") statt blind mitten im Wort. Greift, weil die
+   Seite lang="de" traegt. overflow-wrap bleibt als letzte Rettung stehen. */
 .rs-pcard__name { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h4);
   line-height: var(--lh-h4); letter-spacing: var(--ls-h4); color: var(--text); margin: 0;
-  overflow-wrap: break-word; }
+  -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
 .rs-pcard__cat { font-family: var(--font-display); font-weight: 500; font-size: 11px;
   letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted);
   margin-top: 4px; }
