@@ -548,3 +548,87 @@ listeAufbauen();
 bilderNachladen();          // muss NACH listeAufbauen laufen - erst dann gibt es die Karten
 kopierKnoepfeAktivieren();
 grossansichtAktivieren();
+
+/* ============================================================================
+   KONTAKTFORMULAR (26.08.2026)
+
+   Es wird KEINE Zeile an einen fremden Dienst geschickt. Das Formular baut
+   aus den Eingaben eine fertige E-Mail und uebergibt sie dem Mailprogramm
+   des Besuchers. Abgeschickt wird sie erst dort, von Hand.
+   Dieselbe Loesung wie auf schrittfuerschrittfit.at und webwerkstube.at.
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  const MEINE_EMAIL = 'info@robschman.at';
+
+  function melden(text, art) {
+    const feld = document.getElementById('hinweis-anfrage');
+    if (!feld) return;
+    feld.textContent = text;
+    feld.className = 'rs-form__hinweis rs-form__hinweis--' + art;
+    feld.setAttribute('data-an', '1');
+  }
+
+  function istEmail(wert) {
+    return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(String(wert).trim());
+  }
+
+  const formular = document.getElementById('form-anfrage');
+  if (!formular) return;
+
+  formular.addEventListener('submit', function (ereignis) {
+    ereignis.preventDefault();
+
+    const pflicht = formular.querySelectorAll('[required]');
+    for (const feld of pflicht) {
+      const leer = feld.type === 'checkbox' ? !feld.checked : !feld.value.trim();
+      if (leer) {
+        feld.focus();
+        melden(feld.type === 'checkbox'
+          ? 'Bitte setz noch das Häkchen bei der Einwilligung.'
+          : 'Bitte füll noch alle Felder aus.', 'fehler');
+        return;
+      }
+    }
+
+    const name = formular.elements.name.value.trim();
+    const email = formular.elements.email.value.trim();
+    const nachricht = formular.elements.nachricht.value.trim();
+
+    if (!istEmail(email)) {
+      formular.elements.email.focus();
+      melden('Die E-Mail-Adresse sieht nicht richtig aus. Bitte noch einmal prüfen.', 'fehler');
+      return;
+    }
+
+    const betreff = 'Anfrage über robschman.at — ' + name;
+    const text = nachricht + '\n\n'
+      + '-- \n'
+      + 'Abgeschickt über robschman.at\n'
+      + 'Name: ' + name + '\n'
+      + 'E-Mail: ' + email + '\n';
+
+    /* mailto darf nicht beliebig lang werden — manche Mailprogramme
+       schneiden ab etwa 2000 Zeichen ab. */
+    const adresse = 'mailto:' + MEINE_EMAIL
+      + '?subject=' + encodeURIComponent(betreff)
+      + '&body=' + encodeURIComponent(text.slice(0, 1500));
+
+    /* Hinweis ZUERST, Mailprogramm danach: Auf Geraeten ohne eingerichtetes
+       Mailprogramm bricht die Zeile darunter ab. Stuende der Hinweis erst
+       danach, passierte sichtbar gar nichts — genau dann, wenn er am
+       dringendsten gebraucht wird. */
+    melden('Dein E-Mail-Programm sollte sich jetzt öffnen — die Nachricht ist '
+      + 'fertig vorbereitet, du musst sie nur noch abschicken. '
+      + 'Passiert nichts? Dann schreib mir bitte direkt an ' + MEINE_EMAIL + '.', 'ok');
+
+    try {
+      window.location.href = adresse;
+    } catch (fehler) {
+      melden('Dein Gerät konnte kein E-Mail-Programm öffnen. Schreib mir bitte '
+        + 'direkt an ' + MEINE_EMAIL + '. Deine Eingaben stehen noch im Formular — '
+        + 'du kannst sie einfach herauskopieren.', 'fehler');
+    }
+  });
+})();

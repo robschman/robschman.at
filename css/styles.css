@@ -1135,3 +1135,38 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   /* Kontaktbereich braucht am Handy weniger Innenabstand */
   .cs-contact__box { padding: var(--sp-6) var(--sp-4); }
 }
+
+/* ============================================================================
+   KONTAKTFORMULAR (26.08.2026)
+   Baut aus den Eingaben eine fertige E-Mail und uebergibt sie dem
+   Mailprogramm des Besuchers. Es wird nichts an einen fremden Dienst
+   geschickt — deshalb steht dazu auch nichts in der Datenschutzerklaerung.
+   ========================================================================= */
+.rs-form { display: block; text-align: left; max-width: 34rem;
+  margin: 0 auto var(--space-6, 1.5rem); }
+.rs-form__feld { margin-bottom: 0.9rem; }
+.rs-form__feld label { display: block; font-size: 0.8rem; font-weight: 600;
+  color: var(--gray-400); margin-bottom: 0.3rem; letter-spacing: 0.01em; }
+.rs-form input[type="text"], .rs-form input[type="email"], .rs-form textarea {
+  width: 100%; display: block; background: var(--ink-800);
+  border: 1px solid var(--ink-600); border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem; font: inherit; font-size: 0.95rem;
+  color: var(--paper-100); font-family: var(--font-sans); }
+.rs-form input::placeholder, .rs-form textarea::placeholder { color: var(--gray-600); }
+.rs-form input:focus, .rs-form textarea:focus { outline: 2px solid var(--green-500);
+  outline-offset: -1px; border-color: var(--green-500); }
+.rs-form textarea { min-height: 5.5rem; resize: vertical; line-height: 1.55; }
+.rs-form__ok { display: flex; gap: 0.55rem; align-items: flex-start;
+  margin: 0.9rem 0 1.1rem; font-size: 0.8rem; color: var(--gray-400); line-height: 1.55; }
+.rs-form__ok input[type="checkbox"] { width: 1rem; height: 1rem; flex-shrink: 0;
+  margin: 0.15rem 0 0; accent-color: var(--green-500); }
+.rs-form__ok a { color: var(--green-500); }
+.rs-form__hinweis { margin-top: 0.85rem; padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.6; display: none; }
+.rs-form__hinweis[data-an] { display: block; }
+.rs-form__hinweis--ok { background: rgba(74,222,128,0.12);
+  border-left: 3px solid var(--green-500); color: #c9f3da; }
+.rs-form__hinweis--fehler { background: rgba(224,66,49,0.12);
+  border-left: 3px solid var(--terra-text); color: #f7cdc7; }
+.rs-form__oder { text-align: center; font-size: 0.85rem; color: var(--gray-500);
+  margin: 0 0 0.4rem; }

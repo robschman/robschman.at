@@ -645,11 +645,41 @@
         <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Kontakt</p>
         <h2 class="rs-sh__title">Schreib mir, was du brauchst</h2>
         <p class="rs-sh__sub">
-          Eine E-Mail genügt. Kein Formular, kein Newsletter, keine Weitergabe deiner Adresse.
+          Kurz ausfüllen und abschicken — das öffnet nur dein E-Mail-Programm.
+          Nichts wird an einen fremden Dienst übertragen, kein Newsletter,
+          keine Weitergabe deiner Adresse.
         </p>
       </header>
 
       <div class="cs-contact__box">
+
+        <form id="form-anfrage" class="rs-form" novalidate>
+          <div class="rs-form__feld">
+            <label for="f-name">Dein Name</label>
+            <input id="f-name" name="name" type="text" required
+                   autocomplete="name" placeholder="Max Mustermann">
+          </div>
+          <div class="rs-form__feld">
+            <label for="f-mail">E-Mail</label>
+            <input id="f-mail" name="email" type="email" required
+                   autocomplete="email" placeholder="max@beispiel.at">
+          </div>
+          <div class="rs-form__feld">
+            <label for="f-text">Was brauchst du?</label>
+            <textarea id="f-text" name="nachricht" required
+                      placeholder="Ich hätte gerne ein Programm, das mir die Belege sortiert …"></textarea>
+          </div>
+          <div class="rs-form__ok">
+            <input id="f-ok" name="einwilligung" type="checkbox" required>
+            <label for="f-ok">Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage
+              verwendet werden. Mehr dazu in der
+              <a href="datenschutz.html">Datenschutzerklärung</a>.</label>
+          </div>
+          <button type="submit" class="rs-btn rs-btn--primary rs-btn--lg">Anfrage absenden</button>
+          <p class="rs-form__hinweis" id="hinweis-anfrage" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="rs-form__oder">oder direkt an</p>
         <a class="cs-contact__mail" href="mailto:info@robschman.at">info@robschman.at</a>
 
         <p class="rs-copy" style="justify-content:center">
