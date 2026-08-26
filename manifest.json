@@ -1,0 +1,15 @@
+{
+  "name": "robschman programming",
+  "short_name": "robschman",
+  "description": "Kleine, nützliche Programme für Vereine, kleine Betriebe und Privatpersonen.",
+  "lang": "de-AT",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#0B0B0B",
+  "theme_color": "#0B0B0B",
+  "icons": [
+    { "src": "assets/favicon-32.png",       "sizes": "32x32",   "type": "image/png" },
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
