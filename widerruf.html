@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rücktrittsrecht &amp; Widerrufsformular — robschman</title>
+<title>Rücktrittsrecht &amp; Widerrufsformular&nbsp;— robschman</title>
 <meta name="description" content="Rücktrittsrecht für Verbraucher, Fristen und Muster-Widerrufsformular nach dem Fern- und Auswärtsgeschäfte-Gesetz.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0B0B0B">
@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="css/styles.css?v=20260830">
+<link rel="stylesheet" href="css/styles.css?v=20260831c">
 
 <style>
   .rechts__hinweis{border:1px solid rgba(128,128,128,.32);border-left:3px solid #7CE38B;
@@ -31,8 +31,14 @@
   .rechts__formular pre{border:1px solid rgba(128,128,128,.32);border-radius:10px;
     padding:20px 22px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
     font-size:.86rem;line-height:1.72;white-space:pre;margin:0}
-  .rechts__kopie{position:absolute;top:10px;right:10px;z-index:2}
-  .rechts__kopie.ist-kopiert{background:#7CE38B;color:#0B0B0B;border-color:#7CE38B}
+  /* Der Kopier-Knopf steht ueber dem Formular, damit er keinen Text verdeckt. */
+  .rechts__kopie{display:block;margin:0 0 12px;background:#4ADE80;border-color:#4ADE80;
+    color:#0B0B0B;font-weight:700}
+  .rechts__kopie:hover{background:#7CE38B;border-color:#7CE38B;color:#0B0B0B}
+  .rechts__kopie.ist-kopiert{background:#15803D;color:#fff;border-color:#15803D}
+  /* 40 Zeichen muessen in die Handybreite passen: Schrift mitwachsen lassen */
+  @media (max-width:520px){
+    .rechts__formular pre{font-size:min(.82rem, calc(3.9vw - 2.6px));padding:16px 14px} }
   blockquote{border-left:3px solid rgba(128,128,128,.42);margin:18px 0;padding:2px 0 2px 18px;
     font-style:italic}
 </style>
@@ -43,7 +49,7 @@
 
 <header class="rs-header">
   <div class="rs-header__in">
-    <a class="rs-wm rs-wm--md" href="index.html" aria-label="robschman — zur Startseite">robschman<span
+    <a class="rs-wm rs-wm--md" href="index.html" aria-label="robschman&nbsp;— zur Startseite">robschman<span
       class="rs-wm__dot" aria-hidden="true">_</span><span class="rs-wm__sub">programming</span></a>
     <a class="rs-btn rs-btn--primary rs-btn--sm" href="index.html#kontakt">Schreib mir</a>
   </div>
@@ -71,14 +77,14 @@
 
     <h2>1. Für wen gilt das?</h2>
     <p>
-      Für <strong>Verbraucher</strong> — also für jeden, der nicht im Rahmen eines
+      Für <strong>Verbraucher</strong>&nbsp;— also für jeden, der nicht im Rahmen eines
       Unternehmens beauftragt. Dazu zählt auch ein Verein, der rein ideelle Zwecke
       verfolgt und kein Unternehmen betreibt: ein Sport-, Musik- oder Feuerwehrverein
       etwa ist Verbraucher.
     </p>
     <p>
       Vorausgesetzt ist außerdem, dass der Vertrag <strong>ohne gleichzeitige
-      Anwesenheit</strong> beider Seiten zustande gekommen ist — also per E-Mail,
+      Anwesenheit</strong> beider Seiten zustande gekommen ist&nbsp;— also per E-Mail,
       Telefon oder Brief. Das ist der Regelfall.
     </p>
     <p>
@@ -101,7 +107,7 @@
 
     <h2>3. Wie der Rücktritt erklärt wird</h2>
     <p>
-      Eine eindeutige Erklärung genügt — formlos per E-Mail oder Brief. Ein Satz reicht:
+      Eine eindeutige Erklärung genügt&nbsp;— formlos per E-Mail oder Brief. Ein Satz reicht:
     </p>
     <blockquote>
       „Ich trete von meinem am [Datum] geschlossenen Vertrag über [Bezeichnung] zurück."
@@ -132,7 +138,7 @@
     </ul>
     <p>
       Im Angebot stehen dafür zwei Häkchen. Bei einem Programm zum Herunterladen gilt
-      dasselbe ab Beginn der Bereitstellung (§ 18 Abs. 1 Z 11 FAGG).
+      dasselbe ab Beginn der Bereitstellung (§ 18 Abs. 1 Z 11 FAGG).
     </p>
     <p>
       Wird nach einem solchen Verlangen zurückgetreten, bevor alles fertig ist, ist der
@@ -142,7 +148,7 @@
     <div class="rechts__hinweis">
       <p>
         <strong>Beide Wege stehen offen.</strong> Wer die Häkchen nicht setzt, verliert
-        nichts — es wird dann nach Ablauf der 14 Tage begonnen und das Rücktrittsrecht
+        nichts&nbsp;— es wird dann nach Ablauf der 14 Tage begonnen und das Rücktrittsrecht
         bleibt vollständig erhalten. Im Angebot steht ausdrücklich, welcher Weg gewählt
         wurde.
       </p>
@@ -158,37 +164,41 @@
       <button type="button" class="rs-btn rs-btn--sm rechts__kopie" id="kopierknopf">
         Formular kopieren
       </button>
-      <pre id="formular">An: Robert Thalhammer, robschman programming
-    Grabengasse 13/3/2, 2630 Ternitz, Österreich
+      <pre id="formular">An: Robert Thalhammer
+    robschman programming
+    Grabengasse 13/3/2
+    2630 Ternitz, Österreich
     info@robschman.at
 
-Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*)
-abgeschlossenen Vertrag über den Kauf der folgenden
-Waren (*) / die Erbringung der folgenden Dienstleistung (*)
+Hiermit widerrufe(n) ich/wir (*) den
+von mir/uns (*) abgeschlossenen Vertrag
+über den Kauf der folgenden Waren (*) /
+die Erbringung der folgenden
+Dienstleistung (*)
 
-    ______________________________________________
+  ______________________________________
 
 Bestellt am (*) / erhalten am (*)
 
-    ______________________________________________
+  ______________________________________
 
 Name des/der Verbraucher(s)
 
-    ______________________________________________
+  ______________________________________
 
 Anschrift des/der Verbraucher(s)
 
-    ______________________________________________
-    ______________________________________________
+  ______________________________________
+  ______________________________________
 
 Unterschrift des/der Verbraucher(s)
 (nur bei Mitteilung auf Papier)
 
-    ______________________________________________
+  ______________________________________
 
 Datum
 
-    ______________________________________________
+  ______________________________________
 
 (*) Unzutreffendes streichen</pre>
     </div>

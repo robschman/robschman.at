@@ -640,7 +640,9 @@ code, kbd, samp, pre {
   display: grid; gap: var(--sp-7); }
 @media (min-width: 820px) { .rs-footer__in { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); } }
 .rs-footer__claim { margin-top: var(--sp-4); color: var(--text-muted); }
-.rs-footer__mail { display: inline-block; margin-top: var(--sp-4);
+/* Die E-Mail steht immer in einer eigenen Zeile unter dem Schriftzug — auf den
+   Rechtsseiten fehlt der Claim dazwischen, sonst klebt sie am Wort "programming". */
+.rs-footer__mail { display: block; width: fit-content; margin-top: var(--sp-4);
   font-family: var(--font-mono); font-size: 15px; color: var(--accent); }
 .rs-footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--sp-6); }
 .rs-footer__h { font-family: var(--font-display); font-weight: 500; font-size: 11px;
