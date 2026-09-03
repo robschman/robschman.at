@@ -8,12 +8,22 @@
   </url>
   <url>
     <loc>https://robschman.at/impressum.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://robschman.at/datenschutz.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://robschman.at/agb.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://robschman.at/widerruf.html</loc>
+    <lastmod>2026-09-03</lastmod>
     <priority>0.3</priority>
   </url>
 </urlset>
