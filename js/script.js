@@ -582,12 +582,9 @@ grossansichtAktivieren();
 
     const pflicht = formular.querySelectorAll('[required]');
     for (const feld of pflicht) {
-      const leer = feld.type === 'checkbox' ? !feld.checked : !feld.value.trim();
-      if (leer) {
+      if (!feld.value.trim()) {
         feld.focus();
-        melden(feld.type === 'checkbox'
-          ? 'Bitte setz noch das Häkchen bei der Einwilligung.'
-          : 'Bitte füll noch alle Felder aus.', 'fehler');
+        melden('Bitte füll noch alle Felder aus.', 'fehler');
         return;
       }
     }
