@@ -1160,7 +1160,9 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
    Mailprogramm des Besuchers. Es wird nichts an einen fremden Dienst
    geschickt — deshalb steht dazu auch nichts in der Datenschutzerklaerung.
    ========================================================================= */
-.rs-form { display: block; text-align: left; max-width: 34rem;
+/* width:100% — die Kontaktbox zentriert mit Flexbox; ohne feste Breite schrumpfte das Formular
+   auf die Breite der Felder und wurde erst mit dem Hinweistext nach dem Absenden breit (17.09.2026) */
+.rs-form { display: block; text-align: left; width: 100%; max-width: 34rem;
   margin: 0 auto var(--space-6, 1.5rem); }
 .rs-form__feld { margin-bottom: 0.9rem; }
 .rs-form__feld label { display: block; font-size: 0.8rem; font-weight: 600;
