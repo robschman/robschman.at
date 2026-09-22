@@ -131,7 +131,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/styles.css?v=20260917">
+<link rel="stylesheet" href="css/styles.css?v=20260922">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
      Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
@@ -649,15 +649,16 @@
         <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Kontakt</p>
         <h2 class="rs-sh__title">Schreib mir, was du brauchst</h2>
         <p class="rs-sh__sub">
-          Kurz ausfüllen und abschicken&nbsp;— das öffnet nur dein E-Mail-Programm.
-          Nichts wird an einen fremden Dienst übertragen, kein Newsletter,
+          Kurz ausfüllen und abschicken&nbsp;— die Anfrage kommt direkt bei mir im
+          Postfach an. Kein fremder Formulardienst, kein Newsletter,
           keine Weitergabe deiner Adresse.
         </p>
       </header>
 
       <div class="cs-contact__box">
 
-        <form id="form-anfrage" class="rs-form" novalidate>
+        <form id="form-anfrage" class="rs-form" method="post"
+              action="https://webwerkstube.at/anfrage-robschman.php" novalidate>
           <div class="rs-form__feld">
             <label for="f-name">Dein Name</label>
             <input id="f-name" name="name" type="text" required
@@ -673,9 +674,13 @@
             <textarea id="f-text" name="nachricht" required
                       placeholder="Ich hätte gerne ein Programm, das mir die Belege sortiert …"></textarea>
           </div>
-          <p class="rs-form__hinweis">Das Formular öffnet dein E-Mail-Programm mit der fertigen Nachricht;
-            es schickt nichts an einen Server. Wie mit deiner Anfrage umgegangen wird, steht in der
-            <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+          <!-- Unsichtbares Feld gegen Automaten: Menschen sehen es nicht, Programme fuellen es aus. -->
+          <div class="rs-hp" aria-hidden="true">
+            <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <input type="hidden" name="t0" id="f-t0" value="">
+          <p class="rs-form__ds">Deine Angaben kommen per E-Mail bei mir an und werden nirgends gespeichert.
+            Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
           <button type="submit" class="rs-btn rs-btn--primary rs-btn--lg">Anfrage absenden</button>
           <p class="rs-form__hinweis" id="hinweis-anfrage" role="status" aria-live="polite"></p>
         </form>

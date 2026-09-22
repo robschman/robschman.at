@@ -550,17 +550,24 @@ kopierKnoepfeAktivieren();
 grossansichtAktivieren();
 
 /* ============================================================================
-   KONTAKTFORMULAR (26.08.2026)
+   KONTAKTFORMULAR (umgebaut am 22.09.2026)
 
-   Es wird KEINE Zeile an einen fremden Dienst geschickt. Das Formular baut
-   aus den Eingaben eine fertige E-Mail und uebergibt sie dem Mailprogramm
-   des Besuchers. Abgeschickt wird sie erst dort, von Hand.
-   Dieselbe Loesung wie auf schrittfuerschrittfit.at und webwerkstube.at.
+   Vorher oeffnete das Formular das Mailprogramm des Besuchers (mailto). Wer
+   keines eingerichtet hat — am Handy oder mit Webmail die Regel —, konnte
+   nicht anfragen. Jetzt nimmt ein kleines Programm auf dem eigenen Webspace
+   (All-Inkl, derselbe Server wie webwerkstube.at) die Anfrage entgegen und
+   stellt sie sofort als E-Mail an info@robschman.at zu. Gespeichert wird
+   nichts, ein Formulardienst eines Drittanbieters ist nicht eingebunden.
+   robschman.at liegt auf GitHub Pages und kann selbst kein PHP.
+
+   Ohne JavaScript wird das Formular ganz normal abgeschickt und landet auf
+   danke.html — deshalb stehen action und method auch im HTML.
    ========================================================================= */
 (function () {
   'use strict';
 
   const MEINE_EMAIL = 'info@robschman.at';
+  const ENDPUNKT = 'https://webwerkstube.at/anfrage-robschman.php';
 
   function melden(text, art) {
     const feld = document.getElementById('hinweis-anfrage');
@@ -577,7 +584,15 @@ grossansichtAktivieren();
   const formular = document.getElementById('form-anfrage');
   if (!formular) return;
 
-  formular.addEventListener('submit', function (ereignis) {
+  /* Zeitstempel beim Laden. Der Server verwirft, was in weniger als vier
+     Sekunden abgeschickt wird — so schnell tippt kein Mensch, nur ein Automat. */
+  const zeitfeld = document.getElementById('f-t0');
+  function zeitSetzen() {
+    if (zeitfeld) zeitfeld.value = String(Math.floor(Date.now() / 1000));
+  }
+  zeitSetzen();
+
+  formular.addEventListener('submit', async function (ereignis) {
     ereignis.preventDefault();
 
     const pflicht = formular.querySelectorAll('[required]');
@@ -588,44 +603,46 @@ grossansichtAktivieren();
         return;
       }
     }
-
-    const name = formular.elements.name.value.trim();
-    const email = formular.elements.email.value.trim();
-    const nachricht = formular.elements.nachricht.value.trim();
-
-    if (!istEmail(email)) {
+    if (!istEmail(formular.elements.email.value)) {
       formular.elements.email.focus();
       melden('Die E-Mail-Adresse sieht nicht richtig aus. Bitte noch einmal prüfen.', 'fehler');
       return;
     }
 
-    const betreff = 'Anfrage über robschman.at — ' + name;
-    const text = nachricht + '\n\n'
-      + '-- \n'
-      + 'Abgeschickt über robschman.at\n'
-      + 'Name: ' + name + '\n'
-      + 'E-Mail: ' + email + '\n';
+    const knopf = formular.querySelector('button[type="submit"]');
+    const knopfText = knopf ? knopf.textContent : '';
+    if (knopf) { knopf.disabled = true; knopf.textContent = 'Wird gesendet …'; }
 
-    /* mailto darf nicht beliebig lang werden — manche Mailprogramme
-       schneiden ab etwa 2000 Zeichen ab. */
-    const adresse = 'mailto:' + MEINE_EMAIL
-      + '?subject=' + encodeURIComponent(betreff)
-      + '&body=' + encodeURIComponent(text.slice(0, 1500));
-
-    /* Hinweis ZUERST, Mailprogramm danach: Auf Geraeten ohne eingerichtetes
-       Mailprogramm bricht die Zeile darunter ab. Stuende der Hinweis erst
-       danach, passierte sichtbar gar nichts — genau dann, wenn er am
-       dringendsten gebraucht wird. */
-    melden('Dein E-Mail-Programm sollte sich jetzt öffnen — die Nachricht ist '
-      + 'fertig vorbereitet, du musst sie nur noch abschicken. '
-      + 'Passiert nichts? Dann schreib mir bitte direkt an ' + MEINE_EMAIL + '.', 'ok');
-
+    let status = 'fehler';
     try {
-      window.location.href = adresse;
+      const antwort = await fetch(ENDPUNKT, {
+        method: 'POST',
+        headers: { 'X-Anfrage': 'fetch' },
+        body: new FormData(formular)
+      });
+      let daten = null;
+      try { daten = await antwort.json(); } catch (e) { daten = null; }
+      status = (daten && daten.status) ? daten.status : (antwort.ok ? 'ok' : 'fehler');
     } catch (fehler) {
-      melden('Dein Gerät konnte kein E-Mail-Programm öffnen. Schreib mir bitte '
-        + 'direkt an ' + MEINE_EMAIL + '. Deine Eingaben stehen noch im Formular — '
-        + 'du kannst sie einfach herauskopieren.', 'fehler');
+      /* Kein Netz, Skript blockiert oder der Server antwortet nicht: ganz
+         normal abschicken. Dann uebernimmt der Server und leitet auf
+         danke.html weiter — die Anfrage geht nicht verloren. */
+      formular.submit();
+      return;
+    }
+
+    if (knopf) { knopf.disabled = false; knopf.textContent = knopfText; }
+
+    if (status === 'ok') {
+      formular.reset();
+      zeitSetzen();
+      melden('Danke! Deine Anfrage ist angekommen — ich melde mich per E-Mail, '
+        + 'meist noch am selben Tag.', 'ok');
+    } else if (status === 'spam') {
+      melden('Das ging sehr schnell — bitte schick die Anfrage gleich noch einmal ab.', 'fehler');
+    } else {
+      melden('Das hat leider nicht geklappt. Schreib mir bitte direkt an ' + MEINE_EMAIL
+        + ' — deine Eingaben stehen noch im Formular.', 'fehler');
     }
   });
 })();

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danke&nbsp;— robschman programming</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="css/styles.css?v=20260922">
+</head>
+<body>
+
+<header class="rs-header">
+  <div class="rs-header__in">
+    <a class="rs-wm rs-wm--md" href="index.html" aria-label="robschman&nbsp;— zur Startseite">robschman<span
+      class="rs-wm__dot" aria-hidden="true">_</span><span class="rs-wm__sub">programming</span></a>
+    <a class="rs-btn rs-btn--primary rs-btn--sm" href="index.html">Zur Startseite</a>
+  </div>
+</header>
+
+<main id="inhalt" class="rs-danke">
+  <div class="rs-danke__box">
+    <h1 id="danke-titel">Danke&nbsp;— deine Anfrage ist angekommen.</h1>
+    <p id="danke-text">Ich schaue sie mir an und melde mich per E-Mail, meist noch am selben Tag.</p>
+    <p>Du brauchst es dringend? Schreib direkt an
+      <a href="mailto:info@robschman.at">info@robschman.at</a>.</p>
+    <p><a class="rs-btn rs-btn--primary rs-btn--lg" href="index.html">Zurück zur Startseite</a></p>
+  </div>
+</main>
+
+<script>
+  /* Diese Seite wird nur angezeigt, wenn das Formular ohne JavaScript
+     abgeschickt wurde. Der Server haengt dann ?status=… an. */
+  (function () {
+    var status = new URLSearchParams(location.search).get('status');
+    if (status === 'ok' || !status) return;
+    var titel = document.getElementById('danke-titel');
+    var text = document.getElementById('danke-text');
+    if (status === 'spam') {
+      titel.textContent = 'Das ging sehr schnell.';
+      text.textContent = 'Der Spamschutz hat die Anfrage angehalten. Bitte schick sie auf der Startseite noch einmal ab.';
+    } else {
+      titel.textContent = 'Da ist etwas schiefgegangen.';
+      text.textContent = 'Die Anfrage konnte nicht zugestellt werden. Schreib mir bitte direkt an info@robschman.at.';
+    }
+  })();
+</script>
+
+</body>
+</html>

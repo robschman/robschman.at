@@ -1188,6 +1188,18 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   border-left: 3px solid var(--green-500); color: #c9f3da; }
 .rs-form__hinweis--fehler { background: rgba(224,66,49,0.12);
   border-left: 3px solid var(--terra-text); color: #f7cdc7; }
+.rs-hp { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px;
+  overflow: hidden; }
+.rs-form__ds { margin: 0.9rem 0 0; font-size: 0.8rem; line-height: 1.55;
+  color: var(--paper-100); }
+.rs-form__ds a { color: var(--green-500); }
+/* Danke-Seite nach dem Absenden ohne JavaScript */
+.rs-danke { min-height: 60vh; display: flex; align-items: center; justify-content: center;
+  padding: var(--sp-8, 3rem) var(--sp-4, 1rem); }
+.rs-danke__box { max-width: 34rem; text-align: center; }
+.rs-danke__box h1 { margin: 0 0 0.9rem; }
+.rs-danke__box p { margin: 0 0 1.1rem; line-height: 1.6; }
+.rs-danke__box a:not(.rs-btn) { color: var(--green-500); }
 .rs-form__oder { text-align: center; font-size: 0.85rem; color: var(--gray-500);
   margin: 0 0 0.4rem; }
 
