@@ -1185,7 +1185,9 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.6; display: none; }
 .rs-form__hinweis[data-an] { display: block; }
 .rs-form__hinweis--ok { background: rgba(74,222,128,0.12);
-  border-left: 3px solid var(--green-500); color: #c9f3da; }
+  border-left: 3px solid var(--green-500); color: #c9f3da;
+  text-align: center; }
+.rs-form__hinweis--ok strong { display: inline-block; margin-bottom: 0.2rem; }
 .rs-form__hinweis--fehler { background: rgba(224,66,49,0.12);
   border-left: 3px solid var(--terra-text); color: #f7cdc7; }
 .rs-hp { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px;

@@ -569,10 +569,19 @@ grossansichtAktivieren();
   const MEINE_EMAIL = 'info@robschman.at';
   const ENDPUNKT = 'https://webwerkstube.at/anfrage-robschman.php';
 
-  function melden(text, art) {
+  /* kopf ist optional: steht fett in einer eigenen Zeile darueber ("Danke!").
+     Bewusst ueber Textknoten statt innerHTML zusammengesetzt. */
+  function melden(text, art, kopf) {
     const feld = document.getElementById('hinweis-anfrage');
     if (!feld) return;
-    feld.textContent = text;
+    feld.textContent = '';
+    if (kopf) {
+      const stark = document.createElement('strong');
+      stark.textContent = kopf;
+      feld.appendChild(stark);
+      feld.appendChild(document.createElement('br'));
+    }
+    feld.appendChild(document.createTextNode(text));
     feld.className = 'rs-form__hinweis rs-form__hinweis--' + art;
     feld.setAttribute('data-an', '1');
   }
@@ -636,8 +645,8 @@ grossansichtAktivieren();
     if (status === 'ok') {
       formular.reset();
       zeitSetzen();
-      melden('Danke! Deine Anfrage ist angekommen — ich melde mich per E-Mail, '
-        + 'meist noch am selben Tag.', 'ok');
+      melden('Die Anfrage ist bei mir angekommen. Ich melde mich per E-Mail, '
+        + 'meist noch am selben Tag.', 'ok', 'Danke!');
     } else if (status === 'spam') {
       melden('Das ging sehr schnell — bitte schick die Anfrage gleich noch einmal ab.', 'fehler');
     } else {
