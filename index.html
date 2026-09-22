@@ -131,7 +131,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/styles.css?v=20260922b">
+<link rel="stylesheet" href="css/styles.css?v=20260922c">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
      Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
@@ -209,10 +209,12 @@
       <div class="cs-hero__actions">
         <a class="rs-btn rs-btn--primary rs-btn--lg" href="#programme">Programme ansehen</a>
 
-        <!-- mailto-Button: darunter steht die Adresse zum Kopieren (Pflicht-Rückfall) -->
+        <!-- Führt zum Anfrage-Formular ganz unten (22.09.2026; vorher öffnete der Knopf
+             das Mailprogramm). Die Adresse darunter bleibt als Rückfall für alle,
+             die lieber selbst eine E-Mail schreiben. -->
         <div>
           <a class="rs-btn rs-btn--secondary rs-btn--lg"
-             href="mailto:info@robschman.at?subject=Anfrage&amp;body=Hallo%20Robert%2C%0A%0Aich%20h%C3%A4tte%20folgendes%20Vorhaben%3A%0A%0A">Anfrage schreiben</a>
+             href="#kontakt" data-anfrage>Anfrage schreiben</a>
           <p class="rs-copy" style="margin-top:var(--sp-2)">
             <span class="rs-copy__mail">info@robschman.at</span>
             <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
@@ -401,7 +403,7 @@
         </header>
         <div class="cs-split__aside">
           <a class="rs-btn rs-btn--primary rs-btn--lg"
-             href="mailto:info@robschman.at?subject=Projekt-Anfrage">Projekt anfragen</a>
+             href="#kontakt" data-anfrage data-thema="Projekt-Anfrage">Projekt anfragen</a>
           <p class="rs-copy">
             <span class="rs-copy__mail">info@robschman.at</span>
             <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
@@ -564,7 +566,7 @@
         </div>
         <div class="cs-wish__cta">
           <a class="rs-btn rs-btn--secondary rs-btn--lg"
-             href="mailto:info@robschman.at?subject=Wunsch">Wunsch äußern</a>
+             href="#kontakt" data-anfrage data-thema="Mein Wunsch">Wunsch äußern</a>
           <p class="rs-copy">
             <span class="rs-copy__mail">info@robschman.at</span>
             <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"

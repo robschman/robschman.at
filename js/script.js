@@ -227,13 +227,9 @@ function sicher(t) {
                   .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function mailto(betreff) {
-  return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(betreff);
-}
-
-/* Die Adresse mit Kopieren-Knopf. Steht unter JEDEM mailto-Button.
-   Grund: Ein mailto-Link tut am Computer gar nichts, wenn dort kein
-   Mailprogramm eingerichtet ist. Ohne diese Zeile gingen dort Anfragen verloren. */
+/* Die Adresse mit Kopieren-Knopf. Steht unter JEDEM Anfrage-Knopf.
+   Grund: Manche schreiben lieber selbst eine E-Mail, als ein Formular
+   auszufüllen. Ohne diese Zeile gingen genau die Anfragen verloren. */
 function kopierZeile() {
   return `<p class="rs-copy">
       <span class="rs-copy__mail">${EMAIL}</span>
@@ -304,7 +300,7 @@ function aktion(p) {
   }
 
   return `<a class="rs-btn rs-btn--secondary rs-btn--sm"
-      href="${mailto('Anfrage: ' + p.name)}">Anfrage schreiben</a>
+      href="#kontakt" data-anfrage data-thema="Anfrage: ${sicher(p.name)}">Anfrage schreiben</a>
     ${kopierZeile()}`;
 }
 
@@ -600,6 +596,41 @@ grossansichtAktivieren();
     if (zeitfeld) zeitfeld.value = String(Math.floor(Date.now() / 1000));
   }
   zeitSetzen();
+
+  /* Die Knöpfe „Anfrage schreiben", „Projekt anfragen" und „Wunsch äußern"
+     springen seit 22.09.2026 hierher, statt das Mailprogramm zu öffnen — sonst
+     hätten wir genau das Problem zurück, das das Formular gerade gelöst hat.
+     Steht ein Thema am Knopf, kommt es als erste Zeile ins Nachrichtenfeld. */
+  document.addEventListener('click', function (ereignis) {
+    const knopf = ereignis.target.closest('a[data-anfrage]');
+    if (!knopf) return;
+    /* Selbst scrollen statt den Sprung auf #kontakt zu nehmen: Der Anker steht
+       bei der Überschrift, das Formular begann darunter knapp außerhalb des
+       Bildschirms. Ohne JavaScript bleibt der Anker als Rückfall. */
+    ereignis.preventDefault();
+    formular.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const thema = knopf.getAttribute('data-thema') || '';
+    const nachricht = formular.elements.nachricht;
+    if (thema && nachricht && !nachricht.value.trim()) {
+      nachricht.value = thema + '\n\n';
+    }
+    /* Kurz warten, damit der Sprung zuerst läuft. preventScroll verhindert,
+       dass der Browser danach ein zweites Mal springt. */
+    setTimeout(function () {
+      /* Sicherheitsnetz: Kommt das sanfte Scrollen nicht an (abgebrochen,
+         „Bewegung reduzieren", alter Browser), hart nachziehen. */
+      const sicht = formular.getBoundingClientRect();
+      if (sicht.top < 0 || sicht.top > window.innerHeight - 120) {
+        formular.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      const leerName = !formular.elements.name.value.trim();
+      const ziel = leerName ? formular.elements.name : (nachricht || formular.elements.name);
+      try { ziel.focus({ preventScroll: true }); } catch (e) { ziel.focus(); }
+      if (nachricht && nachricht.value) {
+        try { nachricht.selectionStart = nachricht.selectionEnd = nachricht.value.length; } catch (e) {}
+      }
+    }, 700);
+  });
 
   formular.addEventListener('submit', async function (ereignis) {
     ereignis.preventDefault();
