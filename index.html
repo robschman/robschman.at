@@ -89,14 +89,14 @@
         "@type": "OfferCatalog",
         "name": "Programme",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Kontro.io", "applicationCategory": "FinanceApplication", "operatingSystem": "macOS", "description": "Belege ablegen, den Rest macht das Programm: sortiert nach Monat und Kategorie, trennt einmalige von wiederkehrenden Posten und zeigt, was schon bezahlt ist." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Belegro", "applicationCategory": "FinanceApplication", "operatingSystem": "macOS", "description": "Buchhaltungsprogramm: Belege ablegen, sortiert nach Monat und Kategorie, Abgleich mit dem Kontoauszug, Rechnungen und Aufbereitung für den Steuerberater. Keine Steuerberatung." } },
           { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Blitztext", "applicationCategory": "BusinessApplication", "operatingSystem": "macOS", "description": "Diktier-Werkzeug für den Mac: sprechen statt tippen." } },
           { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "ToDo Sidebar", "applicationCategory": "BusinessApplication", "operatingSystem": "macOS", "description": "Aufgabenliste, die immer am Bildschirmrand mitläuft." } },
           { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "US Aktien Screener", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "url": "https://us-aktien-screener.com/", "description": "Filtert rund 585 Aktien des S&P 500 nach fünf Kennzahlen. Keine Anlageberatung." } },
-          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "YT Scanner", "applicationCategory": "MultimediaApplication", "operatingSystem": "macOS", "description": "Wertet YouTube-Videos aus und zieht die Kernaussagen heraus." } },
-          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Beauty Routine App", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS", "url": "https://beautyroutine.app/", "description": "iPhone-App für die tägliche Pflegeroutine, mit eigener Landingpage und Produktempfehlungen (CozyVibe)." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Beauty Routine App", "applicationCategory": "LifestyleApplication", "operatingSystem": "Web", "url": "https://beautyroutine.app/", "description": "Web-App fürs Handy für die tägliche Pflegeroutine, mit Pflegetipps von CozyVibe." } },
           { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "EÜH-Antragsassistent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://fussfessel-hilfe.at/", "description": "Mehrsprachiger Assistent für den Antrag auf elektronisch überwachten Hausarrest. Keine Rechtsberatung." } },
-          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "GitHub Uploader", "applicationCategory": "DeveloperApplication", "operatingSystem": "macOS", "description": "Dateien per Doppelklick veröffentlichen, ohne Terminal." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "VTW Training", "applicationCategory": "SportsApplication", "operatingSystem": "Web", "description": "Trainings-, Liga- und Turnierplaner für Vereine: Zusagen mit einem Tippen, Kalender-Abo und Erinnerungen." } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Trainingsplan-Programm", "applicationCategory": "HealthApplication", "operatingSystem": "macOS, Web", "description": "Individuelle Trainingspläne mit eigenen Übungs-Bildern, beim Kunden als App am Handy." } },
           { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "VTW Turnierplanung", "applicationCategory": "BusinessApplication", "description": "Auftragsarbeit: vollständige Turnierverwaltung, seit mehreren Turnieren im Einsatz." } }
         ]
       }
@@ -131,7 +131,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/styles.css?v=20260922c">
+<link rel="stylesheet" href="css/styles.css?v=20261014b">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
      Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
@@ -337,7 +337,7 @@
 
   <!-- ===================================================================
        5&nbsp;— PRODUKTVORSCHAU
-       Die Karten baut js/script.js aus der Liste PROGRAMME.
+       Die Schaufenster baut js/script.js aus der Liste PROGRAMME.
        Willst du etwas ändern: dorthin, nicht hierher.
        =================================================================== -->
   <section id="programme" class="cs-sec">
@@ -346,7 +346,7 @@
         <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Programme</p>
         <h2 class="rs-sh__title">Das ist schon da</h2>
         <p class="rs-sh__sub">
-          Drei davon sind öffentlich zu sehen, die übrigen laufen täglich bei mir im Einsatz.
+          Drei davon sind öffentlich im Netz, die übrigen sind täglich im Einsatz.
           Wenn eines fast zu deinem Fall passt, baue ich es auf dich um&nbsp;— sag mir einfach, welches.
         </p>
       </header>
@@ -763,7 +763,7 @@
         <strong>keine Rechtsberatung</strong>.
       </p>
       <p class="rs-footer__fine">
-        US Aktien Screener und Kontro.io sind Werkzeuge zur eigenen Recherche und Aufbereitung —
+        US Aktien Screener und Belegro sind Werkzeuge zur eigenen Recherche und Aufbereitung —
         <strong>keine Anlage- und keine Steuerberatung</strong>.
       </p>
       <p class="rs-footer__fine">
@@ -853,7 +853,7 @@
 <!-- Meldung „Adresse kopiert" für Screenreader (für das Auge steht sie am Button) -->
 <p id="kopier-meldung" class="u-nur-vorlesen" role="status" aria-live="polite"></p>
 
-<script src="js/script.js"></script>
+<script src="js/script.js?v=20261014b"></script>
 
 <!-- =====================================================================
      BESUCHERZAEHLER - Cloudflare Web Analytics

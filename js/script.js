@@ -10,171 +10,177 @@
 
 
 /* ============================================================================
-   DIE DREI GRUPPEN
-   Reihenfolge auf der Seite = Reihenfolge in dieser Liste.
-   ========================================================================= */
-const GRUPPEN = [
-  { id: 'betrieb', titel: 'Für Betrieb und Büro' },
-  { id: 'analyse', titel: 'Analyse und Recherche' },
-  { id: 'alltag',  titel: 'Für den Alltag' },
-];
-
-
-/* ============================================================================
-   DIE PROGRAMME
+   DIE PROGRAMME – jedes bekommt ein eigenes Schaufenster
    ----------------------------------------------------------------------------
+   Reihenfolge auf der Seite = Reihenfolge in dieser Liste.
+   Seit 14.10.2026: keine Gruppen und kleinen Karten mehr, sondern je Programm
+   ein großes Schaufenster in seiner eigenen Farbe (Roberts Wunsch: „jedes
+   Programm soll etwas Besonderes sein“).
+
    Jedes Programm hat diese Felder:
 
-     gruppe    'betrieb' | 'analyse' | 'alltag'      (siehe Liste oben)
-     name      wie es auf der Karte steht
-     kategorie kleine Zeile unter dem Namen (z. B. "Mac-Programm")
-     text      ein Satz: was hat der Nutzer davon
-     status    'online'        -> gruenes Badge, Button "Ansehen" (braucht link)
-               'einsatzbereit' -> gruenes Badge, Button "Anfrage schreiben"
-               'umgesetzt'     -> graues Badge, KEIN Button
-               'beta'          -> bernsteinfarbenes Badge, Button "Anfrage schreiben"
-     link      nur bei status 'online' noetig, sonst null
-     bild      Dateiname in assets/screenshots/ - oder null fuer Platzhalter
-     alt       Bildbeschreibung fuer Blinde und Suchmaschinen (PFLICHT)
-     form      'quer'      Bild fuellt den Rahmen aus (Standard)
-               'handy'     Hochformat, steht mittig auf dunklem Grund
-               'fenster'   fast quadratisch, steht mittig auf dunklem Grund
-     hell      true bei hellen Screenshots -> bekommen einen kraeftigeren
-               Rahmen und werden leicht abgedunkelt, damit sie nicht aus der
-               schwarzen Seite herausleuchten
-     hinweis   rechtlicher Abgrenzungssatz direkt auf der Karte (oder null)
+     slug      kurzer Name ohne Leerzeichen, wird zum Anker #programm-<slug>
+     name      wie es groß im Schaufenster steht
+     art       kleine Zeile über dem Namen (z. B. "Web-App · Mac, Windows, iPhone")
+     satz      zwei, drei Sätze: was ist es, was hat man davon
+     punkte    drei kurze Punkte „was es kann“
+     status    'online' | 'einsatzbereit' | 'beta'   (Badge oben rechts)
+     farbe     Markenfarbe des Programms (hell genug für dunklen Grund)
+     icon      App-Symbol in assets/programme/<slug>.png
+     bild      großes Bild (Pfad ab Website-Wurzel) – oder null: dann steht das
+               Symbol groß mit „Bilder folgen“
+     form      'quer' (Bild füllt den Rahmen) | 'handy' (Hochformat, mittig)
+     hell      true bei hellen Bildern -> werden leicht abgedunkelt
+     alt       Bildbeschreibung (PFLICHT)
+     seite     eigene Programm-Seite mit Film und Galerie (z. B. 'programme/screener/')
+               oder null – dann führt das Bild zur Großansicht
+     link      Adresse der App im Netz – oder null
+     hinweis   rechtlicher Abgrenzungssatz (oder null)
 
    NEUES PROGRAMM AUFNEHMEN
-     1. Screenshot nach assets/_original/ legen
-     2. in _tools/screenshots-aufbereiten.py unten eintragen und das Skript laufen lassen
-     3. hier einen neuen Block ergaenzen - fertig
+     1. Symbol nach assets/programme/<slug>.png (192 x 192 px)
+     2. Bild ablegen (assets/screenshots/ oder programme/<slug>/)
+     3. hier einen Block ergänzen – fertig
    ========================================================================= */
 const PROGRAMME = [
-
-  /* ---------- GRUPPE 1: Für Betrieb und Büro ---------- */
   {
-    gruppe: 'betrieb',
-    name: 'Kontro.io',
-    kategorie: 'Mac-Programm',
-    text: 'Belege ablegen, den Rest macht das Programm: sortiert nach Monat und Kategorie, '
-        + 'trennt einmalige von wiederkehrenden Posten und zeigt, was schon bezahlt ist.',
-    status: 'einsatzbereit',
-    link: null,
-    bild: 'kontro-io.jpg',
-    alt: 'Kontro.io: Jahresübersicht mit Einnahmen, Ausgaben und Gewinn, Balken zur '
-       + 'Sozialversicherungs-Grenze, Fristen-Erinnerungen und Monatstabelle',
-    form: 'quer',
-    hell: true,
-    hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
-  },
-  {
-    gruppe: 'betrieb',
-    name: 'Blitztext',
-    kategorie: 'Mac-Programm',
-    text: 'Tastenkürzel drücken, sprechen, fertiger Text. Wandelt auch WhatsApp-Sprachnachrichten '
-        + 'in lesbaren Text um.',
-    status: 'einsatzbereit',
-    link: null,
-    bild: 'blitztext.jpg',
-    alt: 'Blitztext: Menü in der Mac-Menüleiste mit den Punkten Sprachnachricht transkribieren, '
-       + 'Erkenner, Sprache und Mikrofon',
-    form: 'quer',
-    hell: false,
-    hinweis: null,
-  },
-  {
-    gruppe: 'betrieb',
-    name: 'ToDo Sidebar',
-    kategorie: 'Mac-Programm',
-    text: 'Notizen und Aufgaben per Klick vom Bildschirmrand, ohne das Fenster zu wechseln. '
-        + 'Für den Mac.',
-    status: 'einsatzbereit',
-    link: null,
-    bild: 'todo-sidebar.jpg',
-    alt: 'ToDo Sidebar: schmales Fenster am Bildschirmrand mit den Reitern Allgemein und '
-       + 'Einkaufen und zwei Aufgaben mit Unterpunkten',
-    form: 'handy',
-    hell: false,
-    hinweis: null,
-  },
-
-  /* ---------- GRUPPE 2: Analyse und Recherche ---------- */
-  {
-    gruppe: 'analyse',
+    slug: 'screener',
     name: 'US Aktien Screener',
-    kategorie: 'Web-App',
-    text: 'Filtert S&P 500 und Magnificent 7 nach deinen Kriterien und zeigt dir, welche Aktien '
-        + 'gerade günstig bewertet sind.',
+    art: 'Web-App · Mac, Windows, iPhone, iPad',
+    satz: 'Prüft alle 587 Aktien des S&P 500 nach fünf strengen Kennzahlen und zeigt dir '
+        + 'in Sekunden, welche gerade günstig bewertet sind. Fakten statt Bauchgefühl.',
+    punkte: ['5 Kennzahlen, jede Aktie geprüft', 'Heatmap aller Aktien auf einen Blick', 'KI-Kurzanalyse und Watchlist'],
     status: 'online',
+    farbe: '#19D069',
+    icon: 'assets/programme/screener.png',
+    bild: 'programme/screener/poster.jpg',
+    form: 'quer', hell: false,
+    alt: 'US Aktien Screener: Logo mit Kerzen-Chart und dem Schriftzug US Aktien Screener',
+    seite: 'programme/screener/',
     link: 'https://us-aktien-screener.com',
-    bild: 'us-aktien-screener.jpg',
-    alt: 'US Aktien Screener: Ergebnistabelle mit Ticker, Kurs, KGV, z-Score und Bewertung '
-       + 'für Amazon, Alphabet, Netflix und weitere Aktien',
-    form: 'quer',
-    hell: false,
     hinweis: 'Werkzeug zur Recherche — keine Anlageberatung.',
   },
   {
-    gruppe: 'analyse',
-    name: 'YT Scanner',
-    kategorie: 'Mac-Programm',
-    text: 'Sag, wonach du suchst — die App durchsucht das Video und fasst zusammen, ohne dass du '
-        + 'es ansehen musst.',
-    status: 'einsatzbereit',
-    link: null,
-    bild: 'yt-scanner.jpg',
-    alt: 'YT Scanner: Tabelle mit ausgewerteten YouTube-Videos, je Zeile Kanal, Kategorie und '
-       + 'die wichtigste Erkenntnis',
-    form: 'quer',
-    hell: false,
-    hinweis: null,
-  },
-
-  /* ---------- GRUPPE 3: Für den Alltag ---------- */
-  {
-    gruppe: 'alltag',
-    name: 'Beautyroutine + Cosy Vibe',
-    kategorie: 'iPhone-App mit eigener Landingpage',
-    text: 'Deine Routinen für früh, mittags und abends — wöchentlich, monatlich, samt Terminen '
-        + 'beim Friseur. Mit eigener Landingpage.',
-    status: 'online',
-    link: 'https://beautyroutine.app',
-    bild: 'beautyroutine.jpg',
-    alt: 'Beautyroutine am iPhone: persönliche Begrüßung, Fortschrittsbalken und die Schritte '
-       + 'der Hautpflege zum Abhaken',
-    zweitbild: 'cosy-vibe.jpg',
-    zweitAlt: 'Cosy Vibe: Landingpage mit der Überschrift Ehrliche Skincare-Tipps, die wirklich passen',
-    form: 'handy',
-    hell: true,
-    hinweis: null,
-  },
-  {
-    gruppe: 'alltag',
+    slug: 'eueh',
     name: 'EÜH-Antragsassistent',
-    kategorie: 'Web-App, mehrsprachig',
-    text: 'Führt mehrsprachig durch den Antrag auf elektronisch überwachten Hausarrest — '
-        + 'Feld für Feld, samt Liste der nötigen Unterlagen.',
-    status: 'einsatzbereit',
-    link: null,
-    bild: 'euh-assistent.jpg',
+    art: 'Web-App · mehrsprachig',
+    satz: 'Führt durch den Antrag auf elektronisch überwachten Hausarrest, Feld für Feld '
+        + 'und in einfachen Worten, samt Liste der nötigen Unterlagen.',
+    punkte: ['Feld für Feld erklärt', 'Mehrsprachig', 'Liste der nötigen Unterlagen'],
+    status: 'online',
+    farbe: '#7C9CFF',
+    icon: 'assets/programme/eueh.png',
+    bild: 'assets/screenshots/euh-assistent.jpg',
+    form: 'quer', hell: true,
     alt: 'EÜH-Antragsassistent auf fussfessel-hilfe.at: Startseite mit Sprachauswahl und der '
        + 'Überschrift Ihr Antrag auf Fußfessel, einfach ausgefüllt',
-    form: 'quer',
-    hell: true,
+    seite: null,
+    link: 'https://fussfessel-hilfe.at',
     hinweis: 'Reine Ausfüll-Hilfe — ausdrücklich keine Rechtsberatung.',
   },
   {
-    gruppe: 'alltag',
-    name: 'GitHub Uploader',
-    kategorie: 'Mac-Programm',
-    text: 'Projekte per Klick auf GitHub laden, ohne Kommandozeile.',
+    slug: 'beauty',
+    name: 'Beauty Routine App',
+    art: 'Web-App fürs Handy · mit CozyVibe-Pflegetipps',
+    satz: 'Deine Pflege-Routinen für morgens, mittags und abends, dazu wöchentliche und '
+        + 'monatliche Schritte und Termine. Gratis, direkt im Browser, wie eine App am Handy.',
+    punkte: ['Routinen zum Abhaken', 'Termine im Blick', 'Pflegetipps von CozyVibe'],
+    status: 'online',
+    farbe: '#F2A98B',
+    icon: 'assets/programme/beauty.png',
+    bild: 'assets/screenshots/beautyroutine.jpg',
+    form: 'handy', hell: true,
+    alt: 'Beauty Routine App am iPhone: persönliche Begrüßung, Fortschrittsbalken und die '
+       + 'Schritte der Hautpflege zum Abhaken',
+    seite: null,
+    link: 'https://beautyroutine.app',
+    hinweis: null,
+  },
+  {
+    slug: 'vtw-training',
+    name: 'VTW Training',
+    art: 'Web-App für Vereine · im Einsatz beim VT Wimpassing',
+    satz: 'Trainings-, Liga- und Turnierplaner für Vereine: Mitglieder sagen mit einem Tippen '
+        + 'zu oder ab, der Trainer sieht sofort, wer kommt.',
+    punkte: ['Zusagen mit einem Tippen', 'Kalender-Abo und Erinnerungen', 'Für jeden Verein einrichtbar'],
     status: 'einsatzbereit',
+    farbe: '#F2B705',
+    icon: 'assets/programme/vtw-training.png',
+    bild: 'assets/programme/vtw-training-bild.jpg',
+    form: 'handy', hell: false,
+    alt: 'VTW Training: Anleitung am Handy mit den Schritten Anmelden und Home-Bildschirm',
+    seite: null,
     link: null,
-    bild: 'github-uploader.jpg',
-    alt: 'GitHub Uploader: Fenster mit der Meldung 1 Datei noch nicht hochgeladen und der Liste '
-       + 'der geänderten Dateien',
-    form: 'fenster',
-    hell: false,
+    hinweis: null,
+  },
+  {
+    slug: 'belegro',
+    name: 'Belegro',
+    art: 'Buchhaltungsprogramm · Mac',
+    satz: 'Belege ablegen, den Rest macht das Programm: Es sortiert nach Monat und Kategorie, '
+        + 'gleicht den Kontoauszug ab, schreibt Rechnungen und bereitet alles für den '
+        + 'Steuerberater auf.',
+    punkte: ['Belege mit KI-Erkennung einlesen', 'Abgleich mit dem Kontoauszug', 'Rechnungen und E-Rechnungen'],
+    status: 'einsatzbereit',
+    farbe: '#5AB0D0',
+    icon: 'assets/programme/belegro.png',
+    bild: null,
+    form: 'quer', hell: false,
+    alt: 'Belegro',
+    seite: null,
+    link: null,
+    hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
+  },
+  {
+    slug: 'blitztext',
+    name: 'Blitztext',
+    art: 'Mac-Programm',
+    satz: 'Taste halten, sprechen, fertiger Text. Wandelt auch WhatsApp-Sprachnachrichten '
+        + 'in lesbaren Text um.',
+    punkte: ['Erkennung läuft direkt am Mac', 'Sprachnachrichten werden zu Text', 'Auf Wunsch von KI sauber formuliert'],
+    status: 'einsatzbereit',
+    farbe: '#B79CFF',
+    icon: 'assets/programme/blitztext.png',
+    bild: 'assets/screenshots/blitztext.jpg',
+    form: 'quer', hell: false,
+    alt: 'Blitztext: Menü in der Mac-Menüleiste mit den Punkten Sprachnachricht transkribieren, '
+       + 'Erkenner, Sprache und Mikrofon',
+    seite: null,
+    link: null,
+    hinweis: null,
+  },
+  {
+    slug: 'todo-sidebar',
+    name: 'ToDo Sidebar',
+    art: 'Mac-Programm',
+    satz: 'Notizen und Aufgaben per Klick vom Bildschirmrand, ohne das Fenster zu wechseln.',
+    punkte: ['Immer am Bildschirmrand griffbereit', 'Eigene Listen, z. B. Einkaufen', 'Aufgaben mit Unterpunkten'],
+    status: 'einsatzbereit',
+    farbe: '#FF6B6B',
+    icon: 'assets/programme/todo-sidebar.png',
+    bild: 'assets/screenshots/todo-sidebar.jpg',
+    form: 'handy', hell: false,
+    alt: 'ToDo Sidebar: schmales Fenster am Bildschirmrand mit den Reitern Allgemein und '
+       + 'Einkaufen und zwei Aufgaben mit Unterpunkten',
+    seite: null,
+    link: null,
+    hinweis: null,
+  },
+  {
+    slug: 'trainingsplan',
+    name: 'Trainingsplan-Programm',
+    art: 'Mac-Programm + Web-App · für Schritt für Schritt fit',
+    satz: 'Baut individuelle Trainingspläne mit eigenen Übungs-Bildern. Der Kunde bekommt '
+        + 'seinen Plan als App aufs Handy.',
+    punkte: ['Übungen mit eigenen Bildern', 'Plan als App am Handy', 'Im Einsatz bei Schritt für Schritt fit'],
+    status: 'einsatzbereit',
+    farbe: '#F0555F',
+    icon: 'assets/programme/trainingsplan.png',
+    bild: 'assets/programme/trainingsplan-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'Trainingsplan von Schritt für Schritt fit: Logo mit Kettlebell und dem Schriftzug Trainingsplan',
+    seite: null,
+    link: null,
     hinweis: null,
   },
 ];
@@ -202,6 +208,7 @@ const ZEICHEN = {
            'M11 8v6', 'M8 11h6'],
   kreuz:  ['M18 6 6 18', 'M6 6l12 12'],
   pfeile: ['m8 7-5 5 5 5', 'm16 7 5 5-5 5', 'M3 12h18'],
+  play:   ['M6 3 20 12 6 21 6 3'],
 };
 
 function svg(name, groesse = 14, strich = 1.75) {
@@ -240,105 +247,83 @@ function kopierZeile() {
     </p>`;
 }
 
-/* Der Bildbereich einer Karte - drei Formen, siehe Kommentar bei PROGRAMME */
-function bildBereich(p) {
-  const hell = p.hell ? ' u-shot--hell' : '';
-
-  if (!p.bild) {                                   // Platzhalter, falls ein Bild fehlt
-    return `<div class="rs-pcard__media u-shot">
-        <div class="rs-buehne rs-buehne--leer">
-          <span class="rs-buehne__initial">${sicher(p.name.charAt(0))}</span>
-          <span class="rs-buehne__hinweis">Screenshot folgt</span>
-        </div>
+/* Das große Bild eines Schaufensters.
+   Mit eigener Programm-Seite führt ein Klick dorthin, sonst öffnet sich die Großansicht. */
+function schaufensterBild(p) {
+  if (!p.bild) {                                   // noch kein Bild: Symbol groß
+    return `<div class="sf__bild sf__bild--leer">
+        <img class="sf__leer-icon" src="${p.icon}" alt="" width="132" height="132" loading="lazy">
+        <span class="sf__leer-text">Bilder folgen</span>
       </div>`;
   }
+  const hell = p.hell ? ' sf__bild--hell' : '';
+  const handy = p.form === 'handy';
+  const bild = handy
+    ? `<img class="sf__handy" data-bild="${p.bild}" alt="${sicher(p.alt)}" loading="lazy">`
+    : `<img data-bild="${p.bild}" width="1600" height="1000" alt="${sicher(p.alt)}" loading="lazy">`;
+  const klasse = `sf__bild${handy ? ' sf__bild--handy' : ''}${hell}`;
 
-  const quelle = 'assets/screenshots/' + p.bild;
-
-  // Lupen-Zeichen unten rechts: zeigt, dass man das Bild antippen kann
-  const lupe = `<span class="rs-lupe" aria-hidden="true">
-      ${svg('lupe', 16)}
-    </span>`;
-
-  if (p.form === 'handy' || p.form === 'fenster') {
-    const art = p.form === 'handy' ? 'handy' : 'fenster';
-
-    // Zweitbild (falls angegeben) liegt als abgedunkelter Hintergrund dahinter.
-    // Es ist reine Deko und bekommt deshalb ein leeres alt-Attribut.
-    const hintergrund = p.zweitbild
-      ? `<img class="rs-buehne__hg" data-bild="assets/screenshots/${p.zweitbild}" alt="" loading="lazy">`
-      : '';
-    const klasse = p.zweitbild ? 'rs-buehne rs-buehne--hintergrund' : 'rs-buehne';
-
-    return `<button type="button" class="rs-pcard__media u-shot${hell}"
-              data-gross="${quelle}" data-grossalt="${sicher(p.alt)}"
-              aria-label="Bildschirmfoto von ${sicher(p.name)} groß anzeigen">
-        <div class="${klasse}">
-          ${hintergrund}
-          <img class="rs-buehne__bild--${art}" data-bild="${quelle}"
-               alt="${sicher(p.alt)}" loading="lazy">
-        </div>
-        ${lupe}
-      </button>`;
+  if (p.seite) {
+    return `<a class="${klasse}" href="${p.seite}" aria-label="${sicher(p.name)}: Film und Bilder ansehen">
+        ${bild}
+        <span class="sf__film">${svg('play', 14, 2)}Film und Bilder</span>
+      </a>`;
   }
-
-  return `<button type="button" class="rs-pcard__media u-shot${hell}"
-            data-gross="${quelle}" data-grossalt="${sicher(p.alt)}"
-            aria-label="Bildschirmfoto von ${sicher(p.name)} groß anzeigen">
-      <img data-bild="${quelle}" width="1200" height="750" alt="${sicher(p.alt)}" loading="lazy">
-      ${lupe}
+  return `<button type="button" class="${klasse}" data-gross="${p.bild}" data-grossalt="${sicher(p.alt)}"
+            aria-label="Bild von ${sicher(p.name)} groß anzeigen">
+      ${bild}
+      <span class="rs-lupe" aria-hidden="true">${svg('lupe', 16)}</span>
     </button>`;
 }
 
-/* Der Knopf am Ende der Karte - haengt am Status */
-function aktion(p) {
-  if (p.status === 'umgesetzt') return '';         // abgeschlossene Auftragsarbeit: kein Knopf
-
-  if (p.status === 'online' && p.link) {
-    return `<a class="rs-btn rs-btn--primary rs-btn--sm" href="${p.link}"
-        target="_blank" rel="noopener noreferrer">Ansehen ${svg('extern', 13)}</a>`;
+/* Die Knöpfe eines Schaufensters */
+function schaufensterKnoepfe(p) {
+  const teile = [];
+  if (p.seite) {
+    teile.push(`<a class="rs-btn rs-btn--primary rs-btn--md" href="${p.seite}">Programm ansehen</a>`);
   }
-
-  return `<a class="rs-btn rs-btn--secondary rs-btn--sm"
-      href="#kontakt" data-anfrage data-thema="Anfrage: ${sicher(p.name)}">Anfrage schreiben</a>
-    ${kopierZeile()}`;
+  if (p.link) {
+    const art = p.seite ? 'rs-btn--secondary' : 'rs-btn--primary';
+    teile.push(`<a class="rs-btn ${art} rs-btn--md" href="${p.link}" target="_blank" rel="noopener noreferrer">Zur App ${svg('extern', 13)}</a>`);
+  }
+  if (!p.link) {
+    teile.push(`<a class="rs-btn rs-btn--secondary rs-btn--md" href="#kontakt" data-anfrage
+        data-thema="Anfrage: ${sicher(p.name)}">Anfrage schreiben</a>`);
+  }
+  const kopie = p.link ? '' : kopierZeile();
+  return `<div class="sf__knoepfe">${teile.join('')}</div>${kopie}`;
 }
 
-function karte(p) {
+function schaufenster(p) {
   const s = STATUS[p.status] || STATUS.einsatzbereit;
-
+  const punkte = p.punkte.map((x) => `<li>${svg('haken', 16, 2.4)}<span>${sicher(x)}</span></li>`).join('');
   const hinweis = p.hinweis
-    ? `<p class="rs-pcard__note">${svg('info', 14)}<span>${sicher(p.hinweis)}</span></p>`
-    : '';
+    ? `<p class="sf__hinweis">${svg('info', 14)}<span>${sicher(p.hinweis)}</span></p>` : '';
 
-  return `<article class="rs-pcard">
-      ${bildBereich(p)}
-      <div class="rs-pcard__top">
-        <div>
-          <h4 class="rs-pcard__name">${sicher(p.name)}</h4>
-          ${p.kategorie ? `<div class="rs-pcard__cat">${sicher(p.kategorie)}</div>` : ''}
+  return `<article class="sf" id="programm-${p.slug}" style="--sf-farbe: ${p.farbe}">
+      <div class="sf__text">
+        <div class="sf__kopf">
+          <img class="sf__icon" src="${p.icon}" alt="" width="72" height="72" loading="lazy">
+          <div class="sf__titel">
+            <p class="sf__art">${sicher(p.art)}</p>
+            <h3 class="sf__name">${sicher(p.name)}</h3>
+          </div>
+          <span class="rs-status rs-status--${s.klasse} sf__status">${svg(s.zeichen, 12, 2)}${s.text}</span>
         </div>
-        <span class="rs-status rs-status--${s.klasse}">${svg(s.zeichen, 12, 2)}${s.text}</span>
+        <p class="sf__satz">${sicher(p.satz)}</p>
+        <ul class="sf__punkte">${punkte}</ul>
+        ${hinweis}
+        ${schaufensterKnoepfe(p)}
       </div>
-      <p class="rs-pcard__benefit">${sicher(p.text)}</p>
-      ${hinweis}
-      <div class="rs-pcard__actions">${aktion(p)}</div>
+      ${schaufensterBild(p)}
     </article>`;
 }
 
-/* Baut die drei Gruppen mit ihren Karten */
+/* Baut alle Schaufenster */
 function listeAufbauen() {
   const ziel = document.getElementById('programm-liste');
   if (!ziel) return;
-
-  ziel.innerHTML = GRUPPEN.map((g) => {
-    const karten = PROGRAMME.filter((p) => p.gruppe === g.id).map(karte).join('');
-    if (!karten) return '';
-    return `<section class="cs-gruppe" aria-labelledby="gruppe-${g.id}">
-        <h3 class="cs-gruppe__titel" id="gruppe-${g.id}">${sicher(g.titel)}</h3>
-        <div class="cs-grid">${karten}</div>
-      </section>`;
-  }).join('');
+  ziel.innerHTML = `<div class="sf-liste">${PROGRAMME.map(schaufenster).join('')}</div>`;
 }
 
 /* --- Bilder erst laden, wenn sie in die Naehe des Bildschirms kommen ------
