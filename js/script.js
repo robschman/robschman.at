@@ -70,10 +70,10 @@ const PROGRAMME = [
     status: 'online',
     farbe: '#7C9CFF',
     icon: 'assets/programme/eueh.png',
-    bild: 'assets/screenshots/euh-assistent.jpg',
-    form: 'quer', hell: true,
-    alt: 'EÜH-Antragsassistent auf fussfessel-hilfe.at: Startseite mit Sprachauswahl und der '
-       + 'Überschrift Ihr Antrag auf Fußfessel, einfach ausgefüllt',
+    bild: 'assets/programme/eueh-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'EÜH-Antragsassistent: ausgefüllte persönliche Daten eines erfundenen Testfalls, die Auswahl der '
+       + 'Justizanstalt mit Hinweis und dahinter das amtliche Formular, Schriftzug „Feld für Feld erklärt“',
     seite: null,
     link: 'https://fussfessel-hilfe.at',
     hinweis: 'Reine Ausfüll-Hilfe — ausdrücklich keine Rechtsberatung.',
@@ -88,12 +88,30 @@ const PROGRAMME = [
     status: 'online',
     farbe: '#F2A98B',
     icon: 'assets/programme/beauty.png',
-    bild: 'assets/screenshots/beautyroutine.jpg',
-    form: 'handy', hell: true,
-    alt: 'Beauty Routine App am iPhone: persönliche Begrüßung, Fortschrittsbalken und die '
-       + 'Schritte der Hautpflege zum Abhaken',
+    bild: 'assets/programme/beauty-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'Beauty Routine App: zwei Handys mit der abgehakten Morgenroutine von Zoe (9 von 23 erledigt) '
+       + 'und den nächsten Terminen, Schriftzug „Deine Routine. Jeden Tag abgehakt.“',
     seite: null,
     link: 'https://beautyroutine.app',
+    hinweis: null,
+  },
+  {
+    slug: 'terminbuch',
+    name: 'Terminbuch',
+    art: 'Online-Terminbuchung · läuft auf deiner Website',
+    satz: 'Kunden buchen selbst einen freien Termin – rund um die Uhr, ohne Anruf. Sie bekommen '
+        + 'sofort eine Bestätigung mit Kalenderdatei und einen Tag vorher eine Erinnerung.',
+    punkte: ['Freie Termine selbst buchen', 'Bestätigung, Kalenderdatei, Erinnerung', 'Im Einsatz bei Schritt für Schritt fit'],
+    status: 'einsatzbereit',
+    farbe: '#F0555F',
+    icon: 'assets/programme/terminbuch.png',
+    bild: 'assets/programme/terminbuch-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'Terminbuch: Handy mit Kalender und freien Uhrzeiten, daneben die Bestätigung „Dein Termin ist gebucht“ '
+       + 'und die Mail mit Kalenderdatei, Schriftzug „Rund um die Uhr gebucht“',
+    seite: null,
+    link: null,
     hinweis: null,
   },
   {
