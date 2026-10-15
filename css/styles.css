@@ -116,8 +116,10 @@
   --line-strong:   var(--ink-500);
 
   --text:          var(--paper-100); /* 18,4:1 — Fliesstext */
-  --text-muted:    var(--gray-500);  /*  6,4:1 */
-  --text-soft:     var(--gray-400);  /*  9,0:1 */
+  /* Seit 14.10.2026 weiß statt grau — Roberts Regel vom 02.09.2026: lesbarer Text ist nie
+     grau. Rangordnung entsteht über Größe und Gewicht. Grau bleibt nur für Linien und Rahmen. */
+  --text-muted:    var(--paper-100);
+  --text-soft:     var(--paper-100);
   --text-disabled: var(--gray-700);
 
   /* --- Schriftfamilie fuer Fliesstext --- */
@@ -267,8 +269,8 @@
   --line:          rgba(245,245,245,0.34);
   --line-strong:   rgba(245,245,245,0.70);
   --text:          var(--on-terra);
-  --text-muted:    rgba(245,245,245,0.78);
-  --text-soft:     rgba(245,245,245,0.86);
+  --text-muted:    var(--on-terra);
+  --text-soft:     var(--on-terra);
   --accent:        var(--on-terra);
   --accent-hover:  #FFFFFF;
   --accent-active: #E6E6E6;
@@ -1166,7 +1168,7 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   margin: 0 auto var(--space-6, 1.5rem); }
 .rs-form__feld { margin-bottom: 0.9rem; }
 .rs-form__feld label { display: block; font-size: 0.8rem; font-weight: 600;
-  color: var(--gray-400); margin-bottom: 0.3rem; letter-spacing: 0.01em; }
+  color: var(--text); margin-bottom: 0.3rem; letter-spacing: 0.01em; }
 .rs-form input[type="text"], .rs-form input[type="email"], .rs-form textarea {
   width: 100%; display: block; background: var(--ink-800);
   border: 1px solid var(--ink-600); border-radius: var(--radius-md);
@@ -1177,7 +1179,7 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   outline-offset: -1px; border-color: var(--green-500); }
 .rs-form textarea { min-height: 5.5rem; resize: vertical; line-height: 1.55; }
 .rs-form__ok { display: flex; gap: 0.55rem; align-items: flex-start;
-  margin: 0.9rem 0 1.1rem; font-size: 0.8rem; color: var(--gray-400); line-height: 1.55; }
+  margin: 0.9rem 0 1.1rem; font-size: 0.8rem; color: var(--text); line-height: 1.55; }
 .rs-form__ok input[type="checkbox"] { width: 1rem; height: 1rem; flex-shrink: 0;
   margin: 0.15rem 0 0; accent-color: var(--green-500); }
 .rs-form__ok a { color: var(--green-500); }
@@ -1202,7 +1204,7 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .rs-danke__box h1 { margin: 0 0 0.9rem; }
 .rs-danke__box p { margin: 0 0 1.1rem; line-height: 1.6; }
 .rs-danke__box a:not(.rs-btn) { color: var(--green-500); }
-.rs-form__oder { text-align: center; font-size: 0.85rem; color: var(--gray-500);
+.rs-form__oder { text-align: center; font-size: 0.85rem; color: var(--text);
   margin: 0 0 0.4rem; }
 
 /* ------------------------------------------------------------------
@@ -1258,6 +1260,10 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .sf__hinweis { display: flex; gap: var(--sp-2); align-items: flex-start; margin: var(--sp-4) 0 0;
   font-size: var(--fs-body-sm); color: var(--text); }
 .sf__hinweis svg { flex: none; margin-top: 3px; color: var(--sf-farbe); }
+.sf__extra { display: flex; gap: var(--sp-2); align-items: flex-start; margin: var(--sp-4) 0 0; font-weight: 700; color: var(--text); }
+.sf__extra svg { flex: none; margin-top: 5px; color: var(--sf-farbe); fill: currentColor; }
+.sf__extra a { color: var(--text); text-decoration-color: var(--sf-farbe); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.sf__extra a:hover { color: var(--sf-farbe); }
 .sf__knoepfe { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
 .sf .rs-copy { margin-top: var(--sp-3); }
 
@@ -1288,6 +1294,10 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   color: #0B0B0B; background: var(--sf-farbe); box-shadow: 0 6px 20px rgba(0,0,0,0.45); }
 .sf__film svg { fill: currentColor; }
 
+/* Am Handy steht das Bild ÜBER dem Text: Es ist der „Hook“, der zuerst ins Auge
+   springen soll (Robert 14.10.2026: wie bei YouTube Shorts). */
+@media (max-width: 899px) { .sf__bild { order: -1; } }
+
 @media (min-width: 900px) {
   .sf { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--sp-7); padding: var(--sp-7); }
   .sf:nth-child(even) .sf__bild { order: -1; }
@@ -1305,3 +1315,86 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 @media (prefers-reduced-motion: reduce) {
   .sf__bild, .sf__bild:hover { transition: none; transform: none; }
 }
+
+
+/* ==========================================================================
+   BLOCK 10 — VIDEOS & PRÄSENTATIONEN (Startseite) + Bereichs-Links im Kopf
+   Seit 15.10.2026. Die eigene Seite dazu liegt in videos/index.html.
+   ========================================================================== */
+.rs-header__nav { display: flex; align-items: center; gap: var(--sp-4); }
+.rs-header__link { font-weight: 600; font-size: 15px; text-decoration: none; color: var(--text); }
+.rs-header__link:hover { color: var(--accent); }
+@media (max-width: 560px) { .rs-header__link--breit { display: none; } .rs-header__nav { gap: var(--sp-3); } }
+
+.vid-reihe { display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: var(--sp-4); align-items: end; margin-top: var(--sp-6); }
+.vid-bild { position: relative; display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-strong);
+  background: var(--ink-850); box-shadow: 0 24px 60px rgba(0,0,0,0.5); transition: transform var(--dur-slow) var(--ease-out); }
+.vid-bild:hover { transform: translateY(-3px); border-color: var(--accent); }
+.vid-bild img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.vid-bild--quer { aspect-ratio: 16 / 9; }
+.vid-bild--hoch { aspect-ratio: 9 / 16; max-height: 420px; }
+.vid-etikett { position: absolute; left: 12px; bottom: 12px; padding: 7px 12px; border-radius: var(--radius-pill);
+  background: var(--accent); color: #0B0B0B; font-weight: 700; font-size: 14px; }
+.vid-arten { list-style: none; margin: var(--sp-6) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2) var(--sp-6); }
+.vid-arten li { position: relative; padding-left: 22px; color: var(--text); }
+.vid-arten li::before { content: "▶"; position: absolute; left: 0; top: 5px; color: var(--accent); font-size: 12px; }
+.vid-arten b { font-weight: 700; margin-right: 4px; }
+.vid-knoepfe { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+@media (max-width: 760px) {
+  .vid-reihe { grid-template-columns: 1fr 1fr; }
+  .vid-bild--quer { grid-column: 1 / -1; }
+  .vid-arten { grid-template-columns: 1fr; }
+}
+
+/* --- Kachel: gleicher Rahmen wie die Programm-Schaufenster (15.10.2026) --------
+   Für Bereiche, die kein Programm sind, aber genauso aussehen sollen:
+   „Videos & Präsentationen“ und „Du brauchst etwas Eigenes?“. */
+.kachel { --sf-farbe: var(--accent);
+  position: relative; padding: var(--sp-5); border-radius: 16px; overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--sf-farbe) 32%, var(--line));
+  background:
+    radial-gradient(110% 90% at 100% 0%, color-mix(in srgb, var(--sf-farbe) 12%, transparent), transparent 62%),
+    var(--surface); }
+.kachel::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--sf-farbe), transparent 70%); }
+.kachel--videos { display: grid; gap: var(--sp-6); align-items: center; }
+.kachel--videos .vid-reihe { margin-top: 0; grid-template-columns: 1fr 1fr; }
+.kachel--videos .vid-bild--quer { grid-column: 1 / -1; }
+.kachel--videos .vid-arten { grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .kachel { padding: var(--sp-7); }
+  .kachel--videos { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--sp-7); }
+}
+
+/* --- „Du brauchst etwas Eigenes?“ – aufgeräumt (15.10.2026) ------------------ */
+.ang-kopf { display: grid; gap: var(--sp-5); align-items: center; }
+.ang-aktion { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+.ang-preise { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-4); margin-top: var(--sp-7); }
+.ang-preis { display: flex; flex-direction: column; padding: var(--sp-5); border-radius: 14px; border: 1px solid var(--line-strong); background: var(--bg-raised); }
+.ang-preis--tipp { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg-raised)); }
+.ang-preis__art { margin: 0; font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text); }
+.ang-preis--tipp .ang-preis__art { color: var(--accent); }
+.ang-preis__wert { margin: var(--sp-2) 0 0; font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1.1; color: var(--text); }
+.ang-preis__text { margin: var(--sp-3) 0 0; flex: 1; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--text); }
+.ang-preis__dauer { display: flex; align-items: center; gap: 6px; margin: var(--sp-4) 0 0; padding-top: var(--sp-3); border-top: 1px solid var(--line);
+  font-size: 14px; font-weight: 600; color: var(--text); }
+.ang-preis__dauer svg { color: var(--accent); }
+.ang-kleiner { margin: var(--sp-4) 0 0; padding: var(--sp-3) var(--sp-4); border-radius: 12px; background: var(--bg-raised); border: 1px dashed var(--line-strong);
+  font-size: var(--fs-body-sm); color: var(--text); }
+.ang-kleiner b { color: var(--accent); }
+.ang-titel { margin: var(--sp-8) 0 var(--sp-4); font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text); }
+.ang-ablauf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-4); position: relative; }
+.ang-ablauf li { position: relative; display: flex; flex-direction: column; gap: 4px; padding-top: 52px; color: var(--text); font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); }
+.ang-ablauf li b { font-size: 16px; }
+.ang-ablauf__nr { position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: #0B0B0B; font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.ang-ablauf li::before { content: ""; position: absolute; left: 46px; right: calc(-1 * var(--sp-4) + 8px); top: 19px; height: 2px; background: var(--line-strong); }
+.ang-ablauf li:last-child::before { display: none; }
+.ang-infos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--line); }
+.ang-info { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); color: var(--text); }
+.ang-info svg { flex: none; margin-top: 2px; color: var(--accent); }
+.ang-info b { display: block; margin-bottom: 4px; font-size: 15px; }
+.ang .cs-preis-fein { margin-top: var(--sp-6); }
+@media (min-width: 900px) { .ang-kopf { grid-template-columns: minmax(0, 1fr) auto; } .ang-aktion { align-items: flex-end; } }
+@media (max-width: 980px) { .ang-preise { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ang-ablauf { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ang-ablauf li::before { display: none; } }
+@media (max-width: 640px) { .ang-preise, .ang-ablauf, .ang-infos { grid-template-columns: 1fr; } }

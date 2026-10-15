@@ -56,6 +56,9 @@
   .knopf.voll:hover { background:#2ee27c; }
   .knopf.rand { border:2px solid var(--border-hell); color:var(--text); background:rgba(15,42,27,.8); }
   .knopf.rand:hover { border-color:var(--accent); }
+  .hook { display:block; padding:0; border:2px solid var(--border-hell); border-radius:18px; overflow:hidden; background:none; cursor:zoom-in;
+    box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(25,208,105,.15); }
+  .hook img { display:block; width:100%; height:auto; }
   .kerzen { display:flex; align-items:flex-end; justify-content:center; gap:22px; height:240px; }
   .kerze { position:relative; width:34px; border-radius:6px; background:currentColor; animation:wachsen 1.1s cubic-bezier(.2,.9,.3,1.3) both; transform-origin:50% 100%; }
   .kerze::before, .kerze::after { content:""; position:absolute; left:50%; width:3px; margin-left:-1.5px; background:currentColor; border-radius:2px; }
@@ -128,6 +131,22 @@
     .knopf { width:100%; justify-content:center; }
   }
   @media (prefers-reduced-motion: reduce) { .hinweisband .spur, .kerze { animation:none; } html { scroll-behavior:auto; } }
+
+  /* Kein Bild breiter als der sichtbare Bereich (Robert 15.10.: breite Bilder musste man am iPhone zweimal schieben) */
+  .galerie figure { max-width:100%; }
+  .galerie img, .galerie .hoch img { width:auto; height:auto; max-width:100%; max-height:340px; }
+  /* Strichleiste unter der Galerie: zeigt, bei welchem Bild man ist (Robert 15.10.2026) */
+  .punkte { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:4px 0 0; }
+  .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(255,255,255,.35); cursor:pointer; }
+  .punkte button.an { background:#19d069; box-shadow:0 0 10px #19d069; }
+  @media (max-width:600px) {
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    .galerie { gap:12px; }
+    .galerie figure { flex:0 0 100%; }
+    .galerie button { width:100%; display:flex; justify-content:center; align-items:center; }
+    .galerie img, .galerie .hoch img { width:auto; max-width:100%; height:auto; max-height:68vh; }
+    .galerie figcaption { max-width:none; }
+  }
 </style>
 </head>
 <body>
@@ -153,14 +172,9 @@
         <a class="knopf rand" href="https://us-aktien-screener.com/#pricing" target="_blank" rel="noopener">Preise ansehen</a>
       </div>
     </div>
-    <div class="kerzen" aria-hidden="true">
-      <div class="kerze g" style="height:70px;animation-delay:.05s"></div>
-      <div class="kerze g" style="height:96px;margin-bottom:20px;animation-delay:.15s"></div>
-      <div class="kerze r" style="height:32px;margin-bottom:84px;animation-delay:.25s"></div>
-      <div class="kerze g" style="height:84px;margin-bottom:60px;animation-delay:.35s"></div>
-      <div class="kerze g" style="height:104px;margin-bottom:96px;animation-delay:.45s"></div>
-      <div class="kerze r" style="height:34px;margin-bottom:158px;animation-delay:.55s"></div>
-      <div class="kerze g" style="height:62px;margin-bottom:146px;animation-delay:.65s"></div>
+    <button type="button" class="hook" data-gross="../../assets/programme/screener-bild.jpg" data-text="US Aktien Screener: Heatmap von grün bis rot und Trefferliste am Handy" aria-label="Bild groß ansehen">
+      <img src="../../assets/programme/screener-bild.jpg" alt="US Aktien Screener: Heatmap aller Aktien von grün bis rot und die Trefferliste am Handy" width="1600" height="1000">
+    </button>
     </div>
   </div>
 </header>
@@ -267,7 +281,7 @@
   }
   // Bilder groß ansehen
   var d = document.getElementById('gross'), bild = document.getElementById('gross-bild'), text = document.getElementById('gross-text');
-  document.querySelectorAll('.galerie button').forEach(function (b) {
+  document.querySelectorAll('.galerie button, .hook').forEach(function (b) {
     b.addEventListener('click', function () {
       bild.src = b.dataset.gross; bild.alt = b.dataset.text; text.textContent = b.dataset.text;
       if (d.showModal) d.showModal(); else window.open(b.dataset.gross, '_blank');
@@ -275,6 +289,29 @@
   });
   document.getElementById('gross-zu').addEventListener('click', function () { d.close(); });
   d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+  // Strichleiste: ein Strich je Bild, der aktuelle leuchtet; antippen springt hin
+  document.querySelectorAll('.galerie').forEach(function (g) {
+    var bilder = g.querySelectorAll('figure'); if (bilder.length < 2) return;
+    var leiste = document.createElement('div'); leiste.className = 'punkte'; leiste.setAttribute('aria-label', 'Bild auswählen');
+    var lage = function (f) { return f.getBoundingClientRect().left - g.getBoundingClientRect().left + g.scrollLeft; };
+    bilder.forEach(function (f, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + bilder.length);
+      b.addEventListener('click', function () { g.scrollTo({ left: lage(f), behavior: 'smooth' }); });
+      leiste.appendChild(b);
+    });
+    g.insertAdjacentElement('afterend', leiste);
+    var knoepfe = leiste.querySelectorAll('button'), wartet = false;
+    function markieren() {
+      wartet = false;
+      var nr = 0, best = Infinity;
+      if (g.scrollLeft + g.clientWidth >= g.scrollWidth - 4) nr = bilder.length - 1;
+      else bilder.forEach(function (f, i) { var d = Math.abs(lage(f) - g.scrollLeft); if (d < best) { best = d; nr = i; } });
+      knoepfe.forEach(function (b, i) { b.classList.toggle('an', i === nr); b.setAttribute('aria-current', i === nr ? 'true' : 'false'); });
+    }
+    g.addEventListener('scroll', function () { if (!wartet) { wartet = true; requestAnimationFrame(markieren); } }, { passive: true });
+    window.addEventListener('resize', markieren); markieren();
+  });
 })();
 </script>
 <script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"

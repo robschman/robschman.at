@@ -53,9 +53,9 @@ const PROGRAMME = [
     status: 'online',
     farbe: '#19D069',
     icon: 'assets/programme/screener.png',
-    bild: 'programme/screener/poster.jpg',
+    bild: 'assets/programme/screener-bild.jpg',
     form: 'quer', hell: false,
-    alt: 'US Aktien Screener: Logo mit Kerzen-Chart und dem Schriftzug US Aktien Screener',
+    alt: 'US Aktien Screener: Heatmap aller Aktien von grün bis rot und die Trefferliste am Handy, Schriftzug „Günstig oder teuer?“',
     seite: 'programme/screener/',
     link: 'https://us-aktien-screener.com',
     hinweis: 'Werkzeug zur Recherche — keine Anlageberatung.',
@@ -94,23 +94,6 @@ const PROGRAMME = [
        + 'Schritte der Hautpflege zum Abhaken',
     seite: null,
     link: 'https://beautyroutine.app',
-    hinweis: null,
-  },
-  {
-    slug: 'vtw-training',
-    name: 'VTW Training',
-    art: 'Web-App für Vereine · im Einsatz beim VT Wimpassing',
-    satz: 'Trainings-, Liga- und Turnierplaner für Vereine: Mitglieder sagen mit einem Tippen '
-        + 'zu oder ab, der Trainer sieht sofort, wer kommt.',
-    punkte: ['Zusagen mit einem Tippen', 'Kalender-Abo und Erinnerungen', 'Für jeden Verein einrichtbar'],
-    status: 'einsatzbereit',
-    farbe: '#F2B705',
-    icon: 'assets/programme/vtw-training.png',
-    bild: 'assets/programme/vtw-training-bild.jpg',
-    form: 'handy', hell: false,
-    alt: 'VTW Training: Anleitung am Handy mit den Schritten Anmelden und Home-Bildschirm',
-    seite: null,
-    link: null,
     hinweis: null,
   },
   {
@@ -187,6 +170,65 @@ const PROGRAMME = [
 
 
 /* ============================================================================
+   AUFTRAGSARBEITEN – stehen ganz oben, gleich nach der Begrüßung
+   ----------------------------------------------------------------------------
+   Seit 14.10.2026 (Robert: „Auftragsarbeiten nach vorne“). Gleiche Felder wie
+   oben, dazu:
+     linkText  Beschriftung des Knopfs zur App (sonst „Zur App“)
+     anfrage   Betreff für den Knopf „Anfrage schreiben“ – erscheint hier
+               immer, auch wenn es einen Link gibt
+     extra     { text, link } – hervorgehobene Zeile unter den Punkten (optional)
+   Die Bilder sind „Hook-Bilder“: echter Bildschirm mit erfundenen Testdaten,
+   gebaut aus robschman programming/schaufenster/hookbilder/.
+   ========================================================================= */
+const AUFTRAEGE = [
+  {
+    slug: 'vtw-turnier',
+    name: 'VTW Turnierplanung',
+    art: 'Auftragsarbeit für einen Verein',
+    satz: 'Die ganze Turnierverwaltung an einem Ort: Gruppen, Spielplan, K.-\u2060o.-\u2060Runde und '
+        + 'Platzierungsspiele. Jedes Ergebnis steht sofort am Beamer und auf dem Handy der '
+        + 'Zuschauer.',
+    punkte: ['Gruppen, K.-\u2060o.-\u2060Baum und Platzierung', 'Live-Anzeige am Beamer mit Durchsagen', 'Zuschauer-Seite fürs Handy, ohne App',
+             'Für jeden Verein umbaubar: Fußball, Tennis & Co., eigenes Design, eigene Spielregeln'],
+    status: 'imEinsatz',
+    farbe: '#F6B319',
+    icon: 'assets/programme/vtw-turnier.png',
+    bild: 'assets/programme/vtw-turnier-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'VTW Turnierplanung: Beamer-Anzeige mit Gruppentabellen und Ergebnissen, davor ein Handy mit dem Spielplan und dem laufenden Spiel, Schriftzug „Spielstand live“',
+    seite: 'programme/vtw-turnier/',
+    link: null,
+    anfrage: 'Anfrage: Turnierplanung für meinen Verein',
+    hinweis: null,
+  },
+  {
+    slug: 'vtw-training',
+    name: 'VTW Training',
+    art: 'Auftragsarbeit für einen Verein',
+    satz: 'Trainings-, Liga- und Turnierplaner für Vereine: Mitglieder sagen mit einem Tippen '
+        + 'zu oder ab, der Trainer sieht sofort, wer kommt. Haupt- und Zusatztraining stehen '
+        + 'in einem Plan, Absagen kommen sofort aufs Handy.',
+    punkte: ['Zusagen mit einem Tippen', 'Haupt- und Zusatztraining in einem Plan', 'Erinnerungen und Absagen als Mitteilung',
+             'Für jeden Verein einrichtbar: eigenes Logo, eigene Farben, jede Sportart'],
+    status: 'imEinsatz',
+    farbe: '#F6B319',
+    icon: 'assets/programme/vtw-training.png',
+    bild: 'assets/programme/vtw-training-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'VTW Training: zwei Handys mit Freitagstraining samt Zusatztraining und einem abgesagten Training, Mitteilung „Training abgesagt“, Schriftzug „Wer kommt heute?“',
+    seite: 'programme/vtw-training/',
+    link: 'https://training.schrittfuerschrittfit.at/vorschau',
+    linkText: 'Vorschau ausprobieren',
+    anfrage: 'Anfrage: Trainingsplaner für meinen Verein',
+    hinweis: null,
+    extra: { text: 'Mit Erklärvideo von Maskottchen Linus – solche Motion-Graphics-Videos mache ich auch für dich.',
+             link: 'videos/#erklaervideo' },
+  },
+];
+
+
+/* ============================================================================
    AB HIER IST TECHNIK — hier musst du normalerweise nichts ändern.
    ========================================================================= */
 
@@ -224,7 +266,8 @@ function svg(name, groesse = 14, strich = 1.75) {
 const STATUS = {
   online:        { text: 'Online',        klasse: 'ok',   zeichen: 'haken' },
   einsatzbereit: { text: 'Einsatzbereit', klasse: 'ok',   zeichen: 'haken' },
-  umgesetzt:     { text: 'Umgesetzt',     klasse: 'soon', zeichen: 'haken' },
+  imEinsatz:     { text: 'Im Einsatz',    klasse: 'ok',   zeichen: 'haken' },
+  umgesetzt:    { text: 'Umgesetzt',     klasse: 'soon', zeichen: 'haken' },
   beta:          { text: 'Beta',          klasse: 'beta', zeichen: 'warn'  },
 };
 
@@ -284,13 +327,15 @@ function schaufensterKnoepfe(p) {
   }
   if (p.link) {
     const art = p.seite ? 'rs-btn--secondary' : 'rs-btn--primary';
-    teile.push(`<a class="rs-btn ${art} rs-btn--md" href="${p.link}" target="_blank" rel="noopener noreferrer">Zur App ${svg('extern', 13)}</a>`);
+    teile.push(`<a class="rs-btn ${art} rs-btn--md" href="${p.link}" target="_blank" rel="noopener noreferrer">${sicher(p.linkText || 'Zur App')} ${svg('extern', 13)}</a>`);
   }
-  if (!p.link) {
-    teile.push(`<a class="rs-btn rs-btn--secondary rs-btn--md" href="#kontakt" data-anfrage
-        data-thema="Anfrage: ${sicher(p.name)}">Anfrage schreiben</a>`);
+  const mitAnfrage = !p.link || p.anfrage;          // Auftragsarbeiten: immer mit Anfrage-Knopf
+  if (mitAnfrage) {
+    const art = teile.length ? 'rs-btn--secondary' : 'rs-btn--primary';   // ohne andere Knöpfe: Hauptknopf
+    teile.push(`<a class="rs-btn ${art} rs-btn--md" href="#kontakt" data-anfrage
+        data-thema="${sicher(p.anfrage || 'Anfrage: ' + p.name)}">Anfrage schreiben</a>`);
   }
-  const kopie = p.link ? '' : kopierZeile();
+  const kopie = mitAnfrage ? kopierZeile() : '';
   return `<div class="sf__knoepfe">${teile.join('')}</div>${kopie}`;
 }
 
@@ -299,6 +344,8 @@ function schaufenster(p) {
   const punkte = p.punkte.map((x) => `<li>${svg('haken', 16, 2.4)}<span>${sicher(x)}</span></li>`).join('');
   const hinweis = p.hinweis
     ? `<p class="sf__hinweis">${svg('info', 14)}<span>${sicher(p.hinweis)}</span></p>` : '';
+  const extra = p.extra
+    ? `<p class="sf__extra">${svg('play', 14, 2)}<a href="${p.extra.link}">${sicher(p.extra.text)}</a></p>` : '';
 
   return `<article class="sf" id="programm-${p.slug}" style="--sf-farbe: ${p.farbe}">
       <div class="sf__text">
@@ -313,6 +360,7 @@ function schaufenster(p) {
         <p class="sf__satz">${sicher(p.satz)}</p>
         <ul class="sf__punkte">${punkte}</ul>
         ${hinweis}
+        ${extra}
         ${schaufensterKnoepfe(p)}
       </div>
       ${schaufensterBild(p)}
@@ -324,6 +372,13 @@ function listeAufbauen() {
   const ziel = document.getElementById('programm-liste');
   if (!ziel) return;
   ziel.innerHTML = `<div class="sf-liste">${PROGRAMME.map(schaufenster).join('')}</div>`;
+}
+
+/* Baut die Auftragsarbeiten (oben, Abschnitt „Bereits umgesetzt“) */
+function auftraegeAufbauen() {
+  const ziel = document.getElementById('auftrag-liste');
+  if (!ziel) return;
+  ziel.innerHTML = `<div class="sf-liste">${AUFTRAEGE.map(schaufenster).join('')}</div>`;
 }
 
 /* --- Bilder erst laden, wenn sie in die Naehe des Bildschirms kommen ------
@@ -525,8 +580,9 @@ function grossansichtAktivieren() {
   });
 }
 
+auftraegeAufbauen();
 listeAufbauen();
-bilderNachladen();          // muss NACH listeAufbauen laufen - erst dann gibt es die Karten
+bilderNachladen();          // muss NACH dem Aufbauen laufen - erst dann gibt es die Karten
 kopierKnoepfeAktivieren();
 grossansichtAktivieren();
 

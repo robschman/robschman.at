@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VTW Training – Auftragsarbeit von robschman programming</title>
+<meta name="description" content="Trainings-, Liga- und Turnierplaner für Vereine: Zusagen mit einem Tippen, Haupt- und Zusatztraining, Absagen sofort am Handy. Gebaut für den VT Wimpassing, für jeden Verein einrichtbar.">
+<link rel="canonical" href="https://robschman.at/programme/vtw-training/">
+<meta property="og:title" content="VTW Training – robschman programming">
+<meta property="og:description" content="Wer kommt heute? Ein Tippen – und der Trainer weiß es.">
+<meta property="og:image" content="https://robschman.at/assets/programme/vtw-training-bild.jpg">
+<meta property="og:url" content="https://robschman.at/programme/vtw-training/">
+<meta name="theme-color" content="#FBF0D4">
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+  :root { --grund:#FBF0D4; --held:radial-gradient(ellipse 70% 80% at 80% 20%, rgba(246,179,25,.45), transparent 60%), repeating-linear-gradient(-35deg, rgba(13,13,13,.035) 0 2px, transparent 2px 34px), #FBF0D4; --karte:#FFFFFF; --rahmen:#111111; --text:#111111; --gold:#F6B319; --verein:#111111; --verein-text:#FFFFFF; --robschman:#15803D; }
+  @font-face { font-family:"Saira"; src:url(../../assets/fonts/vtw/saira.woff2) format("woff2"); font-weight:100 900; font-display:swap; }
+  @font-face { font-family:"Barlow"; src:url(../../assets/fonts/vtw/barlow-500.woff2) format("woff2"); font-weight:500; font-display:swap; }
+  @font-face { font-family:"Barlow"; src:url(../../assets/fonts/vtw/barlow-600.woff2) format("woff2"); font-weight:600; font-display:swap; }
+  @font-face { font-family:"Barlow"; src:url(../../assets/fonts/vtw/barlow-700.woff2) format("woff2"); font-weight:700; font-display:swap; }
+  @font-face { font-family:"Aldrich"; src:url(../../assets/fonts/vtw/aldrich-400.woff2) format("woff2"); font-weight:400; font-display:swap; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--grund); color:var(--text); font:500 18px/1.6 "Barlow", -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+
+  /* Laufband oben wie am Beamer */
+  .band { position:relative; overflow:hidden; height:40px; background:var(--gold); border-bottom:2px solid #111111; }
+  .band .spur { position:absolute; top:0; left:0; display:flex; gap:56px; white-space:nowrap; height:38px; align-items:center;
+    font:800 17px/1 "Saira", sans-serif; text-transform:uppercase; color:#111111; animation:band 60s linear infinite; }
+  .band .spur b { color:#9A0012; }
+  @keyframes band { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+  .zurueck { display:inline-flex; align-items:center; gap:8px; margin:22px 0 0; font-weight:700; text-decoration:none; color:var(--text);
+    border:2px solid var(--rahmen); border-radius:999px; padding:8px 16px; background:var(--karte); }
+  .zurueck:hover { border-color:var(--gold); }
+
+  header.held { position:relative; overflow:hidden; padding:40px 0 60px; background:var(--held); }
+  .held .wrap { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  .held .kopf { display:flex; align-items:center; gap:18px; margin-top:30px; }
+  .held .kopf img { width:92px; height:92px; border-radius:22px; box-shadow:0 14px 40px rgba(0,0,0,.35); }
+  .held .marke { font:400 30px/1.1 "Aldrich", sans-serif; letter-spacing:.06em; }
+  .held .art { margin-top:6px; font:700 14px/1.4 "Barlow", sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+  .held h1 { margin:22px 0 0; font:900 74px/.95 "Saira", sans-serif; text-transform:uppercase; }
+  .held .lead { margin:22px 0 0; font-size:22px; line-height:1.45; font-weight:600; }
+  .held .hook { display:block; border-radius:18px; overflow:hidden; border:2px solid var(--rahmen); box-shadow:0 30px 80px rgba(0,0,0,.45); }
+  .held .hook img { display:block; width:100%; height:auto; }
+  .knoepfe { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .knopf { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:14px; font:800 18px/1 "Barlow", sans-serif; text-decoration:none; border:2px solid #111111; }
+  .knopf.voll { background:var(--gold); color:#111111; box-shadow:0 10px 28px rgba(246,179,25,.35); }
+  .knopf.voll:hover { background:#FFC42E; }
+  .knopf.rand { background:var(--karte); color:var(--text); border-color:var(--rahmen); }
+  .knopf.rand:hover { border-color:var(--gold); }
+
+  section { padding:64px 0 6px; }
+  .kicker { font:700 15px/1.4 "Barlow", sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+  .kicker::before { content:""; display:inline-block; width:34px; height:5px; margin-right:12px; vertical-align:4px; background:var(--gold); }
+  h2 { margin:8px 0 22px; font:900 44px/1.05 "Saira", sans-serif; text-transform:uppercase; }
+
+  .film { position:relative; border-radius:20px; overflow:hidden; border:2px solid var(--rahmen); background:#000000; aspect-ratio:16/9;
+    box-shadow:0 30px 90px rgba(0,0,0,.45); }
+  .film video { display:block; width:100%; height:100%; object-fit:cover; }
+
+  .galerie { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 18px; }
+  .galerie figure { margin:0; flex:0 0 auto; scroll-snap-align:start; }
+  .galerie button { display:block; padding:0; border:2px solid var(--rahmen); border-radius:16px; overflow:hidden; background:var(--karte); cursor:zoom-in; }
+  .galerie button:hover, .galerie button:focus-visible { border-color:var(--gold); outline:none; }
+  .galerie img { display:block; height:340px; width:auto; }
+  .galerie figcaption { margin-top:10px; max-width:520px; font-size:16px; line-height:1.4; font-weight:700; }
+  .wisch { font-size:15px; font-weight:600; margin:-6px 0 14px; }
+
+  .raster { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .karte { background:var(--karte); border:2px solid var(--rahmen); border-radius:16px; padding:20px 22px; }
+  .karte h3 { margin:0 0 8px; font:800 21px/1.25 "Saira", sans-serif; }
+  .karte h3 .z { display:inline-grid; place-items:center; width:32px; height:32px; margin-right:8px; border-radius:9px; background:var(--gold); color:#111111; font:800 17px/1 "Saira", sans-serif; vertical-align:2px; }
+  .karte p { margin:0; font-size:17px; }
+
+  .verein { display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:center; padding:30px; border-radius:22px; background:var(--verein); color:var(--verein-text); border:2px solid #111111; }
+  .verein h2 { color:inherit; }
+  .verein .kicker::before { background:currentColor; }
+  .verein p { margin:0 0 14px; font-size:19px; }
+  .sport { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+  .sport span { padding:9px 15px; border-radius:12px; background:#FFFFFF; color:#111111; border:2px solid #111111; font:800 18px/1 "Saira", sans-serif; }
+  .sport span.eig { background:var(--gold); }
+  .verein img { display:block; width:auto; max-width:100%; max-height:560px; justify-self:center; border-radius:14px; border:2px solid #111111; }
+
+  .schluss { margin:64px 0 0; text-align:center; padding:48px 20px; border-radius:24px; border:2px solid var(--rahmen); background:var(--held); }
+  .schluss .gross { margin:10px 0 0; font:900 46px/1.05 "Saira", sans-serif; text-transform:uppercase; }
+  .schluss .knoepfe { justify-content:center; }
+
+  footer { margin-top:64px; padding:30px 0 40px; border-top:2px solid var(--rahmen); font-size:16px; }
+  footer .zeile { display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; justify-content:space-between; }
+  footer .von { font-weight:800; text-decoration:none; color:var(--robschman); }
+  footer nav a { margin-right:16px; }
+  footer .ki { margin-top:14px; }
+
+  dialog { padding:0; border:2px solid var(--rahmen); border-radius:16px; background:var(--grund); color:var(--text); max-width:94vw; max-height:92vh; }
+  dialog::backdrop { background:rgba(0,0,0,.82); }
+  dialog img { display:block; max-width:94vw; max-height:80vh; width:auto; height:auto; }
+  dialog .leiste { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; font-weight:700; }
+  dialog button { font:800 15px/1 "Barlow", sans-serif; color:#111111; background:var(--gold); border:2px solid #111111; border-radius:10px; padding:10px 14px; cursor:pointer; }
+
+  @media (max-width:900px) {
+    .held .wrap, .verein { grid-template-columns:1fr; } .held h1 { font-size:56px; } .raster { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:600px) {
+    body { font-size:17px; } .held { padding-top:24px; } .held h1 { font-size:44px; } .held .kopf img { width:70px; height:70px; border-radius:17px; }
+    .held .marke { font-size:23px; } .held .lead { font-size:19px; } h2 { font-size:32px; } .raster { grid-template-columns:1fr; }
+    .galerie img { height:240px; } .knopf { width:100%; justify-content:center; } .verein { padding:20px; } .schluss .gross { font-size:32px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .band .spur { animation:none; } html { scroll-behavior:auto; } }
+
+  .mark { display:inline-block; background:var(--gold); padding:0 12px 2px; transform:rotate(-1.5deg); box-shadow:5px 5px 0 #111111; }
+  .linus { display:grid; grid-template-columns:.62fr 1.38fr; gap:30px; align-items:start; }
+  .linus-bild { display:block; border:2px solid #111111; border-radius:20px; overflow:hidden; background:#111111; aspect-ratio:9/16; }
+  .linus-bild video { display:block; width:100%; height:100%; object-fit:cover; }
+  .linus p { margin:0 0 14px; font-size:19px; }
+  .linus .klein { font-size:15px; font-weight:700; }
+  .angebot { margin-top:20px; padding:24px; border-radius:18px; background:#111111; color:#FFFFFF; border:2px solid #111111; }
+  .angebot h3 { margin:8px 0 10px; font:900 30px/1.1 "Saira", sans-serif; text-transform:uppercase; color:var(--gold); }
+  .angebot p { font-size:18px; }
+  .angebot .knopf.rand { background:#111111; color:#FFFFFF; border-color:#FFFFFF; }
+  @media (max-width:700px) { .linus { grid-template-columns:1fr; } .linus-bild { max-width:320px; } }
+
+
+  /* Kein Bild breiter als der sichtbare Bereich (Robert 15.10.: breite Bilder musste man am iPhone zweimal schieben) */
+  .galerie figure { max-width:100%; }
+  .galerie img, .galerie .hoch img { width:auto; height:auto; max-width:100%; max-height:340px; }
+  /* Strichleiste unter der Galerie: zeigt, bei welchem Bild man ist (Robert 15.10.2026) */
+  .punkte { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:4px 0 0; }
+  .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(13,13,13,.22); cursor:pointer; }
+  .punkte button.an { background:#E09A0A; box-shadow:0 0 10px #E09A0A; }
+  @media (max-width:600px) {
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    .galerie { gap:12px; }
+    .galerie figure { flex:0 0 100%; }
+    .galerie button { width:100%; display:flex; justify-content:center; align-items:center; }
+    .galerie img, .galerie .hoch img { width:auto; max-width:100%; height:auto; max-height:68vh; }
+    .galerie figcaption { max-width:none; }
+  }
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"><div class="spur">
+  <span><b>Fr 18:40</b> Schritt für Schritt fit</span><span><b>Fr 19:00</b> Hallentraining · 9 zugesagt</span><span><b>Mo 18:00</b> VTW 2 vs TSV Pottschach</span><span><b>Fr 30.10.</b> Training abgesagt – Halle belegt</span><span><b>Fr 18:40</b> Schritt für Schritt fit</span><span><b>Fr 19:00</b> Hallentraining · 9 zugesagt</span><span><b>Mo 18:00</b> VTW 2 vs TSV Pottschach</span><span><b>Fr 30.10.</b> Training abgesagt – Halle belegt</span>
+</div></div>
+
+<header class="held">
+  <div class="wrap">
+    <div>
+      <a class="zurueck" href="../../#programm-vtw-training">← Zurück zur Startseite</a>
+      <div class="kopf">
+        <img src="icon.png" alt="Symbol von VTW Training" width="92" height="92">
+        <div><div class="marke">VTW TRAINING</div><div class="art">Auftragsarbeit · VT Wimpassing<br>Web-App fürs Handy</div></div>
+      </div>
+      <h1>Wer kommt <span class="mark">heute?</span></h1>
+      <p class="lead">Trainings-, Liga- und Turnierplaner für Vereine: Mitglieder sagen mit einem Tippen zu oder ab, der Trainer sieht sofort, wer kommt. Haupt- und Zusatztraining stehen in einem Plan.</p>
+      <div class="knoepfe">
+        <a class="knopf voll" href="https://training.schrittfuerschrittfit.at/vorschau" target="_blank" rel="noopener">Vorschau ausprobieren ↗</a>
+        <a class="knopf rand" href="#film">▶ Film ansehen</a>
+      </div>
+    </div>
+    <button type="button" class="hook" data-gross="../../assets/programme/vtw-training-bild.jpg" data-text="VTW Training: zwei Handys mit Zusagen und einem abgesagten Training" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
+      <img src="../../assets/programme/vtw-training-bild.jpg" alt="VTW Training: zwei Handys mit Zusagen und einem abgesagten Training" width="1600" height="1000">
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="film" style="padding-top:20px">
+    <div class="kicker">In 30 Sekunden</div>
+    <h2>So läuft eine <span class="mark">Trainingswoche.</span></h2>
+    <div class="film">
+      <video id="video" muted playsinline loop controls preload="none" poster="poster.jpg" width="1920" height="1080"
+             aria-label="Kurzfilm: VTW Training">
+        <source src="film.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="bilder">
+    <div class="kicker">Bilder aus der App</div>
+    <h2>Mit <span class="mark">Beispieldaten.</span></h2>
+    <p class="wisch">Zum Weiterwischen seitlich schieben, zum Vergrößern antippen.</p>
+    <div class="galerie">
+      <figure><button type="button" data-gross="bilder/zusage-freitag.jpg" data-text="Freitag: Haupttraining mit Zusagen, davor das Zusatztraining"><img src="bilder/zusage-freitag.jpg" alt="Freitag: Haupttraining mit Zusagen, davor das Zusatztraining" width="780" height="1688" loading="lazy"></button><figcaption>Freitag: Haupttraining mit Zusagen, davor das Zusatztraining</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/wer-kommt.jpg" data-text="Wer kommt? Alle Namen auf einen Blick, auch Gäste"><img src="bilder/wer-kommt.jpg" alt="Wer kommt? Alle Namen auf einen Blick, auch Gäste" width="780" height="1688" loading="lazy"></button><figcaption>Wer kommt? Alle Namen auf einen Blick, auch Gäste</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/abgesagt.jpg" data-text="Abgesagt: mit Grund, sofort für alle sichtbar"><img src="bilder/abgesagt.jpg" alt="Abgesagt: mit Grund, sofort für alle sichtbar" width="780" height="1688" loading="lazy"></button><figcaption>Abgesagt: mit Grund, sofort für alle sichtbar</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/start-infos.jpg" data-text="Infos vom Vorstand und geänderte Matches stehen oben"><img src="bilder/start-infos.jpg" alt="Infos vom Vorstand und geänderte Matches stehen oben" width="780" height="1688" loading="lazy"></button><figcaption>Infos vom Vorstand und geänderte Matches stehen oben</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/liga-match.jpg" data-text="Liga: wer spielt, wer zuschaut, wer fährt"><img src="bilder/liga-match.jpg" alt="Liga: wer spielt, wer zuschaut, wer fährt" width="780" height="1688" loading="lazy"></button><figcaption>Liga: wer spielt, wer zuschaut, wer fährt</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/aufstellung.jpg" data-text="Aufstellung für das Match"><img src="bilder/aufstellung.jpg" alt="Aufstellung für das Match" width="780" height="1688" loading="lazy"></button><figcaption>Aufstellung für das Match</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/liga-tabelle.jpg" data-text="Liga-Tabelle mit eigenen Punkteregeln"><img src="bilder/liga-tabelle.jpg" alt="Liga-Tabelle mit eigenen Punkteregeln" width="780" height="1688" loading="lazy"></button><figcaption>Liga-Tabelle mit eigenen Punkteregeln</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/kalender.jpg" data-text="Kalender mit Trainings, Matches, Turnieren und Events"><img src="bilder/kalender.jpg" alt="Kalender mit Trainings, Matches, Turnieren und Events" width="780" height="1688" loading="lazy"></button><figcaption>Kalender mit Trainings, Matches, Turnieren und Events</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="kann">
+    <div class="kicker">Was es kann</div>
+    <h2>Alles für den <span class="mark">Vereinsalltag.</span></h2>
+    <div class="raster">
+      <div class="karte"><h3><span class="z">1</span>Zusagen mit einem Tippen</h3><p>Ja, vielleicht oder nein, dazu eine Notiz oder „komme nur zum Zuschauen“.</p></div>
+      <div class="karte"><h3><span class="z">2</span>Haupt- + Zusatztraining</h3><p>Trainings als Serie, das Zusatztraining gleich dabei. Fällt das Haupttraining aus, fragt die App beim Zusatztraining nach.</p></div>
+      <div class="karte"><h3><span class="z">3</span>Wer kommt?</h3><p>Der Trainer sieht alle Namen, Damen und Herren und mitgebrachte Gäste.</p></div>
+      <div class="karte"><h3><span class="z">4</span>Erinnerungen &amp; Absagen</h3><p>Mitteilungen vor dem Training und bei jeder Absage oder Verlegung. Mit Nachtruhe.</p></div>
+      <div class="karte"><h3><span class="z">5</span>Liga &amp; Turniere</h3><p>Matches, Aufstellung, Tabelle, Fahrgemeinschaft und „Wer bringt was mit?“.</p></div>
+      <div class="karte"><h3><span class="z">6</span>Für den Vorstand</h3><p>Infos an alle, Umfragen, Vorstandssitzungen, neue Mitglieder freischalten, Kalender-Abo.</p></div>
+    </div>
+  </section>
+
+  <section id="linus">
+    <div class="kicker">Erklärvideo</div>
+    <h2>Linus erklärt <span class="mark">die App.</span></h2>
+    <div class="linus">
+      <div class="linus-bild"><video controls playsinline preload="none" poster="linus-standbild.jpg" width="1080" height="1920" aria-label="Erklärvideo: Linus erklärt VTW Training"><source src="../../videos/linus.mp4" type="video/mp4"></video></div>
+      <div>
+        <p>Damit wirklich alle Mitglieder mitmachen, gibt es ein Erklärvideo: Maskottchen <b>Linus</b> zeigt in gut zwei Minuten, wie man sich anmeldet, die App auf den Home-Bildschirm holt und die Erinnerungen einschaltet – in Mundart, mit Untertiteln und viel Volleyball.</p>
+        <p class="klein">Linus, seine Bewegungen und seine Stimme sind KI-generiert. Die Namen in der App sind für diese Fassung erfunden.</p>
+        <div class="angebot">
+          <div class="kicker">Auch für dich</div>
+          <h3>Solche Videos mache ich auch.</h3>
+          <p>Erklärvideos, Werbespots, Clips für Social Media und Präsentationen – für dein Programm, deinen Verein oder deine Dienstleistung. Mit echten Bildschirmen und Motion Graphics, auf Wunsch mit Maskottchen, Stimme und Untertiteln.</p>
+          <div class="knoepfe" style="margin-top:6px"><a class="knopf voll" href="../../videos/">Videos ansehen</a><a class="knopf rand" href="../../#kontakt">Video anfragen</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="verein">
+    <div class="verein">
+      <div>
+        <div class="kicker">Für jeden Verein</div>
+        <h2>Dein Verein. <span style="color:var(--gold)">Dein Design.</span></h2>
+        <p>VTW Training ist <b style="color:var(--gold)">für jeden Verein einrichtbar</b>: mit eurem Logo, euren Farben, euren Mannschaften und Bereichen wie Halle und Beach.</p><p>Auf Wunsch angepasst an deinen Sport und eure Regeln – Fußball, Tennis, Handball oder jede andere Sportart.</p>
+        <div class="sport"><span class="eig">🏐 Volleyball</span><span>⚽ Fußball</span><span>🎾 Tennis</span><span>🤾 Handball</span><span>🏃 Laufen</span></div>
+      </div>
+      <img src="bilder/kalender.jpg" alt="Kalender mit Trainings, Matches, Turnieren und Events" loading="lazy">
+    </div>
+  </section>
+
+  <div class="schluss">
+    <div class="kicker">Auftragsarbeit</div>
+    <div class="gross">Trainingsplaner für <span class="mark">deinen Verein?</span></div>
+    <div class="knoepfe">
+      <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+      <a class="knopf rand" href="../../#programme">Alle Programme ansehen</a>
+    </div>
+  </div>
+
+  <a class="zurueck" href="../../#programm-vtw-training" style="margin-top:40px">← Zurück zur Startseite</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="zeile">
+      <a class="von" href="../../">Ein Programm von robschman.at →</a>
+      <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
+    </div>
+    <p class="ki">Texte auf dieser Seite teilweise mit Hilfe von KI erstellt. Die Bilder zeigen die echte App mit erfundenen Beispieldaten. Maskottchen Linus ist KI-generiert.</p>
+  </div>
+</footer>
+
+<dialog id="gross" aria-label="Bild in groß">
+  <div class="leiste"><span id="gross-text"></span><button type="button" id="gross-zu">Schließen ✕</button></div>
+  <img id="gross-bild" alt="">
+</dialog>
+
+<script>
+(function () {
+  var v = document.getElementById('video');
+  var ruhig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && 'IntersectionObserver' in window && !ruhig) {
+    new IntersectionObserver(function (e) {
+      e.forEach(function (x) {
+        if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.5 }).observe(v);
+  }
+  var d = document.getElementById('gross'), bild = document.getElementById('gross-bild'), text = document.getElementById('gross-text');
+  document.querySelectorAll('[data-gross]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bild.src = b.dataset.gross; bild.alt = b.dataset.text; text.textContent = b.dataset.text;
+      if (d.showModal) d.showModal(); else window.open(b.dataset.gross, '_blank');
+    });
+  });
+  document.getElementById('gross-zu').addEventListener('click', function () { d.close(); });
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+  // Strichleiste: ein Strich je Bild, der aktuelle leuchtet; antippen springt hin
+  document.querySelectorAll('.galerie').forEach(function (g) {
+    var bilder = g.querySelectorAll('figure'); if (bilder.length < 2) return;
+    var leiste = document.createElement('div'); leiste.className = 'punkte'; leiste.setAttribute('aria-label', 'Bild auswählen');
+    var lage = function (f) { return f.getBoundingClientRect().left - g.getBoundingClientRect().left + g.scrollLeft; };
+    bilder.forEach(function (f, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + bilder.length);
+      b.addEventListener('click', function () { g.scrollTo({ left: lage(f), behavior: 'smooth' }); });
+      leiste.appendChild(b);
+    });
+    g.insertAdjacentElement('afterend', leiste);
+    var knoepfe = leiste.querySelectorAll('button'), wartet = false;
+    function markieren() {
+      wartet = false;
+      var nr = 0, best = Infinity;
+      if (g.scrollLeft + g.clientWidth >= g.scrollWidth - 4) nr = bilder.length - 1;
+      else bilder.forEach(function (f, i) { var d = Math.abs(lage(f) - g.scrollLeft); if (d < best) { best = d; nr = i; } });
+      knoepfe.forEach(function (b, i) { b.classList.toggle('an', i === nr); b.setAttribute('aria-current', i === nr ? 'true' : 'false'); });
+    }
+    g.addEventListener('scroll', function () { if (!wartet) { wartet = true; requestAnimationFrame(markieren); } }, { passive: true });
+    window.addEventListener('resize', markieren); markieren();
+  });
+})();
+</script>
+<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
+</body>
+</html>
