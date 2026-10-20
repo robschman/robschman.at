@@ -119,6 +119,9 @@
   footer nav a { margin-right:16px; }
 
   @media (max-width:980px) { .arten { grid-template-columns:1fr 1fr; } .quer { grid-template-columns:1fr; } .ablauf { grid-template-columns:1fr 1fr; } }
+  /* Die dunkelroten Spots nie neben- oder untereinander (Robert, 20.10.2026): zwei Spalten = Schachbrett,
+     eine Spalte (Handy) = eigene Reihenfolge über --m */
+  @media (max-width:980px) { #werbespots .quer > figure { order:var(--m); } }
   @media (max-width:760px) {
     h1 { font-size:40px; } .lead { font-size:18px; } h3.titel { font-size:30px; }
     .hochreihe { grid-template-columns:1fr; justify-items:center; } .hochreihe .film { width:100%; max-width:320px; }
@@ -150,9 +153,9 @@
     </div>
 
     <div class="arten">
-      <a class="art" href="#werbespots"><div class="zeichen">🎬</div><h2>Werbespot</h2><p>Macht ein Produkt oder eine Dienstleistung sichtbar: kurz, mit Hook, mit echten Bildern.</p><div class="format">Querformat · 20–40 s</div></a>
-      <a class="art" href="#erklaervideo"><div class="zeichen">🧑‍🏫</div><h2>Erklärvideo</h2><p>Zeigt Schritt für Schritt, wie etwas geht – zum Beispiel, wie man sich in einer App anmeldet.</p><div class="format">Hoch- oder Querformat · 1–3 min</div></a>
-      <a class="art" href="#clips"><div class="zeichen">📱</div><h2>Videoclip</h2><p>Kurze Clips für TikTok, Instagram Reels und YouTube Shorts, die in den ersten Sekunden hängen bleiben.</p><div class="format">Hochformat 9:16 · 8–30 s</div></a>
+      <a class="art" href="#werbespots"><div class="zeichen">🎬</div><h2>Werbespot</h2><p>Macht ein Produkt oder eine Dienstleistung sichtbar: kurz, mit Hook, mit echten Bildern.</p><div class="format">Querformat · 20–40&nbsp;s</div></a>
+      <a class="art" href="#erklaervideo"><div class="zeichen">🧑‍🏫</div><h2>Erklärvideo</h2><p>Zeigt Schritt für Schritt, wie etwas geht – zum Beispiel, wie man sich in einer App anmeldet.</p><div class="format">Hoch&nbsp;oder&nbsp;quer · 1–3&nbsp;min</div></a>
+      <a class="art" href="#clips"><div class="zeichen">📱</div><h2>Videoclip</h2><p>Kurze Clips für TikTok, Instagram Reels und YouTube Shorts, die in den ersten Sekunden hängen bleiben.</p><div class="format">Hochformat&nbsp;9:16 · 8–30&nbsp;s</div></a>
       <a class="art" href="#praesentationen"><div class="zeichen">🖥️</div><h2>Präsentation</h2><p>Für das Angebot beim Kunden, die Vereinssitzung oder den Messestand – im Browser oder als Video.</p><div class="format">Bildschirm, Beamer, Handy</div></a>
     </div>
   </div>
@@ -164,24 +167,28 @@
     <h3 class="titel">Zeigen, was <span>es kann.</span></h3>
     <p class="satz">Jedes Programm auf dieser Website hat so einen Film: 30 Sekunden, echte Bildschirme, klare Botschaft. Antippen – dann läuft er groß. Genauso geht das für dein Angebot.</p>
     <div class="quer">
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/screener/film.mp4" data-titel="US Aktien Screener" aria-label="US Aktien Screener groß abspielen"><img src="../programme/screener/poster.jpg" alt="US Aktien Screener" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+      <figure class="film" style="--m:0"><div class="rahmen"><button type="button" class="spot" data-film="../programme/screener/film.mp4" data-titel="US Aktien Screener" aria-label="US Aktien Screener groß abspielen"><img src="../programme/screener/poster.jpg" alt="US Aktien Screener" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
         <figcaption><b>US Aktien Screener</b>Kriterien, Treffer, Heatmap und Watchlist. <a href="../programme/screener/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/vtw-turnier/film.mp4" data-titel="VTW Turnierplanung" aria-label="VTW Turnierplanung groß abspielen"><img src="../programme/vtw-turnier/poster.jpg" alt="VTW Turnierplanung" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
-        <figcaption><b>VTW Turnierplanung</b>Ein Turniertag vom Spielplan bis zur Siegerehrung. <a href="../programme/vtw-turnier/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/vtw-training/film.mp4" data-titel="VTW Training" aria-label="VTW Training groß abspielen"><img src="../programme/vtw-training/poster.jpg" alt="VTW Training" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
-        <figcaption><b>VTW Training</b>Eine Trainingswoche mit Zusagen, Absagen und Liga. <a href="../programme/vtw-training/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/eueh/film.mp4" data-titel="EÜH-Antragsassistent" aria-label="EÜH-Antragsassistent groß abspielen"><img src="../programme/eueh/poster.jpg" alt="EÜH-Antragsassistent" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
-        <figcaption><b>EÜH-Antragsassistent</b>Vom leeren Feld zum fertigen PDF, in 7 Sprachen. <a href="../programme/eueh/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/beauty/film.mp4" data-titel="Beauty Routine App" aria-label="Beauty Routine App groß abspielen"><img src="../programme/beauty/poster.jpg" alt="Beauty Routine App" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
-        <figcaption><b>Beauty Routine App</b>Ein Morgen zum Abhaken, Termine und 6 Designs. <a href="../programme/beauty/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/terminbuch/film.mp4" data-titel="Terminbuch" aria-label="Terminbuch groß abspielen"><img src="../programme/terminbuch/poster.jpg" alt="Terminbuch" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+      <figure class="film" style="--m:1"><div class="rahmen"><button type="button" class="spot" data-film="../programme/terminbuch/film.mp4" data-titel="Terminbuch" aria-label="Terminbuch groß abspielen"><img src="../programme/terminbuch/poster.jpg" alt="Terminbuch" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
         <figcaption><b>Terminbuch</b>Vom Klick zum Termin – und alles im Blick für dich. <a href="../programme/terminbuch/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/todo-sidebar/film.mp4" data-titel="ToDo Sidebar" aria-label="ToDo Sidebar groß abspielen"><img src="../programme/todo-sidebar/poster.jpg" alt="ToDo Sidebar" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+      <figure class="film" style="--m:3"><div class="rahmen"><button type="button" class="spot" data-film="../programme/todo-sidebar/film.mp4" data-titel="ToDo Sidebar" aria-label="ToDo Sidebar groß abspielen"><img src="../programme/todo-sidebar/poster.jpg" alt="ToDo Sidebar" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
         <figcaption><b>ToDo Sidebar</b>Maus an den Rand – die Liste ist da, und wieder weg. <a href="../programme/todo-sidebar/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/blitztext/film.mp4" data-titel="Blitztext" aria-label="Blitztext groß abspielen"><img src="../programme/blitztext/poster.jpg" alt="Blitztext" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
-        <figcaption><b>Blitztext</b>Fn halten, reden, ⌘V – und Claude macht es bissi schöner. <a href="../programme/blitztext/">Zum Programm →</a></figcaption></figure>
-      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/trainingsplan/film.mp4" data-titel="Trainingsplan-Programm" aria-label="Trainingsplan-Programm groß abspielen"><img src="../programme/trainingsplan/poster.jpg" alt="Trainingsplan-Programm" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+      <figure class="film" style="--m:2"><div class="rahmen"><button type="button" class="spot" data-film="../programme/vtw-turnier/film.mp4" data-titel="VTW Turnierplanung" aria-label="VTW Turnierplanung groß abspielen"><img src="../programme/vtw-turnier/poster.jpg" alt="VTW Turnierplanung" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>VTW Turnierplanung</b>Ein Turniertag vom Spielplan bis zur Siegerehrung. <a href="../programme/vtw-turnier/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:4"><div class="rahmen"><button type="button" class="spot" data-film="../programme/eueh/film.mp4" data-titel="EÜH-Antragsassistent" aria-label="EÜH-Antragsassistent groß abspielen"><img src="../programme/eueh/poster.jpg" alt="EÜH-Antragsassistent" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>EÜH-Antragsassistent</b>Vom leeren Feld zum fertigen PDF, in 7 Sprachen. <a href="../programme/eueh/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:5"><div class="rahmen"><button type="button" class="spot" data-film="../programme/einkauf/film.mp4" data-titel="Einkauf" aria-label="Einkauf groß abspielen"><img src="../programme/einkauf/poster.jpg" alt="Einkauf" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>Einkauf</b>Eine Einkaufsliste für alle – am iPhone, am Küchen-iPad und am Mac. <a href="../programme/einkauf/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:7"><div class="rahmen"><button type="button" class="spot" data-film="../programme/trainingsplan/film.mp4" data-titel="Trainingsplan-Programm" aria-label="Trainingsplan-Programm groß abspielen"><img src="../programme/trainingsplan/poster.jpg" alt="Trainingsplan-Programm" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
         <figcaption><b>Trainingsplan-Programm</b>Vom Kundenprofil zum Plan am Handy – und die App mit Timer. <a href="../programme/trainingsplan/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:6"><div class="rahmen"><button type="button" class="spot" data-film="../programme/beauty/film.mp4" data-titel="Beauty Routine App" aria-label="Beauty Routine App groß abspielen"><img src="../programme/beauty/poster.jpg" alt="Beauty Routine App" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>Beauty Routine App</b>Ein Morgen zum Abhaken, Termine und 6 Designs. <a href="../programme/beauty/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:8"><div class="rahmen"><button type="button" class="spot" data-film="../programme/blitztext/film.mp4" data-titel="Blitztext" aria-label="Blitztext groß abspielen"><img src="../programme/blitztext/poster.jpg" alt="Blitztext" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>Blitztext</b>Fn halten, reden, ⌘V – und Claude macht es bissi schöner. <a href="../programme/blitztext/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:9"><div class="rahmen"><button type="button" class="spot" data-film="../programme/mykalender/film.mp4" data-titel="MyKalender" aria-label="MyKalender groß abspielen"><img src="../programme/mykalender/poster.jpg" alt="MyKalender" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>MyKalender</b>Der Kalender auf einen Blick – zwei Wochen, drei Monate, ein Jahr. <a href="../programme/mykalender/">Zum Programm →</a></figcaption></figure>
+      <figure class="film" style="--m:10"><div class="rahmen"><button type="button" class="spot" data-film="../programme/vtw-training/film.mp4" data-titel="VTW Training" aria-label="VTW Training groß abspielen"><img src="../programme/vtw-training/poster.jpg" alt="VTW Training" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>VTW Training</b>Eine Trainingswoche mit Zusagen, Absagen und Liga. <a href="../programme/vtw-training/">Zum Programm →</a></figcaption></figure>
     </div>
   </section>
 

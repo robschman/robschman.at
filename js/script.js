@@ -13,6 +13,8 @@
    DIE PROGRAMME – jedes bekommt ein eigenes Schaufenster
    ----------------------------------------------------------------------------
    Reihenfolge auf der Seite = Reihenfolge in dieser Liste.
+   Die dunkelroten (Terminbuch, ToDo Sidebar, Einkauf, Trainingsplan, MyKalender) stehen nie
+   direkt hintereinander – sie sehen sich ähnlich (Robert, 20.10.2026: „quer durchmischt“).
    Seit 14.10.2026: keine Gruppen und kleinen Karten mehr, sondern je Programm
    ein großes Schaufenster in seiner eigenen Farbe (Roberts Wunsch: „jedes
    Programm soll etwas Besonderes sein“).
@@ -61,6 +63,24 @@ const PROGRAMME = [
     hinweis: 'Werkzeug zur Recherche — keine Anlageberatung.',
   },
   {
+    slug: 'terminbuch',
+    name: 'Terminbuch',
+    art: 'Online-Terminbuchung · läuft auf deiner Website',
+    satz: 'Kunden buchen selbst einen freien Termin – rund um die Uhr, ohne Anruf. Sie bekommen '
+        + 'sofort eine Bestätigung mit Kalenderdatei und einen Tag vorher eine Erinnerung.',
+    punkte: ['Freie Termine selbst buchen', 'Bestätigung, Kalenderdatei, Erinnerung', 'Im Einsatz bei Schritt für Schritt fit'],
+    status: 'einsatzbereit',
+    farbe: '#F0555F',
+    icon: 'assets/programme/terminbuch.png',
+    bild: 'assets/programme/terminbuch-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'Terminbuch: Handy mit Kalender und freien Uhrzeiten, daneben die Bestätigung „Dein Termin ist gebucht“ '
+       + 'und die Mail mit Kalenderdatei, Schriftzug „Rund um die Uhr gebucht“',
+    seite: 'programme/terminbuch/',
+    link: null,
+    hinweis: null,
+  },
+  {
     slug: 'eueh',
     name: 'EÜH-Antragsassistent',
     art: 'Web-App · mehrsprachig',
@@ -77,6 +97,24 @@ const PROGRAMME = [
     seite: 'programme/eueh/',
     link: 'https://fussfessel-hilfe.at',
     hinweis: 'Reine Ausfüll-Hilfe — ausdrücklich keine Rechtsberatung.',
+  },
+  {
+    slug: 'todo-sidebar',
+    name: 'ToDo Sidebar',
+    art: 'Mac-Programm',
+    satz: 'Deine Aufgaben am Bildschirmrand: Maus an den Rand, und die Liste ist da – ohne das Fenster '
+        + 'zu wechseln. Nach ein paar Sekunden verschwindet sie wieder von selbst.',
+    punkte: ['Liegt über jedem Fenster', 'Aufgaben mit Unterpunkten und Notizen', 'Einkaufsliste auch am Handy'],
+    status: 'einsatzbereit',
+    farbe: '#FF6B6B',
+    icon: 'assets/programme/todo-sidebar.png',
+    bild: 'assets/programme/todo-sidebar-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'ToDo Sidebar: Aufgabenliste mit Beispiel-Aufgaben, Unterpunkten und Notizen vor einem Mac-Bildschirm, '
+       + 'daneben der rote Reiter am Bildschirmrand, Schriftzug „Immer da. Nie im Weg.“',
+    seite: 'programme/todo-sidebar/',
+    link: null,
+    hinweis: null,
   },
   {
     slug: 'beauty',
@@ -97,56 +135,20 @@ const PROGRAMME = [
     hinweis: null,
   },
   {
-    slug: 'terminbuch',
-    name: 'Terminbuch',
-    art: 'Online-Terminbuchung · läuft auf deiner Website',
-    satz: 'Kunden buchen selbst einen freien Termin – rund um die Uhr, ohne Anruf. Sie bekommen '
-        + 'sofort eine Bestätigung mit Kalenderdatei und einen Tag vorher eine Erinnerung.',
-    punkte: ['Freie Termine selbst buchen', 'Bestätigung, Kalenderdatei, Erinnerung', 'Im Einsatz bei Schritt für Schritt fit'],
+    slug: 'einkauf',
+    name: 'Einkauf',
+    art: 'Web-App · iPhone, iPad und Mac',
+    satz: 'Die gemeinsame Einkaufsliste: Wer etwas braucht, tippt es ein, und alle anderen sehen es '
+        + 'nach wenigen Sekunden – sortiert nach Geschäft, auch ohne Empfang.',
+    punkte: ['Nach Geschäft sortiert', 'Abgehaktes räumt sich selbst weg', 'Küchen-iPad und Mac inklusive'],
     status: 'einsatzbereit',
     farbe: '#F0555F',
-    icon: 'assets/programme/terminbuch.png',
-    bild: 'assets/programme/terminbuch-bild.jpg',
+    icon: 'assets/programme/einkauf.png',
+    bild: 'assets/programme/einkauf-bild.jpg',
     form: 'quer', hell: false,
-    alt: 'Terminbuch: Handy mit Kalender und freien Uhrzeiten, daneben die Bestätigung „Dein Termin ist gebucht“ '
-       + 'und die Mail mit Kalenderdatei, Schriftzug „Rund um die Uhr gebucht“',
-    seite: 'programme/terminbuch/',
-    link: null,
-    hinweis: null,
-  },
-  {
-    slug: 'belegro',
-    name: 'Belegro',
-    art: 'Buchhaltungsprogramm · Mac',
-    satz: 'Belege ablegen, den Rest macht das Programm: Es sortiert nach Monat und Kategorie, '
-        + 'gleicht den Kontoauszug ab, schreibt Rechnungen und bereitet alles für den '
-        + 'Steuerberater auf.',
-    punkte: ['Belege mit KI-Erkennung einlesen', 'Abgleich mit dem Kontoauszug', 'Rechnungen und E-Rechnungen'],
-    status: 'einsatzbereit',
-    farbe: '#5AB0D0',
-    icon: 'assets/programme/belegro.png',
-    bild: null,
-    form: 'quer', hell: false,
-    alt: 'Belegro',
-    seite: null,
-    link: null,
-    hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
-  },
-  {
-    slug: 'todo-sidebar',
-    name: 'ToDo Sidebar',
-    art: 'Mac-Programm',
-    satz: 'Deine Aufgaben am Bildschirmrand: Maus an den Rand, und die Liste ist da – ohne das Fenster '
-        + 'zu wechseln. Nach ein paar Sekunden verschwindet sie wieder von selbst.',
-    punkte: ['Liegt über jedem Fenster', 'Aufgaben mit Unterpunkten und Notizen', 'Einkaufsliste auch am Handy'],
-    status: 'einsatzbereit',
-    farbe: '#FF6B6B',
-    icon: 'assets/programme/todo-sidebar.png',
-    bild: 'assets/programme/todo-sidebar-bild.jpg',
-    form: 'quer', hell: false,
-    alt: 'ToDo Sidebar: Aufgabenliste mit Beispiel-Aufgaben, Unterpunkten und Notizen vor einem Mac-Bildschirm, '
-       + 'daneben der rote Reiter am Bildschirmrand, Schriftzug „Immer da. Nie im Weg.“',
-    seite: 'programme/todo-sidebar/',
+    alt: 'Einkaufs-App: dieselbe Einkaufsliste mit den Geschäften in ihren Farben am iPhone und am Küchen-iPad, '
+       + 'Schriftzug „Eine Liste. Für alle.“',
+    seite: 'programme/einkauf/',
     link: null,
     hinweis: null,
   },
@@ -183,6 +185,42 @@ const PROGRAMME = [
     alt: 'Trainingsplan-Programm: Übungsliste mit eigenen Übungsbildern am Mac und der fertige Plan eines erfundenen '
        + 'Beispielkunden am Handy, Schriftzug „Dein Plan. Am Handy.“',
     seite: 'programme/trainingsplan/',
+    link: null,
+    hinweis: null,
+  },
+  {
+    slug: 'belegro',
+    name: 'Belegro',
+    art: 'Buchhaltungsprogramm · Mac',
+    satz: 'Belege ablegen, den Rest macht das Programm: Es sortiert nach Monat und Kategorie, '
+        + 'gleicht den Kontoauszug ab, schreibt Rechnungen und bereitet alles für den '
+        + 'Steuerberater auf.',
+    punkte: ['Belege mit KI-Erkennung einlesen', 'Abgleich mit dem Kontoauszug', 'Rechnungen und E-Rechnungen'],
+    status: 'einsatzbereit',
+    farbe: '#5AB0D0',
+    icon: 'assets/programme/belegro.png',
+    bild: null,
+    form: 'quer', hell: false,
+    alt: 'Belegro',
+    seite: null,
+    link: null,
+    hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
+  },
+  {
+    slug: 'mykalender',
+    name: 'MyKalender',
+    art: 'Web-App · iPhone und Mac',
+    satz: 'Dein Apple-Kalender auf einen Blick: zwei Wochen, drei Monate oder das ganze Jahr – '
+        + 'am iPhone-Home-Bildschirm und als kleines Fenster am Mac-Schreibtisch.',
+    punkte: ['Heute und zwei Wochen sofort im Blick', 'Das ganze Jahr mit freien Zeiten', 'Verschlüsselt, nur mit Passwort'],
+    status: 'einsatzbereit',
+    farbe: '#FF6B73',
+    icon: 'assets/programme/mykalender.png',
+    bild: 'assets/programme/mykalender-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'MyKalender: zwei Wochen mit erfundenen Terminen am iPhone und das ganze Jahr am iPad, '
+       + 'Schriftzug „Dein Kalender. Auf einen Blick.“',
+    seite: 'programme/mykalender/',
     link: null,
     hinweis: null,
   },
