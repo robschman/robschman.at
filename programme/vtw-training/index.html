@@ -312,6 +312,17 @@
   });
 })();
 </script>
+<script>
+// Beim Öffnen ganz oben anfangen – auch in einer Vorschau, die ihre eigene Scrollposition behält (Robert 20.10.2026).
+// Nicht bei Zurück, Neuladen oder Sprungmarke (#film …).
+(function () {
+  if (location.hash) return;
+  var n = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (n && (n.type === 'back_forward' || n.type === 'reload')) return;
+  var seite = document.documentElement;
+  try { seite.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { seite.scrollIntoView(true); }
+})();
+</script>
 <script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
 </body>

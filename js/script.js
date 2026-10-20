@@ -74,7 +74,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'EÜH-Antragsassistent: ausgefüllte persönliche Daten eines erfundenen Testfalls, die Auswahl der '
        + 'Justizanstalt mit Hinweis und dahinter das amtliche Formular, Schriftzug „Feld für Feld erklärt“',
-    seite: null,
+    seite: 'programme/eueh/',
     link: 'https://fussfessel-hilfe.at',
     hinweis: 'Reine Ausfüll-Hilfe — ausdrücklich keine Rechtsberatung.',
   },

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EÜH-Antragsassistent – Programm von robschman programming</title>
+<meta name="description" content="Der Antrag auf elektronisch überwachten Hausarrest, Feld für Feld erklärt: einmal eintippen, landet in allen amtlichen Formularen, in 7 Sprachen, als fertiges PDF. Web-App auf fussfessel-hilfe.at.">
+<link rel="canonical" href="https://robschman.at/programme/eueh/">
+<meta property="og:title" content="EÜH-Antragsassistent – robschman programming">
+<meta property="og:description" content="Der Fußfessel-Antrag. Feld für Feld erklärt.">
+<meta property="og:image" content="https://robschman.at/assets/programme/eueh-bild.jpg">
+<meta property="og:url" content="https://robschman.at/programme/eueh/">
+<meta name="theme-color" content="#EEF4FB">
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+  :root { --grund:#EEF4FB; --held:radial-gradient(ellipse 70% 80% at 80% 20%, rgba(14,93,165,.22), transparent 60%), radial-gradient(ellipse 50% 60% at 100% 100%, rgba(230,0,126,.12), transparent 60%),
+      linear-gradient(rgba(14,93,165,.06) 1px, transparent 1px) 0 0/56px 56px, linear-gradient(90deg, rgba(14,93,165,.06) 1px, transparent 1px) 0 0/56px 56px, #EEF4FB;
+    --karte:#FFFFFF; --rahmen:#0E5DA5; --text:#111111; --blau:#0E5DA5; --dunkel:#094477; --pink:#E6007E; --robschman:#15803D;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--grund); color:var(--text); font:500 18px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+
+  /* Laufband oben */
+  .band { position:relative; overflow:hidden; height:40px; background:var(--dunkel); border-bottom:3px solid var(--pink); }
+  .band .spur { position:absolute; top:0; left:0; display:flex; gap:56px; white-space:nowrap; height:37px; align-items:center;
+    font:800 16px/1 var(--sans); letter-spacing:.04em; text-transform:uppercase; color:#FFFFFF; animation:band 60s linear infinite; }
+  .band .spur b { color:#FF7AC0; }
+  @keyframes band { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+  .zurueck { display:inline-flex; align-items:center; gap:8px; margin:22px 0 0; font-weight:700; text-decoration:none; color:var(--text);
+    border:2px solid var(--rahmen); border-radius:999px; padding:8px 16px; background:var(--karte); }
+  .zurueck:hover { border-color:var(--pink); }
+
+  header.held { position:relative; overflow:hidden; padding:40px 0 60px; background:var(--held); }
+  .held .wrap { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  .held .kopf { display:flex; align-items:center; gap:18px; margin-top:30px; }
+  .held .kopf img { width:92px; height:92px; border-radius:22px; box-shadow:0 14px 40px rgba(9,68,119,.30); }
+  .held .marke { font:900 28px/1.1 var(--sans); letter-spacing:.04em; color:var(--dunkel); }
+  .held .marke b { color:var(--pink); }
+  .held .art { margin-top:6px; font:700 14px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--dunkel); }
+  .held h1 { margin:22px 0 0; font:900 66px/1 var(--sans); letter-spacing:-.02em; text-transform:uppercase; color:var(--dunkel); }
+  .held .lead { margin:22px 0 0; font-size:22px; line-height:1.45; font-weight:600; }
+  .held .hook { display:block; border-radius:18px; overflow:hidden; border:2px solid var(--rahmen); box-shadow:0 30px 80px rgba(9,68,119,.40); }
+  .held .hook img { display:block; width:100%; height:auto; }
+  .knoepfe { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .knopf { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:14px; font:800 18px/1 var(--sans); text-decoration:none; border:2px solid var(--dunkel); }
+  .knopf.voll { background:var(--pink); border-color:var(--pink); color:#FFFFFF; box-shadow:0 10px 28px rgba(230,0,126,.30); }
+  .knopf.voll:hover { background:#C8006D; border-color:#C8006D; }
+  .knopf.rand { background:var(--karte); color:var(--dunkel); border-color:var(--rahmen); }
+  .knopf.rand:hover { border-color:var(--pink); }
+  .achtung { margin-top:22px; display:inline-block; padding:10px 16px; border-radius:12px; background:var(--dunkel); color:#FFFFFF; font:700 16px/1.35 var(--sans); }
+  .achtung b { color:#FF7AC0; }
+
+  section { padding:64px 0 6px; }
+  .kicker { font:800 15px/1.4 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--dunkel); }
+  .kicker::before { content:""; display:inline-block; width:34px; height:5px; margin-right:12px; vertical-align:4px; background:var(--pink); }
+  h2 { margin:8px 0 22px; font:900 42px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+
+  .film { position:relative; border-radius:20px; overflow:hidden; border:2px solid var(--rahmen); background:#000000; aspect-ratio:16/9;
+    box-shadow:0 30px 90px rgba(9,68,119,.40); }
+  .film video { display:block; width:100%; height:100%; object-fit:cover; }
+
+  .galerie { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 18px; }
+  .galerie figure { margin:0; flex:0 0 auto; scroll-snap-align:start; }
+  .galerie button { display:block; padding:0; border:2px solid var(--rahmen); border-radius:16px; overflow:hidden; background:var(--karte); cursor:zoom-in; }
+  .galerie button:hover, .galerie button:focus-visible { border-color:var(--pink); outline:none; }
+  .galerie img { display:block; height:340px; width:auto; }
+  .galerie figcaption { margin-top:10px; max-width:440px; font-size:16px; line-height:1.4; font-weight:700; }
+  .wisch { font-size:15px; font-weight:600; margin:-6px 0 14px; }
+
+  .raster { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .karte { background:var(--karte); border:2px solid var(--rahmen); border-radius:16px; padding:20px 22px; }
+  .karte h3 { margin:0 0 8px; font:800 20px/1.25 var(--sans); color:var(--dunkel); }
+  .karte h3 .z { display:inline-grid; place-items:center; width:32px; height:32px; margin-right:8px; border-radius:9px; background:var(--pink); color:#FFFFFF; font:800 17px/1 var(--sans); vertical-align:2px; }
+  .karte p { margin:0; font-size:17px; }
+
+  .verein { display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:center; padding:30px; border-radius:22px; background:var(--dunkel); color:#FFFFFF; border:2px solid var(--dunkel); }
+  .verein h2 { color:inherit; }
+  .verein .kicker { color:#FFFFFF; }
+  .verein .kicker::before { background:#FF7AC0; }
+  .verein p { margin:0 0 14px; font-size:19px; }
+  .sport { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+  .sport span { padding:9px 15px; border-radius:12px; background:#FFFFFF; color:var(--dunkel); border:2px solid #FFFFFF; font:800 17px/1 var(--sans); }
+  .sport span.eig { background:var(--pink); border-color:var(--pink); color:#FFFFFF; }
+  .verein img { display:block; width:auto; max-width:100%; max-height:520px; justify-self:center; border-radius:14px; border:2px solid #FFFFFF; }
+
+  .schluss { margin:64px 0 0; text-align:center; padding:48px 20px; border-radius:24px; border:2px solid var(--rahmen); background:var(--held); }
+  .schluss .gross { margin:10px 0 0; font:900 44px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+  .schluss .knoepfe { justify-content:center; }
+
+  footer { margin-top:64px; padding:30px 0 40px; border-top:2px solid var(--rahmen); font-size:16px; }
+  footer .zeile { display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; justify-content:space-between; }
+  footer .von { font-weight:800; text-decoration:none; color:var(--robschman); }
+  footer nav a { margin-right:16px; }
+  footer .ki { margin-top:14px; }
+
+  dialog { padding:0; border:2px solid var(--rahmen); border-radius:16px; background:var(--grund); color:var(--text); max-width:94vw; max-height:92vh; }
+  dialog::backdrop { background:rgba(4,30,54,.85); }
+  dialog img { display:block; max-width:94vw; max-height:80vh; width:auto; height:auto; }
+  dialog .leiste { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; font-weight:700; }
+  dialog button { font:800 15px/1 var(--sans); color:#FFFFFF; background:var(--pink); border:2px solid var(--pink); border-radius:10px; padding:10px 14px; cursor:pointer; }
+
+  .mark { display:inline-block; background:var(--pink); color:#FFFFFF; padding:0 12px 3px; transform:rotate(-1.5deg); box-shadow:5px 5px 0 var(--dunkel); }
+
+  @media (max-width:900px) {
+    .held .wrap, .verein { grid-template-columns:1fr; } .held h1 { font-size:52px; } .raster { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:600px) {
+    body { font-size:17px; } .held { padding-top:24px; } .held h1 { font-size:40px; } .held .kopf img { width:70px; height:70px; border-radius:17px; }
+    .held .marke { font-size:22px; } .held .lead { font-size:19px; } h2 { font-size:30px; } .raster { grid-template-columns:1fr; }
+    .galerie img { height:240px; } .knopf { width:100%; justify-content:center; } .verein { padding:20px; } .schluss .gross { font-size:30px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .band .spur { animation:none; } html { scroll-behavior:auto; } }
+
+  /* Kein Bild breiter als der sichtbare Bereich */
+  .galerie figure { max-width:100%; }
+  .galerie img { width:auto; height:auto; max-width:100%; max-height:340px; }
+  /* Strichleiste unter der Galerie: zeigt, bei welchem Bild man ist */
+  .punkte { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:4px 0 0; }
+  .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(9,68,119,.22); cursor:pointer; }
+  .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
+  @media (max-width:600px) {
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    .galerie { gap:12px; }
+    .galerie figure { flex:0 0 100%; }
+    .galerie button { width:100%; height:min(60vh, 500px); display:flex; justify-content:center; align-items:center; }
+    .galerie img { width:auto; max-width:100%; height:auto; max-height:100%; }
+    .galerie figcaption { max-width:none; }
+  }
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"><div class="spur">
+  <span><b>15</b> Themenblöcke</span><span><b>7</b> Sprachen</span><span>Alle Formulare in <b>einem PDF</b></span><span>Eingaben bleiben im <b>Browser</b></span><span>Einwilligung <b>gratis</b></span><span><b>15</b> Themenblöcke</span><span><b>7</b> Sprachen</span><span>Alle Formulare in <b>einem PDF</b></span><span>Eingaben bleiben im <b>Browser</b></span><span>Einwilligung <b>gratis</b></span>
+</div></div>
+
+<header class="held">
+  <div class="wrap">
+    <div>
+      <a class="zurueck" href="../../#programm-eueh">← Zurück zur Startseite</a>
+      <div class="kopf">
+        <img src="icon.png" alt="Symbol des EÜH-Antragsassistenten" width="92" height="92">
+        <div><div class="marke">EÜH-<b>ANTRAGSASSISTENT</b></div><div class="art">Web-App · fussfessel-hilfe.at<br>Computer, Tablet und Handy</div></div>
+      </div>
+      <h1>Der Fußfessel-Antrag. <span class="mark">Feld für Feld</span> erklärt.</h1>
+      <p class="lead">Der Assistent führt durch den Antrag auf elektronisch überwachten Hausarrest. Was man einmal eintippt, steht danach in allen amtlichen Formularen – am Ende kommt ein fertiges PDF zum Ausdrucken heraus.</p>
+      <div class="knoepfe">
+        <a class="knopf voll" href="https://fussfessel-hilfe.at" target="_blank" rel="noopener">fussfessel-hilfe.at ↗</a>
+        <a class="knopf rand" href="#film">▶ Film ansehen</a>
+      </div>
+      <p class="achtung">Reine Ausfüllhilfe – <b>keine Rechtsberatung</b>. Privates Angebot, keine Behörde.</p>
+    </div>
+    <button type="button" class="hook" data-gross="../../assets/programme/eueh-bild.jpg" data-text="EÜH-Antragsassistent: ausgefüllte persönliche Daten, Auswahl der Justizanstalt und das amtliche Formular" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
+      <img src="../../assets/programme/eueh-bild.jpg" alt="EÜH-Antragsassistent: ausgefüllte persönliche Daten eines erfundenen Testfalls, die Auswahl der Justizanstalt und dahinter das amtliche Formular" width="1600" height="1000">
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="film" style="padding-top:20px">
+    <div class="kicker">In 30 Sekunden</div>
+    <h2>Vom leeren Feld zum <span class="mark">fertigen PDF.</span></h2>
+    <div class="film">
+      <video id="video" muted playsinline loop controls preload="none" poster="poster.jpg" width="1920" height="1080"
+             aria-label="Kurzfilm: EÜH-Antragsassistent">
+        <source src="film.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="bilder">
+    <div class="kicker">Bilder aus dem Assistenten</div>
+    <h2>Mit <span class="mark">erfundenen Daten.</span></h2>
+    <p class="wisch">Zum Weiterwischen seitlich schieben, zum Vergrößern antippen. Der Testfall „Michael Hofer“ ist erfunden.</p>
+    <div class="galerie">
+      <figure><button type="button" data-gross="bilder/persoenliche-daten.jpg" data-text="Persönliche Daten: einmal eingeben, landet in allen Formularen"><img src="bilder/persoenliche-daten.jpg" alt="Persönliche Daten: einmal eingeben, landet in allen Formularen" width="1400" height="1165" loading="lazy"></button><figcaption>Persönliche Daten: einmal eingeben, landet in allen Formularen</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/justizanstalt.jpg" data-text="Justizanstalt aus der Liste wählen – die Adresse kommt von selbst, Hinweise direkt beim Feld"><img src="bilder/justizanstalt.jpg" alt="Justizanstalt aus der Liste wählen – die Adresse kommt von selbst, Hinweise direkt beim Feld" width="1400" height="1081" loading="lazy"></button><figcaption>Justizanstalt aus der Liste wählen – die Adresse kommt von selbst, Hinweise direkt beim Feld</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/originaltext.jpg" data-text="Der Originaltext aus dem Antrag mit den Lücken, darunter die passenden Felder"><img src="bilder/originaltext.jpg" alt="Der Originaltext aus dem Antrag mit den Lücken, darunter die passenden Felder" width="1400" height="1587" loading="lazy"></button><figcaption>Der Originaltext aus dem Antrag mit den Lücken, darunter die passenden Felder</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/zweisprachig.jpg" data-text="Zweisprachig: Deutsch bleibt stehen, die Übersetzung steht daneben (hier Türkisch)"><img src="bilder/zweisprachig.jpg" alt="Zweisprachig: Deutsch bleibt stehen, die Übersetzung steht daneben (hier Türkisch)" width="1400" height="1311" loading="lazy"></button><figcaption>Zweisprachig: Deutsch bleibt stehen, die Übersetzung steht daneben (hier Türkisch)</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/formular.jpg" data-text="Im fertigen PDF: das amtliche Formular, schon ausgefüllt (Beispielantrag)"><img src="bilder/formular.jpg" alt="Im fertigen PDF: das amtliche Formular, schon ausgefüllt (Beispielantrag)" width="992" height="1404" loading="lazy"></button><figcaption>Im fertigen PDF: das amtliche Formular, schon ausgefüllt (Beispielantrag)</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/checkliste.jpg" data-text="Checkliste: welche Belege dazugehören und was zu unterschreiben ist"><img src="bilder/checkliste.jpg" alt="Checkliste: welche Belege dazugehören und was zu unterschreiben ist" width="993" height="1404" loading="lazy"></button><figcaption>Checkliste: welche Belege dazugehören und was zu unterschreiben ist</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/ausgangsantrag.jpg" data-text="Ausgangsantrag: Art des Ausgangs ankreuzen, die Erklärung steht gleich daneben"><img src="bilder/ausgangsantrag.jpg" alt="Ausgangsantrag: Art des Ausgangs ankreuzen, die Erklärung steht gleich daneben" width="1400" height="1492" loading="lazy"></button><figcaption>Ausgangsantrag: Art des Ausgangs ankreuzen, die Erklärung steht gleich daneben</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/handy-start.jpg" data-text="Am Handy: Startseite von fussfessel-hilfe.at"><img src="bilder/handy-start.jpg" alt="Am Handy: Startseite von fussfessel-hilfe.at" width="780" height="1688" loading="lazy"></button><figcaption>Am Handy: Startseite von fussfessel-hilfe.at</figcaption></figure>
+      <figure><button type="button" data-gross="bilder/handy-assistent.jpg" data-text="Am Handy: der Assistent mit Sprachwahl oben"><img src="bilder/handy-assistent.jpg" alt="Am Handy: der Assistent mit Sprachwahl oben" width="780" height="1688" loading="lazy"></button><figcaption>Am Handy: der Assistent mit Sprachwahl oben</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="kann">
+    <div class="kicker">Was es kann</div>
+    <h2>Ein Antrag, <span class="mark">viele Formulare.</span></h2>
+    <div class="raster">
+      <div class="karte"><h3><span class="z">1</span>Einmal eintippen</h3><p>Name, Geburtsdatum, Adresse und alles Weitere stehen danach in jedem Formular, in dem sie gebraucht werden.</p></div>
+      <div class="karte"><h3><span class="z">2</span>15 Themenblöcke</h3><p>Von den persönlichen Daten über Unterkunft, Beschäftigung und Einkommen bis zu Ort und Datum – mit Hinweisen beim Feld.</p></div>
+      <div class="karte"><h3><span class="z">3</span>7 Sprachen</h3><p>Deutsch, Englisch, Kroatisch, Serbisch in lateinischer und kyrillischer Schrift, Türkisch und Ungarisch – Deutsch bleibt stehen, die Übersetzung steht daneben.</p></div>
+      <div class="karte"><h3><span class="z">4</span>Ein fertiges PDF</h3><p>Alle Formulare in einer Datei, dazu eine Checkliste der Belege. Ausdrucken, unterschreiben, einreichen.</p></div>
+      <div class="karte"><h3><span class="z">5</span>Daten bleiben im Browser</h3><p>Die Eingaben werden auf dem eigenen Gerät verarbeitet, das PDF entsteht direkt im Browser.</p></div>
+      <div class="karte"><h3><span class="z">6</span>Weitere Anträge</h3><p>Teilzahlungs- und Ausgangsantrag gibt es extra. Einwilligung, Einverständnis und Einzugsermächtigung sind gratis.</p></div>
+    </div>
+  </section>
+
+  <section id="eigenes">
+    <div class="verein">
+      <div>
+        <div class="kicker">Für deine Formulare</div>
+        <h2>Dein Formular. <span style="color:#FF7AC0">Dein Assistent.</span></h2>
+        <p>Gibt es bei dir ein Formular, das Kundinnen und Kunden immer wieder falsch oder unvollständig ausfüllen? Daraus wird ein Assistent wie dieser: <b style="color:#FF7AC0">Feld für Feld erklärt</b>, auf Wunsch mehrsprachig, am Ende ein fertiges PDF.</p>
+        <p>Ich baue die Technik – die Inhalte und Erklärungen kommen von dir.</p>
+        <div class="sport"><span class="eig">📄 Anträge</span><span>📝 Anmeldungen</span><span>🏠 Mietformulare</span><span>🧾 Aufnahmebögen</span></div>
+      </div>
+      <img src="bilder/justizanstalt.jpg" alt="Justizanstalt aus der Liste wählen – die Adresse kommt von selbst" loading="lazy">
+    </div>
+  </section>
+
+  <div class="schluss">
+    <div class="kicker">Formular-Assistent</div>
+    <div class="gross">Formulare, die sich <span class="mark">selbst ausfüllen?</span></div>
+    <div class="knoepfe">
+      <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+      <a class="knopf rand" href="../../#programme">Alle Programme ansehen</a>
+    </div>
+  </div>
+
+  <a class="zurueck" href="../../#programm-eueh" style="margin-top:40px">← Zurück zur Startseite</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="zeile">
+      <a class="von" href="../../">Ein Programm von robschman.at →</a>
+      <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
+    </div>
+    <p class="ki">Texte auf dieser Seite teilweise mit Hilfe von KI erstellt. Die Bilder zeigen den echten Assistenten mit erfundenen Beispieldaten. Der EÜH-Antragsassistent ist eine reine Ausfüllhilfe und ersetzt keine Rechtsberatung.</p>
+  </div>
+</footer>
+
+<dialog id="gross" aria-label="Bild in groß">
+  <div class="leiste"><span id="gross-text"></span><button type="button" id="gross-zu">Schließen ✕</button></div>
+  <img id="gross-bild" alt="">
+</dialog>
+
+<script>
+(function () {
+  var v = document.getElementById('video');
+  var ruhig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && 'IntersectionObserver' in window && !ruhig) {
+    new IntersectionObserver(function (e) {
+      e.forEach(function (x) {
+        if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.5 }).observe(v);
+  }
+  var d = document.getElementById('gross'), bild = document.getElementById('gross-bild'), text = document.getElementById('gross-text');
+  document.querySelectorAll('[data-gross]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bild.src = b.dataset.gross; bild.alt = b.dataset.text; text.textContent = b.dataset.text;
+      if (d.showModal) d.showModal(); else window.open(b.dataset.gross, '_blank');
+    });
+  });
+  document.getElementById('gross-zu').addEventListener('click', function () { d.close(); });
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+  // Strichleiste: ein Strich je Bild, der aktuelle leuchtet; antippen springt hin
+  document.querySelectorAll('.galerie').forEach(function (g) {
+    var bilder = g.querySelectorAll('figure'); if (bilder.length < 2) return;
+    var leiste = document.createElement('div'); leiste.className = 'punkte'; leiste.setAttribute('aria-label', 'Bild auswählen');
+    var lage = function (f) { return f.getBoundingClientRect().left - g.getBoundingClientRect().left + g.scrollLeft; };
+    bilder.forEach(function (f, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + bilder.length);
+      b.addEventListener('click', function () { g.scrollTo({ left: lage(f), behavior: 'smooth' }); });
+      leiste.appendChild(b);
+    });
+    g.insertAdjacentElement('afterend', leiste);
+    var knoepfe = leiste.querySelectorAll('button'), wartet = false;
+    function markieren() {
+      wartet = false;
+      var nr = 0, best = Infinity;
+      if (g.scrollLeft + g.clientWidth >= g.scrollWidth - 4) nr = bilder.length - 1;
+      else bilder.forEach(function (f, i) { var d = Math.abs(lage(f) - g.scrollLeft); if (d < best) { best = d; nr = i; } });
+      knoepfe.forEach(function (b, i) { b.classList.toggle('an', i === nr); b.setAttribute('aria-current', i === nr ? 'true' : 'false'); });
+    }
+    g.addEventListener('scroll', function () { if (!wartet) { wartet = true; requestAnimationFrame(markieren); } }, { passive: true });
+    window.addEventListener('resize', markieren); markieren();
+  });
+})();
+</script>
+<script>
+// Beim Öffnen ganz oben anfangen – auch in einer Vorschau, die ihre eigene Scrollposition behält (Robert 20.10.2026).
+// Nicht bei Zurück, Neuladen oder Sprungmarke (#film …).
+(function () {
+  if (location.hash) return;
+  var n = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (n && (n.type === 'back_forward' || n.type === 'reload')) return;
+  var seite = document.documentElement;
+  try { seite.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { seite.scrollIntoView(true); }
+})();
+</script>
+<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
+</body>
+</html>

@@ -61,7 +61,7 @@
   h3.titel span { color:var(--gruen); }
   .satz { margin:0 0 24px; max-width:820px; font-size:18px; }
 
-  .quer { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+  .quer { display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
   .film { margin:0; }
   .film .rahmen { position:relative; border-radius:14px; overflow:hidden; border:1px solid var(--rahmen); background:#000000; aspect-ratio:16/9; }
   .film .rahmen.hoch { aspect-ratio:9/16; }
@@ -170,6 +170,8 @@
         <figcaption><b>VTW Turnierplanung</b>Ein Turniertag vom Spielplan bis zur Siegerehrung. <a href="../programme/vtw-turnier/">Zum Programm →</a></figcaption></figure>
       <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/vtw-training/film.mp4" data-titel="VTW Training" aria-label="VTW Training groß abspielen"><img src="../programme/vtw-training/poster.jpg" alt="VTW Training" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
         <figcaption><b>VTW Training</b>Eine Trainingswoche mit Zusagen, Absagen und Liga. <a href="../programme/vtw-training/">Zum Programm →</a></figcaption></figure>
+      <figure class="film"><div class="rahmen"><button type="button" class="spot" data-film="../programme/eueh/film.mp4" data-titel="EÜH-Antragsassistent" aria-label="EÜH-Antragsassistent groß abspielen"><img src="../programme/eueh/poster.jpg" alt="EÜH-Antragsassistent" width="1920" height="1080" loading="lazy"><span class="play" aria-hidden="true">▶</span></button></div>
+        <figcaption><b>EÜH-Antragsassistent</b>Vom leeren Feld zum fertigen PDF, in 7 Sprachen. <a href="../programme/eueh/">Zum Programm →</a></figcaption></figure>
     </div>
   </section>
 
@@ -283,6 +285,17 @@
   d.addEventListener('click', function (e) { if (e.target === d) zu(); });
   d.addEventListener('cancel', function () { v.pause(); });
   v.addEventListener('webkitendfullscreen', function () { zu(); });
+})();
+</script>
+<script>
+// Beim Öffnen ganz oben anfangen – auch in einer Vorschau, die ihre eigene Scrollposition behält (Robert 20.10.2026).
+// Nicht bei Zurück, Neuladen oder Sprungmarke (#film …).
+(function () {
+  if (location.hash) return;
+  var n = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (n && (n.type === 'back_forward' || n.type === 'reload')) return;
+  var seite = document.documentElement;
+  try { seite.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { seite.scrollIntoView(true); }
 })();
 </script>
 <script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
