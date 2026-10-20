@@ -82,8 +82,8 @@ const PROGRAMME = [
     slug: 'beauty',
     name: 'Beauty Routine App',
     art: 'Web-App fürs Handy · mit CozyVibe-Pflegetipps',
-    satz: 'Deine Pflege-Routinen für morgens, mittags und abends, dazu wöchentliche und '
-        + 'monatliche Schritte und Termine. Gratis, direkt im Browser, wie eine App am Handy.',
+    satz: 'Deine Pflege-Routinen für morgens, abends und die ganze Woche zum Abhaken, '
+        + 'dazu deine Beauty-Termine. Gratis, ohne Anmeldung, direkt im Browser, wie eine App am Handy.',
     punkte: ['Routinen zum Abhaken', 'Termine im Blick', 'Pflegetipps von CozyVibe'],
     status: 'online',
     farbe: '#F2A98B',
@@ -92,7 +92,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'Beauty Routine App: zwei Handys mit der abgehakten Morgenroutine von Zoe (9 von 23 erledigt) '
        + 'und den nächsten Terminen, Schriftzug „Deine Routine. Jeden Tag abgehakt.“',
-    seite: null,
+    seite: 'programme/beauty/',
     link: 'https://beautyroutine.app',
     hinweis: null,
   },
