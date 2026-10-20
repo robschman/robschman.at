@@ -110,7 +110,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'Terminbuch: Handy mit Kalender und freien Uhrzeiten, daneben die Bestätigung „Dein Termin ist gebucht“ '
        + 'und die Mail mit Kalenderdatei, Schriftzug „Rund um die Uhr gebucht“',
-    seite: null,
+    seite: 'programme/terminbuch/',
     link: null,
     hinweis: null,
   },

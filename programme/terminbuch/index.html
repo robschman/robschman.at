@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminbuch – Programm von robschman programming</title>
+<meta name="description" content="Online-Terminbuchung für die eigene Website: Kunden buchen selbst einen freien Termin, bekommen sofort eine Bestätigung mit Kalender-Knopf und einen Tag vorher eine Erinnerung. Im Einsatz bei Schritt für Schritt fit.">
+<link rel="canonical" href="https://robschman.at/programme/terminbuch/">
+<meta property="og:title" content="Terminbuch – robschman programming">
+<meta property="og:description" content="Rund um die Uhr gebucht.">
+<meta property="og:image" content="https://robschman.at/assets/programme/terminbuch-bild.jpg">
+<meta property="og:url" content="https://robschman.at/programme/terminbuch/">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+  :root { --grund:#0B0B0B; --held:radial-gradient(ellipse 70% 80% at 80% 20%, rgba(193,18,31,.30), transparent 60%),
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, #0B0B0B;
+    --karte:#161616; --rahmen:#3A3A3A; --text:#F5F5F5; --blau:#3A3A3A; --dunkel:#F5F5F5; --pink:#C1121F; --rot-hell:#F0555F; --robschman:#4ADE80;
+    --sans:"Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; --titel:"Bangers", Impact, sans-serif; }
+  @font-face { font-family:"Bangers"; src:url(../../assets/fonts/sfsf/bangers-latin.woff2) format("woff2"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Montserrat"; src:url(../../assets/fonts/sfsf/montserrat-latin.woff2) format("woff2"); font-weight:100 900; font-display:swap; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--grund); color:var(--text); font:500 18px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+
+  /* Laufband oben */
+  .band { position:relative; overflow:hidden; height:40px; background:var(--dunkel); border-bottom:3px solid var(--pink); }
+  .band .spur { position:absolute; top:0; left:0; display:flex; gap:56px; white-space:nowrap; height:37px; align-items:center;
+    font:800 16px/1 var(--sans); letter-spacing:.04em; text-transform:uppercase; color:#FFFFFF; animation:band 60s linear infinite; }
+  .band .spur b { color:#F0555F; }
+  @keyframes band { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+  .zurueck { display:inline-flex; align-items:center; gap:8px; margin:22px 0 0; font-weight:700; text-decoration:none; color:var(--text);
+    border:2px solid var(--rahmen); border-radius:999px; padding:8px 16px; background:var(--karte); }
+  .zurueck:hover { border-color:var(--pink); }
+
+  header.held { position:relative; overflow:hidden; padding:40px 0 60px; background:var(--held); }
+  .held .wrap { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  .held .kopf { display:flex; align-items:center; gap:18px; margin-top:30px; }
+  .held .kopf img { width:92px; height:92px; border-radius:22px; box-shadow:0 14px 40px rgba(0,0,0,.30); }
+  .held .marke { font:900 28px/1.1 var(--sans); letter-spacing:.04em; color:var(--dunkel); }
+  .held .marke b { color:var(--pink); }
+  .held .art { margin-top:6px; font:700 14px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--dunkel); }
+  .held h1 { margin:22px 0 0; font:900 66px/1 var(--sans); letter-spacing:-.02em; text-transform:uppercase; color:var(--dunkel); }
+  .held .lead { margin:22px 0 0; font-size:22px; line-height:1.45; font-weight:600; }
+  .held .hook { display:block; border-radius:18px; overflow:hidden; border:2px solid var(--rahmen); box-shadow:0 30px 80px rgba(0,0,0,.40); }
+  .held .hook img { display:block; width:100%; height:auto; }
+  .knoepfe { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .knopf { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:14px; font:800 18px/1 var(--sans); text-decoration:none; border:2px solid var(--dunkel); }
+  .knopf.voll { background:var(--pink); border-color:var(--pink); color:#FFFFFF; box-shadow:0 10px 28px rgba(193,18,31,.30); }
+  .knopf.voll:hover { background:#9E0E19; border-color:#9E0E19; }
+  .knopf.rand { background:var(--karte); color:var(--dunkel); border-color:var(--rahmen); }
+  .knopf.rand:hover { border-color:var(--pink); }
+  .achtung { margin-top:22px; display:inline-block; padding:10px 16px; border-radius:12px; background:var(--dunkel); color:#FFFFFF; font:700 16px/1.35 var(--sans); }
+  .achtung b { color:#F0555F; }
+
+  section { padding:64px 0 6px; }
+  .kicker { font:800 15px/1.4 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--dunkel); }
+  .kicker::before { content:""; display:inline-block; width:34px; height:5px; margin-right:12px; vertical-align:4px; background:var(--pink); }
+  h2 { margin:8px 0 22px; font:900 42px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+
+  .film { position:relative; border-radius:20px; overflow:hidden; border:2px solid var(--rahmen); background:#000000; aspect-ratio:16/9;
+    box-shadow:0 30px 90px rgba(0,0,0,.40); }
+  .film video { display:block; width:100%; height:100%; object-fit:cover; }
+
+  .galerie { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 18px; }
+  .galerie figure { margin:0; flex:0 0 auto; scroll-snap-align:start; }
+  .galerie button { display:block; padding:0; border:2px solid var(--rahmen); border-radius:16px; overflow:hidden; background:var(--karte); cursor:zoom-in; }
+  .galerie button:hover, .galerie button:focus-visible { border-color:var(--pink); outline:none; }
+  .galerie img { display:block; height:340px; width:auto; }
+  .galerie figcaption { margin-top:10px; max-width:440px; font-size:16px; line-height:1.4; font-weight:700; }
+  .wisch { font-size:15px; font-weight:600; margin:-6px 0 14px; }
+
+  .raster { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .karte { background:var(--karte); border:2px solid var(--rahmen); border-radius:16px; padding:20px 22px; }
+  .karte h3 { margin:0 0 8px; font:800 20px/1.25 var(--sans); color:var(--dunkel); }
+  .karte h3 .z { display:inline-grid; place-items:center; width:32px; height:32px; margin-right:8px; border-radius:9px; background:var(--pink); color:#FFFFFF; font:800 17px/1 var(--sans); vertical-align:2px; }
+  .karte p { margin:0; font-size:17px; }
+
+  .verein { display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:center; padding:30px; border-radius:22px; background:var(--dunkel); color:#FFFFFF; border:2px solid var(--dunkel); }
+  .verein h2 { color:inherit; }
+  .verein .kicker { color:#FFFFFF; }
+  .verein .kicker::before { background:#F0555F; }
+  .verein p { margin:0 0 14px; font-size:19px; }
+  .sport { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+  .sport span { padding:9px 15px; border-radius:12px; background:#FFFFFF; color:var(--dunkel); border:2px solid #FFFFFF; font:800 17px/1 var(--sans); }
+  .sport span.eig { background:var(--pink); border-color:var(--pink); color:#FFFFFF; }
+  .verein img { display:block; width:auto; max-width:100%; max-height:520px; justify-self:center; border-radius:14px; border:2px solid #FFFFFF; }
+
+  .schluss { margin:64px 0 0; text-align:center; padding:48px 20px; border-radius:24px; border:2px solid var(--rahmen); background:var(--held); }
+  .schluss .gross { margin:10px 0 0; font:900 44px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+  .schluss .knoepfe { justify-content:center; }
+
+  footer { margin-top:64px; padding:30px 0 40px; border-top:2px solid var(--rahmen); font-size:16px; }
+  footer .zeile { display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; justify-content:space-between; }
+  footer .von { font-weight:800; text-decoration:none; color:var(--robschman); }
+  footer nav a { margin-right:16px; }
+  footer .ki { margin-top:14px; }
+
+  dialog { padding:0; border:2px solid var(--rahmen); border-radius:16px; background:var(--grund); color:var(--text); max-width:94vw; max-height:92vh; }
+  dialog::backdrop { background:rgba(0,0,0,.85); }
+  dialog img { display:block; max-width:94vw; max-height:80vh; width:auto; height:auto; }
+  dialog .leiste { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; font-weight:700; }
+  dialog button { font:800 15px/1 var(--sans); color:#FFFFFF; background:var(--pink); border:2px solid var(--pink); border-radius:10px; padding:10px 14px; cursor:pointer; }
+
+  .mark { display:inline-block; background:var(--pink); color:#FFFFFF; padding:0 12px 3px; transform:rotate(-1.5deg); box-shadow:5px 5px 0 var(--dunkel); }
+
+  @media (max-width:900px) {
+    .held .wrap, .verein { grid-template-columns:1fr; } .held h1 { font-size:52px; } .raster { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:600px) {
+    body { font-size:17px; } .held { padding-top:24px; } .held h1 { font-size:40px; } .held .kopf img { width:70px; height:70px; border-radius:17px; }
+    .held .marke { font-size:22px; } .held .lead { font-size:19px; } h2 { font-size:30px; } .raster { grid-template-columns:1fr; }
+    .galerie img { height:240px; } .knopf { width:100%; justify-content:center; } .verein { padding:20px; } .schluss .gross { font-size:30px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .band .spur { animation:none; } html { scroll-behavior:auto; } }
+
+  /* Kein Bild breiter als der sichtbare Bereich */
+  .galerie figure { max-width:100%; }
+  .galerie img { width:auto; height:auto; max-width:100%; max-height:340px; }
+  /* Strichleiste unter der Galerie: zeigt, bei welchem Bild man ist */
+  .punkte { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:4px 0 0; }
+  .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(0,0,0,.22); cursor:pointer; }
+  .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
+  @media (max-width:600px) {
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    .galerie { gap:12px; }
+    .galerie figure { flex:0 0 100%; }
+    .galerie button { width:100%; height:min(60vh, 500px); display:flex; justify-content:center; align-items:center; }
+    .galerie img { width:auto; max-width:100%; height:auto; max-height:100%; }
+    .galerie figcaption { max-width:none; }
+  }
+
+  /* Terminbuch: dunkles Design von Schritt für Schritt fit */
+  body { font-synthesis:none; }
+  .held h1, h2, .schluss .gross { font-family:var(--titel); font-weight:400; letter-spacing:.01em; }
+  .held h1 { font-size:84px; line-height:.98; } h2 { font-size:54px; } .schluss .gross { font-size:56px; }
+  .held .marke { font-family:var(--titel); font-weight:400; font-size:36px; letter-spacing:.06em; }
+  .held .marke b { color:var(--rot-hell); }
+  .mark { box-shadow:5px 5px 0 #000000; }
+  .band { background:#161616; border-bottom:3px solid var(--pink); }
+  .band .spur b { color:var(--rot-hell); }
+  .achtung { background:#161616; border:2px solid var(--rahmen); }
+  .knopf { border-color:var(--rahmen); }
+  .knopf.voll { color:#FFFFFF; }
+  .karte h3 { color:var(--text); }
+  .verein { background:#161616; border-color:var(--pink); }
+  .sport span { background:#0B0B0B; color:var(--text); border-color:var(--rahmen); }
+  .sport span.eig { background:var(--pink); border-color:var(--pink); color:#FFFFFF; }
+  .verein img { border-color:var(--rahmen); }
+  .punkte button { background:rgba(245,245,245,.25); }
+  .punkte button.an { background:var(--rot-hell); box-shadow:0 0 10px var(--rot-hell); }
+  dialog button { background:var(--pink); border-color:var(--pink); }
+  /* Handy-Bilder größer, Beschriftung so breit wie das Bild; Verwaltungs-Bilder (quer) normal */
+  .galerie figure { width:min-content; }
+  .galerie .hoch img { height:480px; width:auto; max-width:none; max-height:none; }
+  .galerie .quer img { height:480px; width:auto; max-width:none; max-height:none; }
+  .galerie figcaption { max-width:none; }
+  @media (max-width:900px) { .held h1 { font-size:64px; } }
+  @media (max-width:600px) {
+    .held h1 { font-size:50px; } h2 { font-size:40px; } .schluss .gross { font-size:40px; }
+    .galerie figure { width:auto; }
+    .galerie .hoch img, .galerie .quer img { height:auto; max-width:100%; max-height:100%; }
+  }
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"><div class="spur">
+  <span>Buchen <b>rund um die Uhr</b></span><span>Bestätigung mit <b>Kalender-Knopf</b></span><span>Erinnerung <b>einen Tag vorher</b></span><span>Absagen <b>per Link</b></span><span>Verwaltung <b>im Browser</b></span><span>Buchen <b>rund um die Uhr</b></span><span>Bestätigung mit <b>Kalender-Knopf</b></span><span>Erinnerung <b>einen Tag vorher</b></span><span>Absagen <b>per Link</b></span><span>Verwaltung <b>im Browser</b></span>
+</div></div>
+
+<header class="held">
+  <div class="wrap">
+    <div>
+      <a class="zurueck" href="../../#programm-terminbuch">← Zurück zur Startseite</a>
+      <div class="kopf">
+        <img src="icon.png" alt="Symbol des Terminbuchs" width="92" height="92">
+        <div><div class="marke">TERMIN<b>BUCH</b></div><div class="art">Online-Terminbuchung · läuft auf deiner Website<br>Im Einsatz bei Schritt für Schritt fit</div></div>
+      </div>
+      <h1>Rund um die Uhr <span class="mark">gebucht.</span></h1>
+      <p class="lead">Kundinnen und Kunden buchen selbst einen freien Termin – ohne Anruf, ohne Hin und Her. Sie bekommen sofort eine Bestätigung mit Kalender-Knopf und einen Tag vorher eine Erinnerung.</p>
+      <div class="knoepfe">
+        <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+        <a class="knopf rand" href="#film">▶ Film ansehen</a>
+      </div>
+    </div>
+    <button type="button" class="hook" data-gross="../../assets/programme/terminbuch-bild.jpg" data-text="Terminbuch: Kalender mit freien Uhrzeiten, Bestätigung und Mail mit Kalenderdatei" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
+      <img src="../../assets/programme/terminbuch-bild.jpg" alt="Terminbuch: Handy mit Kalender und freien Uhrzeiten, daneben die Bestätigung „Dein Termin ist gebucht“ und die Mail mit Kalenderdatei" width="1600" height="1000">
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="film" style="padding-top:20px">
+    <div class="kicker">In 30 Sekunden</div>
+    <h2>Vom Klick zum <span class="mark">Termin.</span></h2>
+    <div class="film">
+      <video id="video" muted playsinline loop controls preload="none" poster="poster.jpg" width="1920" height="1080"
+             aria-label="Kurzfilm: Terminbuch">
+        <source src="film.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="bilder">
+    <div class="kicker">Bilder aus dem Terminbuch</div>
+    <h2>Mit <span class="mark">Beispieldaten.</span></h2>
+    <p class="wisch">Zum Weiterwischen seitlich schieben, zum Vergrößern antippen. Alle Buchungen sind erfunden.</p>
+    <div class="galerie">
+      <figure class="hoch"><button type="button" data-gross="bilder/leistung.jpg" data-text="Zuerst die Leistung – jede mit eigener Dauer"><img src="bilder/leistung.jpg" alt="Zuerst die Leistung – jede mit eigener Dauer" width="780" height="1688" loading="lazy"></button><figcaption>Zuerst die Leistung – jede mit eigener Dauer</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/kalender.jpg" data-text="Rote Tage haben freie Termine"><img src="bilder/kalender.jpg" alt="Rote Tage haben freie Termine" width="780" height="1688" loading="lazy"></button><figcaption>Rote Tage haben freie Termine</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/uhrzeit.jpg" data-text="Nur Uhrzeiten, in die der Termin passt"><img src="bilder/uhrzeit.jpg" alt="Nur Uhrzeiten, in die der Termin passt" width="780" height="1688" loading="lazy"></button><figcaption>Nur Uhrzeiten, in die der Termin passt</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/daten.jpg" data-text="Name, Mail, Telefon – und die Häkchen für Datenschutz und Rücktritt"><img src="bilder/daten.jpg" alt="Name, Mail, Telefon – und die Häkchen für Datenschutz und Rücktritt" width="780" height="1688" loading="lazy"></button><figcaption>Name, Mail, Telefon – und die Häkchen für Datenschutz und Rücktritt</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/gebucht.jpg" data-text="Gebucht – die Bestätigung ist unterwegs"><img src="bilder/gebucht.jpg" alt="Gebucht – die Bestätigung ist unterwegs" width="780" height="1688" loading="lazy"></button><figcaption>Gebucht – die Bestätigung ist unterwegs</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/mail.jpg" data-text="Die Mail: Kalender-Knopf, Google Kalender, Absagen"><img src="bilder/mail.jpg" alt="Die Mail: Kalender-Knopf, Google Kalender, Absagen" width="780" height="1688" loading="lazy"></button><figcaption>Die Mail: Kalender-Knopf, Google Kalender, Absagen</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/verwaltung-termine.jpg" data-text="Verwaltung: die nächsten Termine, absagen oder verschieben"><img src="bilder/verwaltung-termine.jpg" alt="Verwaltung: die nächsten Termine, absagen oder verschieben" width="1400" height="1043" loading="lazy"></button><figcaption>Verwaltung: die nächsten Termine, absagen oder verschieben</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/verwaltung-eintragen.jpg" data-text="„Wann ist frei?“ – selbst eintragen oder eine Pause für dich"><img src="bilder/verwaltung-eintragen.jpg" alt="„Wann ist frei?“ – selbst eintragen oder eine Pause für dich" width="1400" height="1043" loading="lazy"></button><figcaption>„Wann ist frei?“ – selbst eintragen oder eine Pause für dich</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/verwaltung-wochen.jpg" data-text="Wochenübersicht der Zeitfenster mit Urlaub und Pausen"><img src="bilder/verwaltung-wochen.jpg" alt="Wochenübersicht der Zeitfenster mit Urlaub und Pausen" width="1400" height="1043" loading="lazy"></button><figcaption>Wochenübersicht der Zeitfenster mit Urlaub und Pausen</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/verwaltung-leistungen.jpg" data-text="Leistungen mit Name, Kurztext und Dauer selbst pflegen"><img src="bilder/verwaltung-leistungen.jpg" alt="Leistungen mit Name, Kurztext und Dauer selbst pflegen" width="1400" height="1043" loading="lazy"></button><figcaption>Leistungen mit Name, Kurztext und Dauer selbst pflegen</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="kann">
+    <div class="kicker">Was es kann</div>
+    <h2>Weniger Telefon, <span class="mark">mehr Termine.</span></h2>
+    <div class="raster">
+      <div class="karte"><h3><span class="z">1</span>Buchen rund um die Uhr</h3><p>Leistung, Tag und Uhrzeit wählen Kundinnen und Kunden selbst – auch abends und am Wochenende.</p></div>
+      <div class="karte"><h3><span class="z">2</span>Dauer je Leistung</h3><p>25, 45 oder 60 Minuten: Angeboten werden nur Uhrzeiten, in die der Termin wirklich passt.</p></div>
+      <div class="karte"><h3><span class="z">3</span>Bestätigung und Erinnerung</h3><p>Sofort eine Mail mit Kalender-Knopf, einen Tag vorher die Erinnerung.</p></div>
+      <div class="karte"><h3><span class="z">4</span>Absagen per Link</h3><p>Wer nicht kann, sagt mit einem Klick ab. Bis wann das kostenlos geht, steht gleich dabei.</p></div>
+      <div class="karte"><h3><span class="z">5</span>Deine Verwaltung</h3><p>Termine sehen, selbst eintragen, verschieben und absagen. Zeitfenster je Woche, Urlaub, Pausen und Kalender-Abo.</p></div>
+      <div class="karte"><h3><span class="z">6</span>Auf deiner Website</h3><p>Läuft auf deinem eigenen Webspace und in deinem Design – die Daten bleiben bei dir.</p></div>
+    </div>
+  </section>
+
+  <section id="eigenes">
+    <div class="verein">
+      <div>
+        <div class="kicker">Für deinen Betrieb</div>
+        <h2>Dein Betrieb. <span style="color:#F0555F">Deine Termine.</span></h2>
+        <p>Friseur, Massage, Training, Beratung oder Nachhilfe: Ich richte das Terminbuch mit <b style="color:#F0555F">deinen Leistungen, deinen Zeiten und deinem Design</b> auf deiner Website ein.</p>
+        <p>Die Rechtstexte für Datenschutz und AGB kommen von dir.</p>
+        <div class="sport"><span class="eig">✂️ Friseur</span><span>💆 Massage</span><span>🏋️ Training</span><span>📐 Beratung</span><span>📚 Nachhilfe</span></div>
+      </div>
+      <img src="bilder/mail.jpg" alt="Die Bestätigungsmail mit Kalender-Knopf" loading="lazy">
+    </div>
+  </section>
+
+  <div class="schluss">
+    <div class="kicker">Online-Terminbuchung</div>
+    <div class="gross">Termine, die sich <span class="mark">selbst buchen?</span></div>
+    <div class="knoepfe">
+      <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+      <a class="knopf rand" href="../../#programme">Alle Programme ansehen</a>
+    </div>
+  </div>
+
+  <a class="zurueck" href="../../#programm-terminbuch" style="margin-top:40px">← Zurück zur Startseite</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="zeile">
+      <a class="von" href="../../">Ein Programm von robschman.at →</a>
+      <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
+    </div>
+    <p class="ki">Texte auf dieser Seite teilweise mit Hilfe von KI erstellt. Die Bilder zeigen das echte Terminbuch mit erfundenen Buchungen.</p>
+  </div>
+</footer>
+
+<dialog id="gross" aria-label="Bild in groß">
+  <div class="leiste"><span id="gross-text"></span><button type="button" id="gross-zu">Schließen ✕</button></div>
+  <img id="gross-bild" alt="">
+</dialog>
+
+<script>
+(function () {
+  var v = document.getElementById('video');
+  var ruhig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && 'IntersectionObserver' in window && !ruhig) {
+    new IntersectionObserver(function (e) {
+      e.forEach(function (x) {
+        if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.5 }).observe(v);
+  }
+  var d = document.getElementById('gross'), bild = document.getElementById('gross-bild'), text = document.getElementById('gross-text');
+  document.querySelectorAll('[data-gross]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bild.src = b.dataset.gross; bild.alt = b.dataset.text; text.textContent = b.dataset.text;
+      if (d.showModal) d.showModal(); else window.open(b.dataset.gross, '_blank');
+    });
+  });
+  document.getElementById('gross-zu').addEventListener('click', function () { d.close(); });
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+  // Strichleiste: ein Strich je Bild, der aktuelle leuchtet; antippen springt hin
+  document.querySelectorAll('.galerie').forEach(function (g) {
+    var bilder = g.querySelectorAll('figure'); if (bilder.length < 2) return;
+    var leiste = document.createElement('div'); leiste.className = 'punkte'; leiste.setAttribute('aria-label', 'Bild auswählen');
+    var lage = function (f) { return f.getBoundingClientRect().left - g.getBoundingClientRect().left + g.scrollLeft; };
+    bilder.forEach(function (f, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + bilder.length);
+      b.addEventListener('click', function () { g.scrollTo({ left: lage(f), behavior: 'smooth' }); });
+      leiste.appendChild(b);
+    });
+    g.insertAdjacentElement('afterend', leiste);
+    var knoepfe = leiste.querySelectorAll('button'), wartet = false;
+    function markieren() {
+      wartet = false;
+      var nr = 0, best = Infinity;
+      if (g.scrollLeft + g.clientWidth >= g.scrollWidth - 4) nr = bilder.length - 1;
+      else bilder.forEach(function (f, i) { var d = Math.abs(lage(f) - g.scrollLeft); if (d < best) { best = d; nr = i; } });
+      knoepfe.forEach(function (b, i) { b.classList.toggle('an', i === nr); b.setAttribute('aria-current', i === nr ? 'true' : 'false'); });
+    }
+    g.addEventListener('scroll', function () { if (!wartet) { wartet = true; requestAnimationFrame(markieren); } }, { passive: true });
+    window.addEventListener('resize', markieren); markieren();
+  });
+})();
+</script>
+<script>
+// Beim Öffnen ganz oben anfangen – auch in einer Vorschau, die ihre eigene Scrollposition behält (Robert 20.10.2026).
+// Nicht bei Zurück, Neuladen oder Sprungmarke (#film …).
+(function () {
+  if (location.hash) return;
+  var n = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (n && (n.type === 'back_forward' || n.type === 'reload')) return;
+  var seite = document.documentElement;
+  try { seite.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { seite.scrollIntoView(true); }
+})();
+</script>
+<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
+</body>
+</html>
