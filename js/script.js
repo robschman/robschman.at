@@ -182,7 +182,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'Trainingsplan-Programm: Übungsliste mit eigenen Übungsbildern am Mac und der fertige Plan eines erfundenen '
        + 'Beispielkunden am Handy, Schriftzug „Dein Plan. Am Handy.“',
-    seite: null,
+    seite: 'programme/trainingsplan/',
     link: null,
     hinweis: null,
   },
