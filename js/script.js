@@ -146,7 +146,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'ToDo Sidebar: Aufgabenliste mit Beispiel-Aufgaben, Unterpunkten und Notizen vor einem Mac-Bildschirm, '
        + 'daneben der rote Reiter am Bildschirmrand, Schriftzug „Immer da. Nie im Weg.“',
-    seite: null,
+    seite: 'programme/todo-sidebar/',
     link: null,
     hinweis: null,
   },
