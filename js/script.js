@@ -164,7 +164,7 @@ const PROGRAMME = [
     form: 'quer', hell: false,
     alt: 'Blitztext: Taste fn mit Tonwelle, ein diktierter Beispieltext in TextEdit, die Meldung „Kopiert – mit Cmd+V einfügen“ '
        + 'und das Menü in der Menüleiste, Schriftzug „Fn halten. Reden. Fertig.“',
-    seite: null,
+    seite: 'programme/blitztext/',
     link: null,
     hinweis: null,
   },
