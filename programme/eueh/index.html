@@ -124,11 +124,11 @@
   .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(9,68,119,.22); cursor:pointer; }
   .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
   @media (max-width:600px) {
-    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar – der Rahmen hält das Format des Bildes (Robert, 21.10.2026) */
     .galerie { gap:12px; }
     .galerie figure { flex:0 0 100%; }
-    .galerie button { width:100%; height:min(60vh, 500px); display:flex; justify-content:center; align-items:center; }
-    .galerie img { width:auto; max-width:100%; height:auto; max-height:100%; }
+    .galerie button { width:100%; height:auto; display:flex; justify-content:center; align-items:center; }
+    .galerie img { width:auto; max-width:100%; height:auto; max-height:min(60vh, 500px); }
     .galerie figcaption { max-width:none; }
   }
 </style>
@@ -233,7 +233,7 @@
       <a class="von" href="../../">Ein Programm von robschman.at →</a>
       <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
     </div>
-    <p class="ki">Texte, Grafiken und Film auf dieser Seite mit Hilfe von KI erstellt. Die Bilder zeigen den echten Assistenten mit erfundenen Beispieldaten. Der EÜH-Antragsassistent ist eine reine Ausfüllhilfe und ersetzt keine Rechtsberatung.</p>
+    <p class="ki">Texte, Grafiken und Film auf dieser Seite mit KI-Unterstützung erstellt. Die Bilder zeigen den echten Assistenten mit erfundenen Beispieldaten. Der EÜH-Antragsassistent ist eine reine Ausfüllhilfe und ersetzt keine Rechtsberatung.</p>
   </div>
 </footer>
 

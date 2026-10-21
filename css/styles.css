@@ -713,6 +713,43 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   font-size: var(--fs-body-sm); color: var(--text-muted); }
 .cs-hero__note svg { flex: none; }
 
+/* --- Hero neu 21.10.2026: Botschaft links, Kurzfilm rechts, Programm-Symbole darunter ------------- */
+.cs-hero--buehne { position: relative; overflow: hidden;
+  background: radial-gradient(700px 520px at 78% 42%, rgba(74,222,128,.14), transparent 70%),
+              linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0/64px 64px,
+              linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0/64px 64px, var(--bg); }
+.cs-hero__raster { display: grid; gap: var(--sp-7); align-items: center; }
+@media (min-width: 1000px) {
+  .cs-hero__raster { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: var(--sp-7); }
+  .cs-hero--buehne .cs-hero__claim.rs-claim--lg { font-size: clamp(34px, 3.2vw, 46px); }
+}
+.cs-hero__links { min-width: 0; }
+.cs-hero--buehne .rs-wm__dot { animation: cs-cursor 1.1s steps(1) infinite; }
+@keyframes cs-cursor { 50% { opacity: 0; } }
+.cs-hero__film { margin: 0; min-width: 0; }
+.cs-hero__rahmen { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(74,222,128,.5); background: #0B0B0B;
+  aspect-ratio: 4 / 3; box-shadow: 0 0 0 6px rgba(74,222,128,.06), 0 40px 100px rgba(0,0,0,.6), 0 0 90px rgba(74,222,128,.18); }
+.cs-hero__rahmen::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 1; background: var(--accent); }
+.cs-hero__rahmen video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cs-hero__film figcaption { margin-top: 14px; font-size: 15px; color: var(--text); text-align: center; }
+.cs-hero__film figcaption b { color: var(--accent); }
+.cs-hero__apps { margin-top: var(--sp-7); display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px;
+  padding-top: var(--sp-5); border-top: 1px solid var(--line); }
+.cs-hero__apps-titel { margin: 0; display: flex; align-items: center; gap: 12px; font: 600 13px/1 var(--font-display);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.cs-hero__apps-titel::before { content: ""; width: 24px; height: 2px; background: var(--accent); }
+.cs-hero__apps ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.cs-hero__apps a { display: block; width: 56px; height: 56px; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 8px 20px rgba(0,0,0,.45); transition: transform .2s ease, box-shadow .2s ease; }
+.cs-hero__apps a:hover, .cs-hero__apps a:focus-visible { transform: translateY(-4px) scale(1.06); box-shadow: 0 0 0 2px var(--accent), 0 12px 26px rgba(74,222,128,.25); outline: none; }
+.cs-hero__apps img { display: block; width: 100%; height: 100%; }
+@media (max-width: 600px) {
+  .cs-hero__apps { gap: 12px; }
+  .cs-hero__apps ul { gap: 9px; }
+  .cs-hero__apps a { width: 46px; height: 46px; border-radius: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .cs-hero--buehne .rs-wm__dot { animation: none; } .cs-hero__apps a { transition: none; } }
+
 /* --- Kurz-Erklaerung ----------------------------------------------------- */
 .cs-explain { display: grid; gap: var(--sp-6); }
 @media (min-width: 820px) {
@@ -728,6 +765,22 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
   font-size: var(--fs-body-sm); color: var(--text-soft); }
 .cs-explain__list svg { flex: none; color: var(--accent); margin-top: 2px; }
 .cs-explain__list b { color: var(--text); font-weight: 600; }
+
+/* Kasten „Was ich mache“ (Robert, 21.10.2026: soll nicht mehr untergehen) */
+.cs-explain--box { position: relative; overflow: hidden; padding: clamp(24px, 4vw, 48px);
+  border: 1px solid rgba(74,222,128,.45); border-radius: 16px;
+  background: radial-gradient(640px 320px at 0% 0%, rgba(74,222,128,.15), transparent 70%),
+              radial-gradient(520px 300px at 100% 100%, rgba(74,222,128,.07), transparent 70%), var(--ink-800);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 60px rgba(74,222,128,.10); }
+.cs-explain--box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+.cs-explain__kicker { display: flex; align-items: center; gap: 12px; margin: 0 0 16px;
+  font: 600 13px/1 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.cs-explain__kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+.cs-explain--box .cs-explain__text { font-size: clamp(20px, 2.2vw, 27px); line-height: 1.45; font-weight: 500; }
+.cs-explain--box .cs-explain__text b { color: var(--accent); font-weight: 700; }
+.cs-explain--box .cs-explain__list li { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px;
+  background: rgba(255,255,255,.03); font-size: 16px; line-height: 1.45; }
+.cs-explain--box .cs-explain__list svg { width: 24px; height: 24px; padding: 3px; margin-top: 0; border-radius: 50%; background: var(--green-tint); }
 
 /* --- Produkt-Grid --------------------------------------------------------
    "minmax(0,1fr)" statt nur "1fr" ist wichtig: Sonst macht ein langes Wort
@@ -874,6 +927,67 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .cs-about__text { margin: 0 0 var(--sp-4); font-size: var(--fs-lead);
   line-height: var(--lh-lead); color: var(--text); }
 .cs-about__text:last-child { margin-bottom: 0; }
+
+/* --- Über mich, neu 21.10.2026: dunkle Karte wie die Programm-Schaufenster ----------- */
+.cs-ich { position: relative; overflow: hidden; display: grid; gap: clamp(24px, 4vw, 56px); align-items: start;
+  padding: clamp(20px, 4vw, 48px); border: 1px solid rgba(74,222,128,.35); border-radius: 16px;
+  background: radial-gradient(700px 420px at 0% 0%, rgba(74,222,128,.13), transparent 70%),
+              radial-gradient(600px 360px at 100% 100%, rgba(74,222,128,.06), transparent 70%), var(--ink-800);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+.cs-ich::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(74,222,128,0)); }
+@media (min-width: 880px) { .cs-ich { grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); } }
+.cs-ich__bild { margin: 0; position: relative; max-width: 360px; }
+@media (min-width: 880px) { .cs-ich__bild { position: sticky; top: 100px; } }
+.cs-ich__bild img { display: block; width: 100%; height: auto; border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(74,222,128,.45), 0 24px 60px rgba(0,0,0,.55), 0 0 60px rgba(74,222,128,.12); }
+.cs-ich__name { position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 16px; border-radius: 12px; background: rgba(11,11,11,.82); border: 1px solid rgba(74,222,128,.35);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.cs-ich__name b { font-size: 19px; font-weight: 700; color: var(--text); }
+.cs-ich__name span { font: 500 12px/1.3 var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.cs-ich__text { min-width: 0; }
+.cs-ich__text > p { margin: 0 0 var(--sp-4); font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text); }
+.cs-ich__lead { font-size: clamp(19px, 1.9vw, 23px) !important; line-height: 1.5 !important; font-weight: 500; }
+.cs-ich__text b { color: var(--accent); font-weight: 700; }
+.cs-ich__kacheln { display: grid; gap: 14px; margin: var(--sp-5) 0; }
+@media (min-width: 640px) { .cs-ich__kacheln { grid-template-columns: 1fr 1fr; } }
+.cs-ich__kachel { padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.03); }
+.cs-ich__kachel h3 { margin: 0 0 8px; font: 700 13px/1.2 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.cs-ich__kachel p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--text); }
+.cs-ich__zitat { margin: 0 0 var(--sp-5); padding: 18px 22px; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0;
+  background: rgba(74,222,128,.07); }
+.cs-ich__zitat p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--text); }
+.cs-ich__zitat b { display: block; margin-top: 8px; font-size: clamp(19px, 1.8vw, 22px); line-height: 1.4; color: var(--text); }
+.cs-ich__chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cs-ich__chips li { padding: 8px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--ink-850);
+  font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* --- Kontakt, neu 21.10.2026: zwei Spalten, links Ablauf + Adresse, rechts das Formular ------- */
+.cs-kontakt { display: grid; gap: clamp(20px, 3vw, 32px); align-items: start; }
+@media (min-width: 900px) { .cs-kontakt { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+  .cs-kontakt__formular { order: 2; } .cs-kontakt__weg { order: 1; } }
+.cs-kontakt__formular, .cs-kontakt__weg { position: relative; overflow: hidden; padding: clamp(20px, 3.5vw, 40px);
+  border-radius: 16px; border: 1px solid var(--line); background: var(--ink-800); }
+.cs-kontakt__formular { border-color: rgba(74,222,128,.45);
+  background: radial-gradient(600px 300px at 100% 0%, rgba(74,222,128,.12), transparent 70%), var(--ink-800);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 60px rgba(74,222,128,.08); }
+.cs-kontakt__formular::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); }
+.cs-kontakt__formular .rs-form { max-width: none; margin: 0; }
+.cs-kontakt__formular .rs-btn { width: 100%; justify-content: center; margin-top: 14px; }
+.cs-kontakt__titel { margin: 0 0 18px; display: flex; align-items: center; gap: 12px;
+  font: 600 13px/1 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.cs-kontakt__titel::before { content: ""; width: 24px; height: 2px; background: var(--accent); }
+.cs-kontakt__schritte { list-style: none; margin: 0 0 var(--sp-6); padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.cs-kontakt__schritte li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: var(--text); }
+.cs-kontakt__schritte li span { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--green-tint); border: 1px solid rgba(74,222,128,.5); color: var(--accent); font: 700 15px/1 var(--font-display); }
+.cs-kontakt__schritte b { color: var(--text); }
+.cs-kontakt__direkt { padding: 20px; border-radius: 12px; border: 1px dashed rgba(74,222,128,.45); background: rgba(74,222,128,.05); }
+.cs-kontakt__oder { margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--text); }
+.cs-kontakt__direkt .cs-contact__mail { display: inline-block; font-size: clamp(20px, 2.6vw, 28px); }
+.cs-kontakt__knoepfe { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.cs-kontakt__pledge { margin: var(--sp-5) 0 0; }
 
 /* --- Kontakt ------------------------------------------------------------- */
 .cs-contact__box { display: flex; flex-direction: column; align-items: center; gap: var(--sp-4);

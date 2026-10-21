@@ -134,7 +134,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/styles.css?v=20261015e">
+<link rel="stylesheet" href="css/styles.css?v=20261021c">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
      Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
@@ -187,57 +187,97 @@
        Warteknopf ist ein Anfrage-Knopf. Statt eines Versprechens steht hier eine
        Tatsache.
        =================================================================== -->
-  <section id="top" class="cs-hero">
+  <section id="top" class="cs-hero cs-hero--buehne">
+    <!-- Neu 21.10.2026 (Robert: „neuer Pep, mit Programm/App“): links die Botschaft wie bisher, rechts der Kurzfilm
+         „Von der Idee zum Programm“ (schaufenster/hero-film, 12 s Schleife ohne Ton), darunter alle Programm-Symbole. -->
     <div class="u-container">
-
-      <p class="cs-hero__badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>
-        </svg>
-        Softwareentwicklung · Ternitz, Niederösterreich
-      </p>
-
-      <div class="cs-hero__wm">
-        <h1 class="rs-wm rs-wm--xl">robschman<span class="rs-wm__dot" aria-hidden="true">_</span><span class="rs-wm__sub">programming</span></h1>
-      </div>
-
-      <p class="rs-claim rs-claim--lg rs-claim--stack cs-hero__claim">
-        <span class="rs-claim__part">Kaufen<span class="rs-claim__dot">.</span></span><span
-              class="rs-claim__part">Mieten<span class="rs-claim__dot">.</span></span><span
-              class="rs-claim__part">Oder machen lassen<span class="rs-claim__dot">.</span></span>
-      </p>
-
-      <p class="u-lead cs-hero__lead">
-        Kleine, nützliche Programme für Vereine, kleine Betriebe und alle, die ein konkretes
-        Alltagsproblem haben&nbsp;— fertig zum Kaufen, monatlich zum Mieten oder eigens für dich gebaut.
-      </p>
-
-      <div class="cs-hero__actions">
-        <a class="rs-btn rs-btn--primary rs-btn--lg" href="#programme">Programme ansehen</a>
-
-        <!-- Führt zum Anfrage-Formular ganz unten (22.09.2026; vorher öffnete der Knopf
-             das Mailprogramm). Die Adresse darunter bleibt als Rückfall für alle,
-             die lieber selbst eine E-Mail schreiben. -->
-        <div>
-          <a class="rs-btn rs-btn--secondary rs-btn--lg"
-             href="#kontakt" data-anfrage>Anfrage schreiben</a>
-          <p class="rs-copy" style="margin-top:var(--sp-2)">
-            <span class="rs-copy__mail">info@robschman.at</span>
-            <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
-                    aria-label="info@robschman.at in die Zwischenablage kopieren">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              <span class="rs-copy__label">Kopieren</span>
-            </button>
+      <div class="cs-hero__raster">
+        <div class="cs-hero__links">
+          <p class="cs-hero__badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>
+            </svg>
+            Softwareentwicklung · Ternitz, Niederösterreich
           </p>
+
+          <div class="cs-hero__wm">
+            <h1 class="rs-wm rs-wm--xl">robschman<span class="rs-wm__dot" aria-hidden="true">_</span><span class="rs-wm__sub">programming</span></h1>
+          </div>
+
+          <p class="rs-claim rs-claim--lg rs-claim--stack cs-hero__claim">
+            <span class="rs-claim__part">Kaufen<span class="rs-claim__dot">.</span></span><span
+                  class="rs-claim__part">Mieten<span class="rs-claim__dot">.</span></span><span
+                  class="rs-claim__part">Oder machen lassen<span class="rs-claim__dot">.</span></span>
+          </p>
+
+          <p class="u-lead cs-hero__lead">
+            Kleine, nützliche Programme für Vereine, kleine Betriebe und alle, die ein konkretes
+            Alltagsproblem haben&nbsp;— fertig zum Kaufen, monatlich zum Mieten oder eigens für dich gebaut.
+          </p>
+
+          <div class="cs-hero__actions">
+            <a class="rs-btn rs-btn--primary rs-btn--lg" href="#programme">Programme ansehen</a>
+
+            <!-- Führt zum Anfrage-Formular ganz unten (22.09.2026; vorher öffnete der Knopf
+                 das Mailprogramm). Die Adresse darunter bleibt als Rückfall für alle,
+                 die lieber selbst eine E-Mail schreiben. -->
+            <div>
+              <a class="rs-btn rs-btn--secondary rs-btn--lg"
+                 href="#kontakt" data-anfrage>Anfrage schreiben</a>
+              <p class="rs-copy" style="margin-top:var(--sp-2)">
+                <span class="rs-copy__mail">info@robschman.at</span>
+                <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+                        aria-label="info@robschman.at in die Zwischenablage kopieren">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 11a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  <span class="rs-copy__label">Kopieren</span>
+                </button>
+              </p>
+            </div>
+          </div>
         </div>
+
+        <figure class="cs-hero__film">
+          <div class="cs-hero__rahmen">
+            <video id="hero-film" muted loop playsinline autoplay preload="metadata" width="960" height="720"
+                   poster="assets/hero/idee-zum-programm.jpg"
+                   aria-label="Kurzfilm: Du hast eine Idee, schreibst oder rufst an, ich baue dein Programm – und es läuft.">
+              <source src="assets/hero/idee-zum-programm.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>Von der Idee zum fertigen Programm&nbsp;— <b>in vier Schritten.</b></figcaption>
+        </figure>
       </div>
 
+      <div class="cs-hero__apps">
+        <p class="cs-hero__apps-titel">Schon gebaut</p>
+        <ul>
+          <li><a href="#programm-vtw-turnier" title="VTW Turnierplanung"><img src="assets/programme/vtw-turnier.png" width="56" height="56" alt="VTW Turnierplanung" loading="lazy"></a></li>
+          <li><a href="#programm-vtw-training" title="VTW Training"><img src="assets/programme/vtw-training.png" width="56" height="56" alt="VTW Training" loading="lazy"></a></li>
+          <li><a href="#programm-screener" title="US Aktien Screener"><img src="assets/programme/screener.png" width="56" height="56" alt="US Aktien Screener" loading="lazy"></a></li>
+          <li><a href="#programm-terminbuch" title="Terminbuch"><img src="assets/programme/terminbuch.png" width="56" height="56" alt="Terminbuch" loading="lazy"></a></li>
+          <li><a href="#programm-eueh" title="EÜH-Antragsassistent"><img src="assets/programme/eueh.png" width="56" height="56" alt="EÜH-Antragsassistent" loading="lazy"></a></li>
+          <li><a href="#programm-todo-sidebar" title="ToDo Sidebar"><img src="assets/programme/todo-sidebar.png" width="56" height="56" alt="ToDo Sidebar" loading="lazy"></a></li>
+          <li><a href="#programm-beauty" title="Beauty Routine App"><img src="assets/programme/beauty.png" width="56" height="56" alt="Beauty Routine App" loading="lazy"></a></li>
+          <li><a href="#programm-einkauf" title="Einkauf"><img src="assets/programme/einkauf.png" width="56" height="56" alt="Einkauf" loading="lazy"></a></li>
+          <li><a href="#programm-blitztext" title="Blitztext"><img src="assets/programme/blitztext.png" width="56" height="56" alt="Blitztext" loading="lazy"></a></li>
+          <li><a href="#programm-trainingsplan" title="Trainingsplan-Programm"><img src="assets/programme/trainingsplan.png" width="56" height="56" alt="Trainingsplan-Programm" loading="lazy"></a></li>
+          <li><a href="#programm-belegro" title="Belegro"><img src="assets/programme/belegro.png" width="56" height="56" alt="Belegro" loading="lazy"></a></li>
+          <li><a href="#programm-mykalender" title="MyKalender"><img src="assets/programme/mykalender.png" width="56" height="56" alt="MyKalender" loading="lazy"></a></li>
+        </ul>
+      </div>
     </div>
+    <script>
+    /* Wer „Bewegung reduzieren“ eingestellt hat, sieht nur das Standbild. */
+    (function () {
+      var v = document.getElementById('hero-film');
+      if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+    })();
+    </script>
   </section>
 
 
@@ -281,13 +321,17 @@
        =================================================================== -->
   <section id="was" class="cs-sec cs-sec--raised">
     <div class="u-container">
-      <div class="cs-explain">
-        <p class="cs-explain__text"><span
-          class="rs-wm rs-wm--inline">robschman<span class="rs-wm__dot" aria-hidden="true">_</span></span>
-          baut kleine Programme, die ein konkretes Problem lösen: Auswertungen,
-          Automatisierungen, Web- und iPhone-Apps. Kein Agentur-Aufwand, keine Monatsprojekte —
-          ein Werkzeug, das ab dem ersten Tag Arbeit abnimmt.
-        </p>
+      <!-- Robert, 21.10.2026: „sehr unauffällig dazwischen“ → eigener Kasten mit grünem Rahmen -->
+      <div class="cs-explain cs-explain--box">
+        <div>
+          <p class="cs-explain__kicker">Was ich mache</p>
+          <p class="cs-explain__text"><span
+            class="rs-wm rs-wm--inline">robschman<span class="rs-wm__dot" aria-hidden="true">_</span></span>
+            baut <b>kleine Programme</b>, die ein <b>konkretes Problem</b> lösen: Auswertungen,
+            Automatisierungen, Web- und iPhone-Apps. Kein Agentur-Aufwand, keine Monatsprojekte&nbsp;—
+            <b>ein Werkzeug, das ab dem ersten Tag Arbeit abnimmt.</b>
+          </p>
+        </div>
         <ul class="cs-explain__list">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -535,67 +579,84 @@
 
 
   <!-- ===================================================================
-       9&nbsp;— ÜBER MICH (Terracotta, zweite und letzte farbige Fläche)
+       9&nbsp;— ÜBER MICH (seit 21.10.2026 dunkle Karte wie die Schaufenster)
        =================================================================== -->
-  <section id="ueber" class="rs-terra theme-terra">
-    <div class="rs-terra__in">
-     <div class="cs-about">
-      <!-- Portraet: dasselbe Bild wie auf schrittfuerschrittfit.at. Schwarzweiss,
-           deshalb passt es hier ohne Nachbearbeitung. Liegt als EIGENE KOPIE in
-           diesem Ordner, nicht ueber Projektgrenzen verlinkt&nbsp;— sonst fehlt es
-           beim Hochladen, weil nur dieser Ordner zu GitHub geht. -->
-      <picture class="cs-about__foto">
-        <source srcset="assets/img/robert-600.webp" type="image/webp">
-        <img src="assets/img/robert-600.jpg" width="600" height="800" loading="lazy"
-             decoding="async" alt="Robert Thalhammer">
-      </picture>
-      <div class="cs-about__inhalt">
-      <h2 class="cs-about__eyebrow">Über mich</h2>
-      <p class="cs-about__text">
-        Gelernt habe ich Radio- und Fernsehmechaniker&nbsp;— schon in der Lehre gab es die ersten
-        Berührungen mit dem Programmieren. Interessiert hat es mich seither immer. Wirklich
-        umsetzen konnte ich es erst, seit mir KI die Werkzeuge dafür in die Hand gibt.
-      </p>
-      <p class="cs-about__text">
-        Seitdem baue ich kleine Programme, die im Alltag wirklich etwas abnehmen: für Vereine,
-        kleine Betriebe und Privatpersonen. Mehrere davon sind heute im Einsatz.
-      </p>
-      <p class="cs-about__text">
-        <b>Warum klein?</b> Weil kleine Programme oft am meisten bringen. Ein Werkzeug, das einer
-        Person, einem Verein oder einer Praxis eine lästige Arbeit abnimmt, verändert im Alltag
-        mehr als ein großes Projekt, an dem man ein Jahr baut.
-      </p>
-      <p class="cs-about__text">
-        Vieles entsteht, weil ich es selbst brauche&nbsp;— meine eigene Buchhaltung läuft über ein
-        Programm, das ich mir dafür gebaut habe. Ich führe selbst einen kleinen Betrieb. Die
-        Probleme meiner Kunden kenne ich also nicht aus Erzählungen.
-      </p>
-      <p class="cs-about__text">
-        Was ich aus dem Handwerk mitgenommen habe: Es kommt auf die Details an. Ich baue nichts
-        von der Stange und nichts auf die Schnelle. Ein Programm ist für mich erst fertig, wenn
-        es sich richtig anfühlt&nbsp;— nicht, wenn es läuft.
-      </p>
-      <p class="cs-about__text">
-        Daneben arbeite ich als Personal Trainer und baue Websites. Sport ist mein Ausgleich zum
-        Schreibtisch: Volleyball und Pickleball im Verein&nbsp;— daher kommt auch die Turnierverwaltung
-        weiter oben. Sonst findet man mich mit dem Hund unterwegs, im Garten oder beim Werken
-        zu Hause.
-      </p>
+  <section id="ueber" class="cs-sec cs-sec--raised">
+    <!-- Neu 21.10.2026 (Robert: „passend zur Serie, schöner“): dunkle Karte wie die Programm-Schaufenster,
+         Text unverändert, nur gegliedert. Porträt = eigene Kopie in assets/img (nicht projektübergreifend verlinken). -->
+    <div class="u-container">
+      <header class="rs-sh">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Über mich</p>
+        <h2 class="rs-sh__title">Der Mensch hinter <br class="u-br-eng">den Programmen</h2>
+      </header>
+
+      <div class="cs-ich">
+        <figure class="cs-ich__bild">
+          <picture>
+            <source srcset="assets/img/robert-600.webp" type="image/webp">
+            <img src="assets/img/robert-600.jpg" width="600" height="800" loading="lazy" decoding="async" alt="Robert Thalhammer">
+          </picture>
+          <figcaption class="cs-ich__name"><b>Robert Thalhammer</b><span>Ternitz · Niederösterreich</span></figcaption>
+        </figure>
+
+        <div class="cs-ich__text">
+          <p class="cs-ich__lead">
+            Gelernt habe ich Radio- und Fernsehmechaniker&nbsp;— schon in der Lehre gab es die ersten
+            Berührungen mit dem Programmieren. Interessiert hat es mich seither immer. Wirklich
+            umsetzen konnte ich es erst, seit mir <b>KI die Werkzeuge</b> dafür in die Hand gibt.
+          </p>
+          <p>
+            Seitdem baue ich kleine Programme, die im Alltag wirklich etwas abnehmen: für Vereine,
+            kleine Betriebe und Privatpersonen. Mehrere davon sind heute im Einsatz.
+          </p>
+
+          <div class="cs-ich__kacheln">
+            <div class="cs-ich__kachel">
+              <h3>Warum klein?</h3>
+              <p>Weil kleine Programme oft am meisten bringen. Ein Werkzeug, das einer Person, einem Verein
+                oder einer Praxis eine lästige Arbeit abnimmt, verändert im Alltag mehr als ein großes
+                Projekt, an dem man ein Jahr baut.</p>
+            </div>
+            <div class="cs-ich__kachel">
+              <h3>Aus eigener Erfahrung</h3>
+              <p>Vieles entsteht, weil ich es selbst brauche&nbsp;— meine eigene Buchhaltung läuft über ein
+                Programm, das ich mir dafür gebaut habe. Ich führe selbst einen kleinen Betrieb. Die
+                Probleme meiner Kunden kenne ich also nicht aus Erzählungen.</p>
+            </div>
+          </div>
+
+          <blockquote class="cs-ich__zitat">
+            <p>Was ich aus dem Handwerk mitgenommen habe: Es kommt auf die Details an. Ich baue nichts
+              von der Stange und nichts auf die Schnelle. <b>Ein Programm ist für mich erst fertig, wenn
+              es sich richtig anfühlt&nbsp;— nicht, wenn es läuft.</b></p>
+          </blockquote>
+
+          <p>
+            Daneben arbeite ich als Personal Trainer und baue Websites. Sport ist mein Ausgleich zum
+            Schreibtisch: Volleyball und Pickleball im Verein&nbsp;— daher kommt auch die Turnierverwaltung
+            weiter oben. Sonst findet man mich mit dem Hund unterwegs, im Garten oder beim Werken
+            zu Hause.
+          </p>
+          <ul class="cs-ich__chips" aria-label="Was ich sonst mache">
+            <li>🏋️ Personal Trainer</li><li>🌐 Websites</li><li>🏐 Volleyball</li><li>🏓 Pickleball</li>
+            <li>🐕 mit dem Hund</li><li>🌱 Garten</li><li>🔧 Werken</li>
+          </ul>
+        </div>
       </div>
-     </div>
     </div>
   </section>
 
 
   <!-- ===================================================================
        10&nbsp;— KONTAKT
-       Bewusst schwarz und nicht Terracotta: nur so darf der wichtigste
-       Button der Seite grün sein.
+       Bewusst schwarz: nur so darf der wichtigste Button der Seite grün sein.
        Kein Formular, kein Newsletter, kein fremder Dienst&nbsp;— nur eine Adresse.
        =================================================================== -->
   <section id="kontakt" class="cs-sec">
+    <!-- Neu 21.10.2026: zwei Spalten wie die Schaufenster – links der Ablauf und die Adresse, rechts das Formular
+         (am Handy zuerst das Formular). Formular, Felder und IDs unverändert (js/script.js braucht sie).
+         Kein fremder Formulardienst, kein Newsletter – das Formular schickt an anfrage-robschman.php. -->
     <div class="u-container">
-      <!-- linksbündig wie alle anderen Abschnitte — zentriert fiel aus der Reihe -->
       <header class="rs-sh">
         <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>Kontakt</p>
         <h2 class="rs-sh__title">Schreib mir, was du brauchst</h2>
@@ -606,8 +667,9 @@
         </p>
       </header>
 
-      <div class="cs-contact__box">
-
+      <div class="cs-kontakt">
+        <div class="cs-kontakt__formular">
+          <p class="cs-kontakt__titel">Deine Anfrage</p>
         <form id="form-anfrage" class="rs-form" method="post"
               action="https://webwerkstube.at/anfrage-robschman.php" novalidate>
           <div class="rs-form__feld">
@@ -635,12 +697,23 @@
           <button type="submit" class="rs-btn rs-btn--primary rs-btn--lg">Anfrage absenden</button>
           <p class="rs-form__hinweis" id="hinweis-anfrage" role="status" aria-live="polite"></p>
         </form>
+        </div>
 
-        <p class="rs-form__oder">oder direkt an</p>
-        <a class="cs-contact__mail" href="mailto:info@robschman.at">info@robschman.at</a>
+        <div class="cs-kontakt__weg">
+          <p class="cs-kontakt__titel">So geht's weiter</p>
+          <ol class="cs-kontakt__schritte">
+            <li><span>1</span><div><b>Du schreibst kurz, worum es geht.</b> Ein paar Sätze reichen&nbsp;— was dich nervt, was es können soll.</div></li>
+            <li><span>2</span><div><b>Ich melde mich.</b> Innerhalb von 24&nbsp;Stunden an Werktagen.</div></li>
+            <li><span>3</span><div><b>Wir schauen, was passt:</b> kaufen, mieten oder etwas Eigenes machen lassen.</div></li>
+          </ol>
 
-        <p class="rs-copy" style="justify-content:center">
-          <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
+          <div class="cs-kontakt__direkt">
+            <p class="cs-kontakt__oder">Lieber direkt per E-Mail?</p>
+            <a class="cs-contact__mail" href="mailto:info@robschman.at">info@robschman.at</a>
+            <div class="cs-kontakt__knoepfe">
+              <a class="rs-btn rs-btn--primary rs-btn--md"
+                 href="mailto:info@robschman.at?subject=Anfrage%20%C3%BCber%20robschman.at">E-Mail schreiben</a>
+              <button type="button" class="rs-copy__btn" data-kopieren="info@robschman.at"
                     aria-label="info@robschman.at in die Zwischenablage kopieren">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -649,20 +722,10 @@
             </svg>
             <span class="rs-copy__label">Adresse kopieren</span>
           </button>
-        </p>
+            </div>
+          </div>
 
-        <div class="cs-contact__cta">
-          <a class="rs-btn rs-btn--primary rs-btn--lg"
-             href="mailto:info@robschman.at?subject=Anfrage%20%C3%BCber%20robschman.at">E-Mail schreiben</a>
         </div>
-
-        <p class="rs-pledge">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20"/><path d="M12 6v6l4 2"/>
-          </svg>
-          Antwort innerhalb von 24 Stunden an Werktagen.
-        </p>
       </div>
     </div>
   </section>
@@ -719,7 +782,7 @@
         Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG&nbsp;— es wird keine Umsatzsteuer ausgewiesen.
       </p>
       <p class="rs-footer__fine">
-        Texte, Grafiken und Filme auf dieser Website mit Hilfe von KI erstellt&nbsp;— in den Filmen steht es mit dabei.
+        Texte, Grafiken und Filme auf dieser Website mit KI-Unterstützung erstellt&nbsp;— die gezeigten Programme und ihre Bildschirme sind echt.
       </p>
     </div>
 

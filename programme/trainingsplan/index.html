@@ -126,11 +126,11 @@
   .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(0,0,0,.22); cursor:pointer; }
   .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
   @media (max-width:600px) {
-    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar */
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar – der Rahmen hält das Format des Bildes (Robert, 21.10.2026) */
     .galerie { gap:12px; }
     .galerie figure { flex:0 0 100%; }
-    .galerie button { width:100%; height:min(60vh, 500px); display:flex; justify-content:center; align-items:center; }
-    .galerie img { width:auto; max-width:100%; height:auto; max-height:100%; }
+    .galerie button { width:100%; height:auto; display:flex; justify-content:center; align-items:center; }
+    .galerie img { width:auto; max-width:100%; height:auto; max-height:min(60vh, 500px); }
     .galerie figcaption { max-width:none; }
   }
 
@@ -163,14 +163,14 @@
   @media (max-width:600px) {
     .held h1 { font-size:50px; } h2 { font-size:40px; } .schluss .gross { font-size:40px; }
     .galerie figure { width:auto; }
-    .galerie .hoch img, .galerie .quer img { height:auto; max-width:100%; max-height:100%; }
+    .galerie .hoch img, .galerie .quer img { height:auto; max-width:100%; max-height:min(60vh, 500px); }
   }
-  .galerie .quer img { height:380px; }
+  @media (min-width:601px) { .galerie .quer img { height:380px; } }   /* nur am Computer – am Handy hält das Bild sein Format */
 </style>
 </head>
 <body>
 <div class="band" aria-hidden="true"><div class="spur">
-  <span>Individuelle <b>Pläne</b></span><span><b>336</b> Übungen mit eigenen Bildern</span><span>Plan als <b>Link am Handy</b></span><span>Trainings-App mit <b>Timer</b></span><span>Im Einsatz bei <b>Schritt für Schritt fit</b></span><span>Individuelle <b>Pläne</b></span><span><b>336</b> Übungen mit eigenen Bildern</span><span>Plan als <b>Link am Handy</b></span><span>Trainings-App mit <b>Timer</b></span><span>Im Einsatz bei <b>Schritt für Schritt fit</b></span>
+  <span>Individuelle <b>Pläne</b></span><span><b>Über 300</b> Übungen – laufend mehr</span><span>Plan als <b>Link am Handy</b></span><span>Trainings-App mit <b>Timer</b></span><span>Im Einsatz bei <b>Schritt für Schritt fit</b></span><span>Individuelle <b>Pläne</b></span><span><b>Über 300</b> Übungen – laufend mehr</span><span>Plan als <b>Link am Handy</b></span><span>Trainings-App mit <b>Timer</b></span><span>Im Einsatz bei <b>Schritt für Schritt fit</b></span>
 </div></div>
 
 <header class="held">
@@ -215,9 +215,12 @@
       <figure class="quer"><button type="button" data-gross="bilder/programm-vorlagen.jpg" data-text="Vorlagen: Ganzkörper, Split, zu Hause, Ältere"><img src="bilder/programm-vorlagen.jpg" alt="Die Vorlagen im Programm" width="1400" height="875" loading="lazy"></button><figcaption>Vorlagen: Ganzkörper, Split, zu Hause, Ältere</figcaption></figure>
       <figure class="quer"><button type="button" data-gross="bilder/programm-plan.jpg" data-text="Der Plan: Zeitraum, Einheiten, Aufwärmen und Dehnen"><img src="bilder/programm-plan.jpg" alt="Plan-Einstellungen im Programm" width="1400" height="875" loading="lazy"></button><figcaption>Der Plan: Zeitraum, Einheiten, Aufwärmen und Dehnen</figcaption></figure>
       <figure class="quer"><button type="button" data-gross="bilder/programm-uebungen-im-plan.jpg" data-text="Übungen hineinziehen, Sätze, Pause und Gewicht einstellen"><img src="bilder/programm-uebungen-im-plan.jpg" alt="Übungen im Plan mit Sätzen, Pause und Gewicht" width="1400" height="875" loading="lazy"></button><figcaption>Übungen hineinziehen, Sätze, Pause und Gewicht einstellen</figcaption></figure>
-      <figure class="quer"><button type="button" data-gross="bilder/programm-uebungsliste.jpg" data-text="336 Übungen mit eigenen Bildern, nach Bereich und Muskel gefiltert"><img src="bilder/programm-uebungsliste.jpg" alt="Die Übungsliste im Programm" width="1400" height="875" loading="lazy"></button><figcaption>336 Übungen mit eigenen Bildern, nach Bereich und Muskel gefiltert</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/programm-uebungsliste.jpg" data-text="Über 300 Übungen mit eigenen Bildern – und laufend kommen neue dazu"><img src="bilder/programm-uebungsliste.jpg" alt="Die Übungsliste im Programm" width="1400" height="875" loading="lazy"></button><figcaption>Über 300 Übungen mit eigenen Bildern – und laufend kommen neue dazu</figcaption></figure>
       <figure class="hoch"><button type="button" data-gross="bilder/plan-handy.jpg" data-text="Der Plan am Handy"><img src="bilder/plan-handy.jpg" alt="Der Plan am Handy" width="780" height="1688" loading="lazy"></button><figcaption>Der Plan am Handy</figcaption></figure>
       <figure class="hoch"><button type="button" data-gross="bilder/plan-uebung.jpg" data-text="Jede Übung mit Bild, Sätzen und Hinweisen"><img src="bilder/plan-uebung.jpg" alt="Eine Übung im Plan am Handy" width="780" height="1688" loading="lazy"></button><figcaption>Jede Übung mit Bild, Sätzen und Hinweisen</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/ausdruck.jpg" data-text="Auch zum Ausdrucken: Vorder- und Rückseite auf zwei A4-Seiten"><img src="bilder/ausdruck.jpg" alt="Der ausgedruckte Plan von Max Beispiel, Vorder- und Rückseite" width="1400" height="980" loading="lazy"></button><figcaption>Auch zum Ausdrucken: Vorder- und Rückseite auf zwei A4-Seiten</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/ausdruck-vorne.jpg" data-text="Ausdruck, Vorderseite: Aufwärmen und Übungen zum Eintragen"><img src="bilder/ausdruck-vorne.jpg" alt="Vorderseite des ausgedruckten Plans" width="1100" height="1557" loading="lazy"></button><figcaption>Vorderseite: Aufwärmen und Übungen zum Eintragen</figcaption></figure>
+      <figure class="hoch"><button type="button" data-gross="bilder/ausdruck-hinten.jpg" data-text="Ausdruck, Rückseite: Dehnen und was das Training wirken lässt"><img src="bilder/ausdruck-hinten.jpg" alt="Rückseite des ausgedruckten Plans" width="1100" height="1557" loading="lazy"></button><figcaption>Rückseite: Dehnen und was das Training wirken lässt</figcaption></figure>
       <figure class="hoch"><button type="button" data-gross="bilder/app-einheiten.jpg" data-text="Trainings-App: Einheiten für Group Fitness"><img src="bilder/app-einheiten.jpg" alt="Trainings-App mit Einheiten für Group Fitness" width="780" height="1688" loading="lazy"></button><figcaption>Trainings-App: Einheiten für Group Fitness</figcaption></figure>
       <figure class="hoch"><button type="button" data-gross="bilder/app-timer.jpg" data-text="Zirkel-Timer: Belastung, Pause, Runden"><img src="bilder/app-timer.jpg" alt="Einstellungen des Zirkel-Timers" width="780" height="1688" loading="lazy"></button><figcaption>Zirkel-Timer: Belastung, Pause, Runden</figcaption></figure>
       <figure class="hoch"><button type="button" data-gross="bilder/app-timer-laeuft.jpg" data-text="Der Timer läuft – mit der nächsten Übung"><img src="bilder/app-timer-laeuft.jpg" alt="Der laufende Timer mit der nächsten Übung" width="780" height="1688" loading="lazy"></button><figcaption>Der Timer läuft – mit der nächsten Übung</figcaption></figure>
@@ -230,7 +233,7 @@
     <div class="raster">
       <div class="karte"><h3><span class="z">1</span>Kundenprofile</h3><p>Ziel, Einheiten pro Woche und Trainingsdauer – auch aus dem Erhebungsbogen übernommen. Die Profile liegen in deiner eigenen iCloud.</p></div>
       <div class="karte"><h3><span class="z">2</span>Vorlagen</h3><p>Ganzkörper, Split, zu Hause oder für Ältere – oder eigene Vorlagen aus einem fertigen Plan speichern.</p></div>
-      <div class="karte"><h3><span class="z">3</span>Übungen mit eigenen Bildern</h3><p>336 Übungen, gefiltert nach Bereich, Muskel und Schlinge – mit Bild und Bewegung.</p></div>
+      <div class="karte"><h3><span class="z">3</span>Übungen mit eigenen Bildern</h3><p>Über 300 Übungen, und es werden laufend mehr – gefiltert nach Bereich, Muskel und Schlinge, mit Bild und Bewegung.</p></div>
       <div class="karte"><h3><span class="z">4</span>Plan am Handy</h3><p>Als Link mit Bildern zu jeder Übung, Startgewicht und Notizen – und auf Wunsch zum Ausdrucken.</p></div>
       <div class="karte"><h3><span class="z">5</span>Trainings-App</h3><p>Einheiten für Gruppen, Verein und Firmen mit Intervall-Timer, Ansagen und Pieptönen.</p></div>
       <div class="karte"><h3><span class="z">6</span>Auch am iPad</h3><p>Das Programm läuft am Mac – das iPad im selben WLAN arbeitet mit.</p></div>
@@ -267,7 +270,7 @@
       <a class="von" href="../../">Ein Programm von robschman.at →</a>
       <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
     </div>
-    <p class="ki">Texte, Grafiken und Film auf dieser Seite mit Hilfe von KI erstellt. Die Bilder zeigen das echte Programm und die echte Trainings-App mit erfundenen Kunden; interne Arbeitsnotizen sind ausgeblendet.</p>
+    <p class="ki">Texte, Grafiken und Film auf dieser Seite mit KI-Unterstützung erstellt. Die Bilder zeigen das echte Programm und die echte Trainings-App mit erfundenen Kunden; interne Arbeitsnotizen sind ausgeblendet. Der Ausdruck ist die echte Druckansicht, im Bild als Blätter dargestellt.</p>
   </div>
 </footer>
 
