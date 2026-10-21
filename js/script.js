@@ -224,6 +224,24 @@ const PROGRAMME = [
     link: null,
     hinweis: null,
   },
+  {
+    slug: 'vertretungsbuch',
+    name: 'Vertretungsbuch',
+    art: 'Mac-Programm · Erwachsenenvertretung',
+    satz: 'Für ehrenamtliche Erwachsenenvertreter:innen – über einen Verein oder direkt vom Gericht bestellt: '
+        + 'Fristen, Akte, Geld und Berichte zu jeder vertretenen Person an einem Platz.',
+    punkte: ['Alle Fristen mit Lämpchen', 'Kassa-Prüfung auf den Cent', 'Fahrtenbuch und Steuer-Übersicht'],
+    status: 'einsatzbereit',
+    farbe: '#FFD200',
+    icon: 'assets/programme/vertretungsbuch.png',
+    bild: 'assets/programme/vertretungsbuch-bild.jpg',
+    form: 'quer', hell: false,
+    alt: 'Vertretungsbuch: Übersicht aller Fristen mit erfundenen Pseudonymen und das Ergebnis einer Kassa-Prüfung, '
+       + 'Schriftzug „Jede Frist. Im Blick.“',
+    seite: 'programme/vertretungsbuch/',
+    link: null,
+    hinweis: 'Privates Arbeitsprogramm, kein Programm eines Vereins – ersetzt keine Rechtsberatung.',
+  },
 ];
 
 

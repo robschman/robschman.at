@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertretungsbuch – Programm von robschman programming</title>
+<meta name="description" content="Mac-Programm für die Erwachsenenvertretung im Ehrenamt und bei gerichtlicher Bestellung: alle Fristen mit Lämpchen, Akte, Einkommen und Abbucher, Kassa-Prüfung auf den Cent, Berichtsentwürfe, Bekanntgaben, Fahrtenbuch und Steuer-Übersicht. Nur Pseudonyme, mit Passwort.">
+<link rel="canonical" href="https://robschman.at/programme/vertretungsbuch/">
+<meta property="og:title" content="Vertretungsbuch – robschman programming">
+<meta property="og:description" content="Jede Frist. Im Blick.">
+<meta property="og:image" content="https://robschman.at/assets/programme/vertretungsbuch-bild.jpg">
+<meta property="og:url" content="https://robschman.at/programme/vertretungsbuch/">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+  :root { --grund:#0B0B0B; --held:radial-gradient(ellipse 70% 80% at 80% 20%, rgba(185,28,28,.30), transparent 60%),
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, #0B0B0B;
+    --karte:#161616; --rahmen:#3A3A3A; --text:#F5F5F5; --blau:#3A3A3A; --dunkel:#F5F5F5; --pink:#B91C1C; --rot-hell:#FF6B6B; --robschman:#4ADE80;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --titel:var(--sans); }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--grund); color:var(--text); font:500 18px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+
+  /* Laufband oben */
+  .band { position:relative; overflow:hidden; height:40px; background:var(--dunkel); border-bottom:3px solid var(--pink); }
+  .band .spur { position:absolute; top:0; left:0; display:flex; gap:56px; white-space:nowrap; height:37px; align-items:center;
+    font:800 16px/1 var(--sans); letter-spacing:.04em; text-transform:uppercase; color:#FFFFFF; animation:band 60s linear infinite; }
+  .band .spur b { color:#FF6B6B; }
+  @keyframes band { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+  .zurueck { display:inline-flex; align-items:center; gap:8px; margin:22px 0 0; font-weight:700; text-decoration:none; color:var(--text);
+    border:2px solid var(--rahmen); border-radius:999px; padding:8px 16px; background:var(--karte); }
+  .zurueck:hover { border-color:var(--pink); }
+
+  header.held { position:relative; overflow:hidden; padding:40px 0 60px; background:var(--held); }
+  .held .wrap { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  .held .kopf { display:flex; align-items:center; gap:18px; margin-top:30px; }
+  .held .kopf img { width:92px; height:92px; border-radius:22px; box-shadow:0 14px 40px rgba(0,0,0,.30); }
+  .held .marke { font:900 28px/1.1 var(--sans); letter-spacing:.04em; color:var(--dunkel); }
+  .held .marke b { color:var(--pink); }
+  .held .art { margin-top:6px; font:700 14px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--dunkel); }
+  .held h1 { margin:22px 0 0; font:900 66px/1 var(--sans); letter-spacing:-.02em; text-transform:uppercase; color:var(--dunkel); }
+  .held .lead { margin:22px 0 0; font-size:22px; line-height:1.45; font-weight:600; }
+  .held .hook { display:block; border-radius:18px; overflow:hidden; border:2px solid var(--rahmen); box-shadow:0 30px 80px rgba(0,0,0,.40); }
+  .held .hook img { display:block; width:100%; height:auto; }
+  .knoepfe { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .knopf { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:14px; font:800 18px/1 var(--sans); text-decoration:none; border:2px solid var(--dunkel); }
+  .knopf.voll { background:var(--pink); border-color:var(--pink); color:#FFFFFF; box-shadow:0 10px 28px rgba(185,28,28,.30); }
+  .knopf.voll:hover { background:#991B1B; border-color:#991B1B; }
+  .knopf.rand { background:var(--karte); color:var(--dunkel); border-color:var(--rahmen); }
+  .knopf.rand:hover { border-color:var(--pink); }
+  .achtung { margin-top:22px; display:inline-block; padding:10px 16px; border-radius:12px; background:var(--dunkel); color:#FFFFFF; font:700 16px/1.35 var(--sans); }
+  .achtung b { color:#FF6B6B; }
+
+  section { padding:64px 0 6px; }
+  .kicker { font:800 15px/1.4 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--dunkel); }
+  .kicker::before { content:""; display:inline-block; width:34px; height:5px; margin-right:12px; vertical-align:4px; background:var(--pink); }
+  h2 { margin:8px 0 22px; font:900 42px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+
+  .film { position:relative; border-radius:20px; overflow:hidden; border:2px solid var(--rahmen); background:#000000; aspect-ratio:16/9;
+    box-shadow:0 30px 90px rgba(0,0,0,.40); }
+  .film video { display:block; width:100%; height:100%; object-fit:cover; }
+
+  .galerie { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 18px; }
+  .galerie figure { margin:0; flex:0 0 auto; scroll-snap-align:start; }
+  .galerie button { display:block; padding:0; border:2px solid var(--rahmen); border-radius:16px; overflow:hidden; background:var(--karte); cursor:zoom-in; }
+  .galerie button:hover, .galerie button:focus-visible { border-color:var(--pink); outline:none; }
+  .galerie img { display:block; height:340px; width:auto; }
+  .galerie figcaption { margin-top:10px; max-width:440px; font-size:16px; line-height:1.4; font-weight:700; }
+  .wisch { font-size:15px; font-weight:600; margin:-6px 0 14px; }
+
+  .raster { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .karte { background:var(--karte); border:2px solid var(--rahmen); border-radius:16px; padding:20px 22px; }
+  .karte h3 { margin:0 0 8px; font:800 20px/1.25 var(--sans); color:var(--dunkel); }
+  .karte h3 .z { display:inline-grid; place-items:center; width:32px; height:32px; margin-right:8px; border-radius:9px; background:var(--pink); color:#FFFFFF; font:800 17px/1 var(--sans); vertical-align:2px; }
+  .karte p { margin:0; font-size:17px; }
+
+  .verein { display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:center; padding:30px; border-radius:22px; background:var(--dunkel); color:#FFFFFF; border:2px solid var(--dunkel); }
+  .verein h2 { color:inherit; }
+  .verein .kicker { color:#FFFFFF; }
+  .verein .kicker::before { background:#FF6B6B; }
+  .verein p { margin:0 0 14px; font-size:19px; }
+  .sport { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+  .sport span { padding:9px 15px; border-radius:12px; background:#FFFFFF; color:var(--dunkel); border:2px solid #FFFFFF; font:800 17px/1 var(--sans); }
+  .sport span.eig { background:var(--pink); border-color:var(--pink); color:#FFFFFF; }
+  .verein img { display:block; width:auto; max-width:100%; max-height:520px; justify-self:center; border-radius:14px; border:2px solid #FFFFFF; }
+
+  .schluss { margin:64px 0 0; text-align:center; padding:48px 20px; border-radius:24px; border:2px solid var(--rahmen); background:var(--held); }
+  .schluss .gross { margin:10px 0 0; font:900 44px/1.08 var(--sans); letter-spacing:-.015em; text-transform:uppercase; color:var(--dunkel); }
+  .schluss .knoepfe { justify-content:center; }
+
+  footer { margin-top:64px; padding:30px 0 40px; border-top:2px solid var(--rahmen); font-size:16px; }
+  footer .zeile { display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; justify-content:space-between; }
+  footer .von { font-weight:800; text-decoration:none; color:var(--robschman); }
+  footer nav a { margin-right:16px; }
+  footer .ki { margin-top:14px; }
+
+  dialog { padding:0; border:2px solid var(--rahmen); border-radius:16px; background:var(--grund); color:var(--text); max-width:94vw; max-height:92vh; }
+  dialog::backdrop { background:rgba(0,0,0,.85); }
+  dialog img { display:block; max-width:94vw; max-height:80vh; width:auto; height:auto; }
+  dialog .leiste { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 14px; font-weight:700; }
+  dialog button { font:800 15px/1 var(--sans); color:#FFFFFF; background:var(--pink); border:2px solid var(--pink); border-radius:10px; padding:10px 14px; cursor:pointer; }
+
+  .mark { display:inline-block; background:var(--pink); color:#FFFFFF; padding:0 12px 3px; transform:rotate(-1.5deg); box-shadow:5px 5px 0 var(--dunkel); }
+
+  @media (max-width:900px) {
+    .held .wrap, .verein { grid-template-columns:1fr; } .held h1 { font-size:52px; } .raster { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:600px) {
+    body { font-size:17px; } .held { padding-top:24px; } .held h1 { font-size:40px; } .held .kopf img { width:70px; height:70px; border-radius:17px; }
+    .held .marke { font-size:22px; } .held .lead { font-size:19px; } h2 { font-size:30px; } .raster { grid-template-columns:1fr; }
+    .galerie img { height:240px; } .knopf { width:100%; justify-content:center; } .verein { padding:20px; } .schluss .gross { font-size:30px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .band .spur { animation:none; } html { scroll-behavior:auto; } }
+
+  /* Kein Bild breiter als der sichtbare Bereich */
+  .galerie figure { max-width:100%; }
+  .galerie img { width:auto; height:auto; max-width:100%; max-height:340px; }
+  /* Strichleiste unter der Galerie: zeigt, bei welchem Bild man ist */
+  .punkte { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:4px 0 0; }
+  .punkte button { width:24px; height:6px; padding:0; border:0; border-radius:3px; background:rgba(0,0,0,.22); cursor:pointer; }
+  .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
+  @media (max-width:600px) {
+    /* am Handy genau ein Bild pro Bildschirmbreite, ganz sichtbar – der Rahmen hält das Format des Bildes (Robert, 21.10.2026) */
+    .galerie { gap:12px; }
+    .galerie figure { flex:0 0 100%; }
+    .galerie button { width:100%; height:auto; display:flex; justify-content:center; align-items:center; }
+    .galerie img { width:auto; max-width:100%; height:auto; max-height:min(60vh, 500px); }
+    .galerie figcaption { max-width:none; }
+  }
+
+  /* Vertretungsbuch: Schwarz und Gelb wie das Programm (Vorlage: MyKalender-Seite). Auf Gelb steht die Schrift schwarz. */
+  :root { --pink:#FFD200; --rot-hell:#FFD200;
+    --held:radial-gradient(ellipse 70% 80% at 80% 20%, rgba(255,210,0,.20), transparent 60%),
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0/64px 64px, #0B0B0B; }
+  body { font-synthesis:none; }
+  .held .marke { font-size:28px; letter-spacing:.1em; }
+  .held .marke b { color:var(--pink); }
+  .mark { color:#111111; box-shadow:5px 5px 0 #000000; }
+  .band { background:#161616; border-bottom:3px solid var(--pink); }
+  .band .spur b { color:var(--pink); }
+  .achtung { background:#161616; border:2px solid var(--rahmen); }
+  .achtung b { color:var(--pink); }
+  .knopf { border-color:var(--rahmen); }
+  .knopf.voll { color:#111111; box-shadow:0 10px 28px rgba(255,210,0,.25); }
+  .knopf.voll:hover { background:#E6BD00; border-color:#E6BD00; }
+  .karte h3 { color:var(--text); }
+  .karte h3 .z { color:#111111; }
+  .verein { background:#161616; border-color:var(--pink); }
+  .verein .kicker::before { background:var(--pink); }
+  .sport span { background:#0B0B0B; color:var(--text); border-color:var(--rahmen); }
+  .sport span.eig { background:var(--pink); border-color:var(--pink); color:#111111; }
+  .verein img { border-color:var(--rahmen); }
+  .punkte button { background:rgba(245,245,245,.25); }
+  .punkte button.an { background:var(--pink); box-shadow:0 0 10px var(--pink); }
+  dialog button { background:var(--pink); border-color:var(--pink); color:#111111; }
+  /* Mac-Bilder (quer) gleich hoch, Beschriftung so breit wie das Bild */
+  .galerie figure { width:min-content; }
+  .galerie .quer img { height:420px; width:auto; max-width:none; max-height:none; }
+  .galerie figcaption { max-width:none; }
+  .held h1 { font-size:66px; line-height:1; } .held h1 .mark { white-space:nowrap; }
+  @media (max-width:900px) { .held h1 { font-size:52px; } }
+  @media (max-width:600px) {
+    .held h1 { font-size:40px; }
+    .held .marke { font-size:19px; letter-spacing:.05em; } .held .art { font-size:12px; letter-spacing:.06em; }
+    .galerie figure { width:auto; }
+    .galerie .quer img { height:auto; max-width:100%; max-height:min(60vh, 500px); }
+  }
+  @media (max-width:380px) {
+    .held .kopf { gap:12px; } .held .kopf img { width:58px; height:58px; border-radius:14px; } .held .marke { font-size:17px; } .held .art { font-size:11px; }
+  }
+</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"><div class="spur">
+  <span>Alle <b>Fristen</b> im Blick</span><span><b>Kassa-Prüfung</b> auf den Cent</span><span>Berichte ans <b>Gericht</b></span><span><b>Fahrtenbuch</b> und Steuer</span><span>Nur <b>Pseudonyme</b></span><span>Mit <b>Passwort</b></span><span>Alle <b>Fristen</b> im Blick</span><span><b>Kassa-Prüfung</b> auf den Cent</span><span>Berichte ans <b>Gericht</b></span><span><b>Fahrtenbuch</b> und Steuer</span><span>Nur <b>Pseudonyme</b></span><span>Mit <b>Passwort</b></span>
+</div></div>
+
+<header class="held">
+  <div class="wrap">
+    <div>
+      <a class="zurueck" href="../../#programm-vertretungsbuch">← Zurück zur Startseite</a>
+      <div class="kopf">
+        <img src="icon.png" alt="Symbol des Vertretungsbuchs" width="92" height="92">
+        <div><div class="marke">VERTRETUNGS<b>BUCH</b></div><div class="art">Mac-Programm<br>für die Erwachsenenvertretung</div></div>
+      </div>
+      <h1>Jede Frist. <span class="mark">Im Blick.</span></h1>
+      <p class="lead">Für ehrenamtliche Erwachsenenvertreter:innen – über einen Verein oder direkt vom Gericht bestellt: Fristen, Akte, Geld und Berichte zu jeder vertretenen Person an einem Platz. Das Programm zeigt, was als Nächstes dran ist.</p>
+      <div class="knoepfe">
+        <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+        <a class="knopf rand" href="#film">▶ Film ansehen</a>
+      </div>
+      <p class="achtung"><b>Hinweis:</b> ein Arbeitsprogramm – es ersetzt keine Rechtsberatung.</p>
+    </div>
+    <button type="button" class="hook" data-gross="../../assets/programme/vertretungsbuch-bild.jpg" data-text="Vertretungsbuch: alle Fristen und eine Kassa-Prüfung auf den Cent" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
+      <img src="../../assets/programme/vertretungsbuch-bild.jpg" alt="Vertretungsbuch: Übersicht aller Fristen mit erfundenen Pseudonymen und das Ergebnis einer Kassa-Prüfung, Schriftzug „Jede Frist. Im Blick.“" width="1600" height="1000">
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="film" style="padding-top:20px">
+    <div class="kicker">In 30 Sekunden</div>
+    <h2>Von der Frist <span class="mark">bis zum Bericht.</span></h2>
+    <div class="film">
+      <video id="video" muted playsinline loop controls preload="none" poster="poster.jpg" width="1920" height="1080"
+             aria-label="Kurzfilm: Vertretungsbuch">
+        <source src="film.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section id="bilder">
+    <div class="kicker">Bilder aus dem Programm</div>
+    <h2>Mit <span class="mark">erfundenen Personen.</span></h2>
+    <p class="wisch">Zum Weiterwischen seitlich schieben, zum Vergrößern antippen. Alle Personen, Firmen und Beträge sind erfunden.</p>
+    <div class="galerie">
+      <figure class="quer"><button type="button" data-gross="bilder/fristen.jpg" data-text="Alle Fristen: das Dringendste zuerst, mit Lämpchen"><img src="bilder/fristen.jpg" alt="Übersicht aller Fristen, überfällige mit rotem Lämpchen" width="1400" height="875" loading="lazy"></button><figcaption>Alle Fristen: das Dringendste zuerst, mit Lämpchen</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/person.jpg" data-text="Jede Person: nächste Frist, Kontakte, Einkommen und Abbucher"><img src="bilder/person.jpg" alt="Übersicht einer vertretenen Person unter Pseudonym" width="1400" height="875" loading="lazy"></button><figcaption>Jede Person: nächste Frist, Kontakte, Einkommen und Abbucher</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/vereinsprogramm.jpg" data-text="Texte fürs Vereinsprogramm – kopieren und abhaken"><img src="bilder/vereinsprogramm.jpg" alt="Liste mit Texten fürs Vereinsprogramm und Kopier-Knöpfen" width="1400" height="875" loading="lazy"></button><figcaption>Texte fürs Vereinsprogramm – kopieren und abhaken</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/kassa-ergebnis.jpg" data-text="Kassa-Prüfung: Soll und Ist auf den Cent"><img src="bilder/kassa-ergebnis.jpg" alt="Ergebnis einer Kassa-Prüfung mit Unterschied 0,00 €" width="1400" height="875" loading="lazy"></button><figcaption>Kassa-Prüfung: Soll und Ist auf den Cent</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/gericht.jpg" data-text="Direkt vom Gericht bestellt: Pflichten laut Beschluss"><img src="bilder/gericht.jpg" alt="Pflichten gegenüber dem Gericht mit Fälligkeiten" width="1400" height="875" loading="lazy"></button><figcaption>Direkt vom Gericht bestellt: Pflichten laut Beschluss</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/bericht.jpg" data-text="Berichtsentwurf mit Kopier-Knopf je Abschnitt"><img src="bilder/bericht.jpg" alt="Entwurf eines Antrittsberichts mit Abschnitten zum Kopieren" width="1400" height="875" loading="lazy"></button><figcaption>Berichtsentwurf mit Kopier-Knopf je Abschnitt</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/bekanntgaben.jpg" data-text="Bekanntgaben bei Banken und Ämtern, mit Textbausteinen"><img src="bilder/bekanntgaben.jpg" alt="Bekanntgaben bei erfundenen Firmen mit Status" width="1400" height="875" loading="lazy"></button><figcaption>Bekanntgaben bei Banken und Ämtern, mit Textbausteinen</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/fahrt.jpg" data-text="Besuch mit Fahrt eintragen – direkt ins Fahrtenbuch"><img src="bilder/fahrt.jpg" alt="Fenster „Besuch mit Fahrt“ mit Uhrzeiten und Kilometern" width="1400" height="875" loading="lazy"></button><figcaption>Besuch mit Fahrt eintragen – direkt ins Fahrtenbuch</figcaption></figure>
+      <figure class="quer"><button type="button" data-gross="bilder/steuer.jpg" data-text="Steuer & Fahrten: Kilometergeld und Ausgaben je Jahr"><img src="bilder/steuer.jpg" alt="Fahrtenbuch mit Kilometergeld für das Jahr 2026" width="1400" height="875" loading="lazy"></button><figcaption>Steuer & Fahrten: Kilometergeld und Ausgaben je Jahr</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="kann">
+    <div class="kicker">Was es kann</div>
+    <h2>Alles zur Vertretung <span class="mark">an einem Platz.</span></h2>
+    <div class="raster">
+      <div class="karte"><h3><span class="z">1</span>Alle Fristen</h3><p>Über alle Personen sortiert: überfällig, in den nächsten 60 Tagen, später. Erledigt man eine wiederkehrende Pflicht, kommt die nächste von selbst.</p></div>
+      <div class="karte"><h3><span class="z">2</span>Verein oder Gericht</h3><p>Beim Anlegen fragt das Programm, wie die Vertretung zustande kam, und schlägt die passenden Pflichten vor – die echten Fristen stehen im Beschluss.</p></div>
+      <div class="karte"><h3><span class="z">3</span>Kassa-Prüfung</h3><p>Sparkarte, Kassabuch und Belege gegeneinander, Soll und Ist auf den Cent. Der Prüfbericht landet als PDF im Ordner der Person.</p></div>
+      <div class="karte"><h3><span class="z">4</span>Berichte und Briefe</h3><p>Entwürfe mit einem Kopier-Knopf je Abschnitt, Textbausteine für Banken, Versicherungen und Ämter – mit Lämpchen, bis die Bestätigung da ist.</p></div>
+      <div class="karte"><h3><span class="z">5</span>Fahrten und Ausgaben</h3><p>Besuch mit Fahrt eintragen, die Strecke merkt es sich je Person. Kilometergeld, eigene Ausgaben mit Beleg und eine Übersicht je Jahr als PDF.</p></div>
+      <div class="karte"><h3><span class="z">6</span>Privat bleibt privat</h3><p>Nur Pseudonyme, Konto- und Vertragsnummern nur mit den letzten Stellen, Passwort, Daten in der eigenen iCloud mit Sicherungen – am Mac und am MacBook.</p></div>
+    </div>
+  </section>
+
+  <section id="eigenes">
+    <div class="verein">
+      <div>
+        <div class="kicker">Für dein Ehrenamt, deinen Verein, dein Büro</div>
+        <h2>Deine Arbeit. <span style="color:#FFD200">Dein Programm.</span></h2>
+        <p>Ehrenamt, Sozialarbeit, Hausverwaltung oder Vereinskassa: Ich baue <b style="color:#FFD200">Programme, die zu deinen Abläufen passen</b> – mit Fristen, Vorlagen und Ablage, so wie du arbeitest.</p>
+        <div class="sport"><span class="eig">🤝 Ehrenamt</span><span>🏛️ Verein</span><span>🏠 Hausverwaltung</span><span>📋 Sozialarbeit</span></div>
+      </div>
+      <img src="bilder/kassa-ergebnis.jpg" alt="Ergebnis einer Kassa-Prüfung im Vertretungsbuch" loading="lazy">
+    </div>
+  </section>
+
+  <div class="schluss">
+    <div class="kicker">Mac-Programm</div>
+    <div class="gross">Dein Ehrenamt. <span class="mark">Gut organisiert?</span></div>
+    <div class="knoepfe">
+      <a class="knopf voll" href="../../#kontakt">Anfrage schreiben</a>
+      <a class="knopf rand" href="../../#programme">Alle Programme ansehen</a>
+    </div>
+  </div>
+
+  <a class="zurueck" href="../../#programm-vertretungsbuch" style="margin-top:40px">← Zurück zur Startseite</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="zeile">
+      <a class="von" href="../../">Ein Programm von robschman.at →</a>
+      <nav><a href="../../impressum.html">Impressum</a><a href="../../datenschutz.html">Datenschutz</a><a href="../../agb.html">AGB</a></nav>
+    </div>
+    <p class="ki">Texte, Grafiken und Film auf dieser Seite mit KI-Unterstützung erstellt. Die Bilder zeigen das echte Programm mit erfundenen Personen, Firmen und Beträgen. Das Vertretungsbuch ist ein privates Arbeitsprogramm, kein Programm eines Vereins, und ersetzt keine Rechtsberatung.</p>
+  </div>
+</footer>
+
+<dialog id="gross" aria-label="Bild in groß">
+  <div class="leiste"><span id="gross-text"></span><button type="button" id="gross-zu">Schließen ✕</button></div>
+  <img id="gross-bild" alt="">
+</dialog>
+
+<script>
+(function () {
+  var v = document.getElementById('video');
+  var ruhig = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (v && 'IntersectionObserver' in window && !ruhig) {
+    new IntersectionObserver(function (e) {
+      e.forEach(function (x) {
+        if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.5 }).observe(v);
+  }
+  var d = document.getElementById('gross'), bild = document.getElementById('gross-bild'), text = document.getElementById('gross-text');
+  document.querySelectorAll('[data-gross]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bild.src = b.dataset.gross; bild.alt = b.dataset.text; text.textContent = b.dataset.text;
+      if (d.showModal) d.showModal(); else window.open(b.dataset.gross, '_blank');
+    });
+  });
+  document.getElementById('gross-zu').addEventListener('click', function () { d.close(); });
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+  // Strichleiste: ein Strich je Bild, der aktuelle leuchtet; antippen springt hin
+  document.querySelectorAll('.galerie').forEach(function (g) {
+    var bilder = g.querySelectorAll('figure'); if (bilder.length < 2) return;
+    var leiste = document.createElement('div'); leiste.className = 'punkte'; leiste.setAttribute('aria-label', 'Bild auswählen');
+    var lage = function (f) { return f.getBoundingClientRect().left - g.getBoundingClientRect().left + g.scrollLeft; };
+    bilder.forEach(function (f, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Bild ' + (i + 1) + ' von ' + bilder.length);
+      b.addEventListener('click', function () { g.scrollTo({ left: lage(f), behavior: 'smooth' }); });
+      leiste.appendChild(b);
+    });
+    g.insertAdjacentElement('afterend', leiste);
+    var knoepfe = leiste.querySelectorAll('button'), wartet = false;
+    function markieren() {
+      wartet = false;
+      var nr = 0, best = Infinity;
+      if (g.scrollLeft + g.clientWidth >= g.scrollWidth - 4) nr = bilder.length - 1;
+      else bilder.forEach(function (f, i) { var d = Math.abs(lage(f) - g.scrollLeft); if (d < best) { best = d; nr = i; } });
+      knoepfe.forEach(function (b, i) { b.classList.toggle('an', i === nr); b.setAttribute('aria-current', i === nr ? 'true' : 'false'); });
+    }
+    g.addEventListener('scroll', function () { if (!wartet) { wartet = true; requestAnimationFrame(markieren); } }, { passive: true });
+    window.addEventListener('resize', markieren); markieren();
+  });
+})();
+</script>
+<script>
+// Beim Öffnen ganz oben anfangen – auch in einer Vorschau, die ihre eigene Scrollposition behält (Robert 20.10.2026).
+// Nicht bei Zurück, Neuladen oder Sprungmarke (#film …).
+(function () {
+  if (location.hash) return;
+  var n = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (n && (n.type === 'back_forward' || n.type === 'reload')) return;
+  var seite = document.documentElement;
+  try { seite.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { seite.scrollIntoView(true); }
+})();
+</script>
+<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "5c43804ceb444304ab5ea60411db335f"}'></script>
+</body>
+</html>
