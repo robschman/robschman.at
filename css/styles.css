@@ -745,9 +745,12 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .cs-hero__apps img { display: block; width: 100%; height: 100%; }
 @media (max-width: 600px) {
   .cs-hero__apps { gap: 12px; }
-  .cs-hero__apps ul { gap: 9px; }
-  .cs-hero__apps a { width: 46px; height: 46px; border-radius: 12px; }
+  /* Am Handy: immer 7 Symbole je Reihe über die volle Breite, die Reihe darunter mittig (Robert 21.10.2026: „nicht schön in der Mitte“) */
+  .cs-hero__apps ul { flex: 1 1 100%; justify-content: center; gap: 8px; }
+  .cs-hero__apps li { flex: 0 0 calc((100% - 48px) / 7); }
+  .cs-hero__apps a { width: 100%; height: auto; aspect-ratio: 1; border-radius: 12px; }
 }
+@media (min-width: 601px) and (max-width: 999px) { .cs-hero__apps ul { flex: 1 1 100%; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .cs-hero--buehne .rs-wm__dot { animation: none; } .cs-hero__apps a { transition: none; } }
 
 /* --- Kurz-Erklaerung ----------------------------------------------------- */
@@ -1439,6 +1442,9 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 .rs-header__link { font-weight: 600; font-size: 15px; text-decoration: none; color: var(--text); }
 .rs-header__link:hover { color: var(--accent); }
 @media (max-width: 560px) { .rs-header__link--breit { display: none; } .rs-header__nav { gap: var(--sp-3); } }
+/* Kleine Handys (≤ 380 px, z. B. iPhone SE/mini): Knopf „Schreib mir“ ragte 2 px über den Rand → enger setzen (21.10.2026) */
+@media (max-width: 380px) { .rs-header__nav { gap: var(--sp-2); } .rs-header__nav .rs-btn--sm { padding-inline: 10px; } }
+@media (max-width: 340px) { .rs-header .rs-wm--md { font-size: 19px; } .rs-header__nav .rs-btn--sm { padding-inline: 8px; } }
 
 .vid-reihe { display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: var(--sp-4); align-items: end; margin-top: var(--sp-6); }
 .vid-bild { position: relative; display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-strong);
