@@ -90,7 +90,7 @@ const PROGRAMME = [
     status: 'online',
     farbe: '#7C9CFF',
     icon: 'assets/programme/eueh.png',
-    bild: 'assets/programme/eueh-bild.jpg',
+    bild: 'assets/programme/eueh-bild.jpg?v=20261022',
     form: 'quer', hell: false,
     alt: 'EÜH-Antragsassistent: ausgefüllte persönliche Daten eines erfundenen Testfalls, die Auswahl der '
        + 'Justizanstalt mit Hinweis und dahinter das amtliche Formular, Schriftzug „Feld für Feld erklärt“',
