@@ -191,18 +191,18 @@ const PROGRAMME = [
   {
     slug: 'belegro',
     name: 'Belegro',
-    art: 'Buchhaltungsprogramm · Mac',
-    satz: 'Belege ablegen, den Rest macht das Programm: Es sortiert nach Monat und Kategorie, '
-        + 'gleicht den Kontoauszug ab, schreibt Rechnungen und bereitet alles für den '
-        + 'Steuerberater auf.',
+    art: 'Buchhaltungsprogramm · Mac und Windows',
+    satz: 'Für Kleinunternehmer:innen in Österreich: Belege mit KI einlesen, den Kontoauszug abgleichen, '
+        + 'Rechnungen schreiben – und am Monatsende liegen die Unterlagen für dich und deine Steuerberatung bereit.',
     punkte: ['Belege mit KI-Erkennung einlesen', 'Abgleich mit dem Kontoauszug', 'Rechnungen und E-Rechnungen'],
     status: 'einsatzbereit',
     farbe: '#5AB0D0',
     icon: 'assets/programme/belegro.png',
-    bild: null,
+    bild: 'assets/programme/belegro-bild.jpg',
     form: 'quer', hell: false,
-    alt: 'Belegro',
-    seite: null,
+    alt: 'Belegro: Übersicht mit Einnahmen, Ausgaben und Gewinn einer erfundenen Massagepraxis und das Fenster '
+       + '„Beleg bearbeiten“, Schriftzug „Belege rein. Ordnung raus.“',
+    seite: 'programme/belegro/',
     link: null,
     hinweis: 'Werkzeug zur Aufbereitung — keine Steuerberatung.',
   },
