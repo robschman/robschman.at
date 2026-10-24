@@ -41,6 +41,8 @@
   .held .wrap { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
   .held .kopf { display:flex; align-items:center; gap:18px; margin-top:30px; }
   .held .kopf img { width:92px; height:92px; border-radius:22px; box-shadow:0 14px 40px rgba(0,0,0,.30); }
+  .held .kopf .symbole { display:flex; gap:10px; flex:none; }   /* Mac-Programm + Pläne am Handy */
+  .held .kopf .symbole img { box-shadow:0 0 0 2px #2A2A2A, 0 14px 40px rgba(0,0,0,.30); }   /* schwarze Kachel auf schwarzem Grund sichtbar machen */
   .held .marke { font:900 28px/1.1 var(--sans); letter-spacing:.04em; color:var(--dunkel); }
   .held .marke b { color:var(--pink); }
   .held .art { margin-top:6px; font:700 14px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--dunkel); }
@@ -113,6 +115,7 @@
   }
   @media (max-width:600px) {
     body { font-size:17px; } .held { padding-top:24px; } .held h1 { font-size:40px; } .held .kopf img { width:70px; height:70px; border-radius:17px; }
+    .held .kopf { flex-wrap:wrap; } .held .kopf > div { flex-basis:100%; }   /* zwei Symbole: Schriftzug darunter */
     .held .marke { font-size:22px; } .held .lead { font-size:19px; } h2 { font-size:30px; } .raster { grid-template-columns:1fr; }
     .galerie img { height:240px; } .knopf { width:100%; justify-content:center; } .verein { padding:20px; } .schluss .gross { font-size:30px; }
   }
@@ -178,7 +181,7 @@
     <div>
       <a class="zurueck" href="../../#programm-trainingsplan">← Zurück zur Startseite</a>
       <div class="kopf">
-        <img src="icon.png" alt="Symbol des Trainingsplan-Programms" width="92" height="92">
+        <span class="symbole"><img src="icon.png" alt="Symbol des Trainingsplan-Programms am Mac" title="am Mac: Pläne erstellen" width="92" height="92"><img src="icon-handy.png?v=20261024" alt="Symbol der Trainingspläne am Handy" title="am Handy: Pläne und Trainings-App" width="92" height="92"></span>
         <div><div class="marke">TRAININGS<b>PLAN</b></div><div class="art">Mac-Programm + Trainings-App<br>Im Einsatz bei Schritt für Schritt fit</div></div>
       </div>
       <h1>Dein Plan. <span class="mark">Am Handy.</span></h1>
@@ -188,8 +191,8 @@
         <a class="knopf rand" href="#film">▶ Film ansehen</a>
       </div>
     </div>
-    <button type="button" class="hook" data-gross="../../assets/programme/trainingsplan-bild.jpg" data-text="Trainingsplan-Programm: Übungsliste am Mac und der fertige Plan am Handy" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
-      <img src="../../assets/programme/trainingsplan-bild.jpg" alt="Trainingsplan-Programm: Übungsliste mit eigenen Übungsbildern am Mac und der fertige Plan eines erfundenen Beispielkunden am Handy, Schriftzug „Dein Plan. Am Handy.“" width="1600" height="1000">
+    <button type="button" class="hook" data-gross="../../assets/programme/trainingsplan-bild.jpg?v=20261024" data-text="Trainingsplan-Programm: Übungsliste am Mac und der fertige Plan am Handy" aria-label="Bild groß ansehen" style="padding:0;cursor:zoom-in;background:none">
+      <img src="../../assets/programme/trainingsplan-bild.jpg?v=20261024" alt="Trainingsplan-Programm: Übungsliste mit eigenen Übungsbildern am Mac und der fertige Plan eines erfundenen Beispielkunden am Handy, Schriftzug „Dein Plan. Am Handy.“" width="1600" height="1000">
     </button>
   </div>
 </header>

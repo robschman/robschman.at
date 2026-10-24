@@ -179,8 +179,8 @@ const PROGRAMME = [
     punkte: ['Übungen mit eigenen Bildern', 'Plan als App am Handy', 'Im Einsatz bei Schritt für Schritt fit'],
     status: 'einsatzbereit',
     farbe: '#F0555F',
-    icon: 'assets/programme/trainingsplan.png',
-    bild: 'assets/programme/trainingsplan-bild.jpg',
+    icon: 'assets/programme/trainingsplan.png?v=20261024',
+    bild: 'assets/programme/trainingsplan-bild.jpg?v=20261024',
     form: 'quer', hell: false,
     alt: 'Trainingsplan-Programm: Übungsliste mit eigenen Übungsbildern am Mac und der fertige Plan eines erfundenen '
        + 'Beispielkunden am Handy, Schriftzug „Dein Plan. Am Handy.“',
