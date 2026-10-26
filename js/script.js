@@ -305,6 +305,52 @@ const AUFTRAEGE = [
 
 
 /* ============================================================================
+   IN ARBEIT – Programme, die gerade entstehen (seit 26.10.2026)
+   ----------------------------------------------------------------------------
+   Robert, 26.10.2026: „einen Reiter mit Projekt in Arbeit … dass immer die neuesten
+   Projekte kurz angeschnitten werden, was in Arbeit momentan ist.“
+   Kleine Karten im Abschnitt #in-arbeit, Reihenfolge = Reihenfolge in dieser Liste.
+
+   Jeder Eintrag hat diese Felder:
+     slug      kurzer Name ohne Leerzeichen, wird zum Anker #in-arbeit-<slug>
+     name      wie es groß auf der Karte steht
+     art       kleine Zeile über dem Namen (z. B. "Handy-App · für kleine Geschäfte")
+     satz      ein, zwei Sätze: was soll es können. Nichts versprechen, was noch nicht
+               feststeht: keine Termine, keine Preise; Geplantes als „geplant“ schreiben.
+     status    'inPlanung' | 'inArbeit'   (Pille auf der Karte)
+     symbol    ein Emoji als schlichtes Zeichen
+     farbe     Farbe der Karte (hell genug für dunklen Grund)
+
+   NEUES PROJEKT AUFNEHMEN: einen Block kopieren und anpassen – fertig.
+   FERTIG GEWORDEN: hier herausnehmen und oben bei PROGRAMME als Schaufenster eintragen.
+   ========================================================================= */
+const IN_ARBEIT = [
+  {
+    slug: 'lagersystem',
+    name: 'Lagersystem mit Barcode',
+    art: 'Handy-App · für kleine Geschäfte',
+    satz: 'Für Trafiken und kleine Geschäfte: Ware mit dem Handy per Barcode scannen und ein- oder '
+        + 'ausbuchen, getrennt nach Kassa und Automaten. Geplant sind außerdem der Abgleich mit dem '
+        + 'Kassenabschluss und ein Bestellvorschlag.',
+    status: 'inPlanung',
+    symbol: '📦',
+    farbe: '#2DD4BF',
+  },
+  {
+    slug: 'foto-app',
+    name: 'Foto-App',
+    art: 'Mac-Programm · für deine Handyfotos',
+    satz: 'Holt die Fotos vom iPhone auf den Mac, sortiert sie nach Datum und hilft beim Aussortieren '
+        + 'von Doppelten und Verschwommenen. Geplant: Urlaube von selbst erkennen und daraus Alben und '
+        + 'Collagen machen, alles am eigenen Mac.',
+    status: 'inPlanung',
+    symbol: '📸',
+    farbe: '#60A5FA',
+  },
+];
+
+
+/* ============================================================================
    AB HIER IST TECHNIK — hier musst du normalerweise nichts ändern.
    ========================================================================= */
 
@@ -345,6 +391,8 @@ const STATUS = {
   imEinsatz:     { text: 'Im Einsatz',    klasse: 'ok',   zeichen: 'haken' },
   umgesetzt:    { text: 'Umgesetzt',     klasse: 'soon', zeichen: 'haken' },
   beta:          { text: 'Beta',          klasse: 'beta', zeichen: 'warn'  },
+  inPlanung:     { text: 'In Planung',    klasse: 'soon', zeichen: 'uhr'   },
+  inArbeit:      { text: 'In Arbeit',     klasse: 'beta', zeichen: 'uhr'   },
 };
 
 /* Schuetzt vor kaputtem HTML, falls in einem Text ein spitze Klammer steht */
@@ -455,6 +503,28 @@ function auftraegeAufbauen() {
   const ziel = document.getElementById('auftrag-liste');
   if (!ziel) return;
   ziel.innerHTML = `<div class="sf-liste">${AUFTRAEGE.map(schaufenster).join('')}</div>`;
+}
+
+/* Baut die Karten im Abschnitt „In Arbeit“ (Liste IN_ARBEIT oben) */
+function inArbeitKarte(p) {
+  const s = STATUS[p.status] || STATUS.inPlanung;
+  return `<article class="ia" id="in-arbeit-${p.slug}" style="--ia-farbe: ${p.farbe}">
+      <div class="ia__kopf">
+        <span class="ia__symbol" aria-hidden="true">${p.symbol}</span>
+        <div class="ia__titel">
+          <p class="ia__art">${sicher(p.art)}</p>
+          <h3 class="ia__name">${sicher(p.name)}</h3>
+        </div>
+      </div>
+      <span class="rs-status rs-status--${s.klasse} ia__status">${svg(s.zeichen, 12, 2)}${s.text}</span>
+      <p class="ia__satz">${sicher(p.satz)}</p>
+    </article>`;
+}
+
+function inArbeitAufbauen() {
+  const ziel = document.getElementById('in-arbeit-liste');
+  if (!ziel) return;
+  ziel.innerHTML = `<div class="ia-liste">${IN_ARBEIT.map(inArbeitKarte).join('')}</div>`;
 }
 
 /* --- Bilder erst laden, wenn sie in die Naehe des Bildschirms kommen ------
@@ -658,6 +728,7 @@ function grossansichtAktivieren() {
 
 auftraegeAufbauen();
 listeAufbauen();
+inArbeitAufbauen();
 bilderNachladen();          // muss NACH dem Aufbauen laufen - erst dann gibt es die Karten
 kopierKnoepfeAktivieren();
 grossansichtAktivieren();

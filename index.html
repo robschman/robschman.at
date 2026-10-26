@@ -135,7 +135,7 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/styles.css?v=20261021d">
+<link rel="stylesheet" href="css/styles.css?v=20261026a">
 
 <!-- Begrüßung für Besucher aus der VTW-Turnierplanung.
      Ruft jemand die Seite mit  robschman.at/?von=vtw  auf, bekommt der
@@ -174,6 +174,7 @@
       class="rs-wm__dot" aria-hidden="true">_</span><span class="rs-wm__sub">programming</span></a>
     <nav class="rs-header__nav" aria-label="Bereiche">
       <a class="rs-header__link rs-header__link--breit" href="#programme">Programme</a>
+      <a class="rs-header__link rs-header__link--breit rs-header__link--ia" href="#in-arbeit">In Arbeit</a>
       <a class="rs-header__link" href="videos/">Videos</a>
       <a class="rs-btn rs-btn--primary rs-btn--sm" href="#kontakt">Schreib mir</a>
     </nav>
@@ -385,6 +386,35 @@
           Übersicht per E-Mail.
         </p>
       </noscript>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       5a — IN ARBEIT (seit 26.10.2026)
+       Robert: „dass immer die neuesten Projekte kurz angeschnitten werden,
+       was in Arbeit momentan ist“. Die Karten baut js/script.js aus der
+       Liste IN_ARBEIT. Willst du etwas ändern: dorthin, nicht hierher.
+       =================================================================== -->
+  <section id="in-arbeit" class="cs-sec ia-sec">
+    <div class="u-container">
+      <header class="rs-sh">
+        <p class="rs-sh__eyebrow"><span class="rs-sh__rule" aria-hidden="true"></span>In Arbeit</p>
+        <h2 class="rs-sh__title">Daran baue ich gerade</h2>
+        <p class="rs-sh__sub">
+          Neue Programme, die gerade entstehen. Klingt eines nach deinem Problem? Schreib mir,
+          dann fließen deine Wünsche gleich mit ein.
+        </p>
+      </header>
+
+      <!-- Hier hinein setzt das Skript die Karten -->
+      <div id="in-arbeit-liste"></div>
+
+      <div class="ia-schluss">
+        <p>Du brauchst etwas Ähnliches oder hast selbst eine Idee für ein Programm?</p>
+        <a class="rs-btn rs-btn--secondary rs-btn--md" href="#kontakt" data-anfrage
+           data-thema="Anfrage: Programm in Arbeit">Anfrage schreiben</a>
+      </div>
     </div>
   </section>
 
@@ -870,7 +900,7 @@
 <!-- Meldung „Adresse kopiert" für Screenreader (für das Auge steht sie am Button) -->
 <p id="kopier-meldung" class="u-nur-vorlesen" role="status" aria-live="polite"></p>
 
-<script src="js/script.js?v=20261024b"></script>
+<script src="js/script.js?v=20261026a"></script>
 
 <!-- =====================================================================
      BESUCHERZAEHLER - Cloudflare Web Analytics

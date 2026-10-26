@@ -1518,3 +1518,41 @@ section[id] { scroll-margin-top: 80px; }      /* damit die Kopfzeile nichts verd
 @media (min-width: 900px) { .ang-kopf { grid-template-columns: minmax(0, 1fr) auto; } .ang-aktion { align-items: flex-end; } }
 @media (max-width: 980px) { .ang-preise { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ang-ablauf { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ang-ablauf li::before { display: none; } }
 @media (max-width: 640px) { .ang-preise, .ang-ablauf, .ang-infos { grid-template-columns: 1fr; } }
+
+
+/* ==========================================================================
+   BLOCK 9b — IN ARBEIT (seit 26.10.2026)
+   Kleine Karten für Programme, die gerade entstehen. Daten: IN_ARBEIT in js/script.js.
+   Gestrichelter Rahmen = „Baustelle“. Alle Texte weiß bzw. in der Kartenfarbe, kein Grau.
+   ========================================================================== */
+.ia-sec { border-top: var(--border-hairline) solid var(--line); }
+/* Menüpunkt „In Arbeit“: nie umbrechen; unter 720 px weglassen, sonst wird die Kopfzeile zu eng */
+.rs-header__link--ia { white-space: nowrap; }
+@media (max-width: 720px) { .rs-header__link--ia { display: none; } }
+.ia-liste { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); margin-top: var(--sp-6); }
+@media (min-width: 760px) { .ia-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ia { --ia-farbe: var(--accent);
+  position: relative; display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-5); border-radius: 16px; overflow: hidden; scroll-margin-top: 90px;
+  border: 1px dashed color-mix(in srgb, var(--ia-farbe) 55%, var(--line));
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--ia-farbe) 12%, transparent), transparent 60%),
+    var(--surface); }
+.ia__kopf { display: flex; align-items: center; gap: var(--sp-4); }
+.ia__symbol { flex: none; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center;
+  font-size: 28px; line-height: 1;
+  background: color-mix(in srgb, var(--ia-farbe) 18%, var(--ink-850));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ia-farbe) 40%, transparent); }
+.ia__titel { min-width: 0; }
+.ia__art { margin: 0 0 4px; font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--ia-farbe); }
+.ia__name { margin: 0; font-family: var(--font-sans); font-weight: 800; color: var(--text);
+  font-size: clamp(21px, 2.6vw, 26px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
+.ia__status { align-self: flex-start; color: var(--ia-farbe); }
+.ia__satz { margin: 0; color: var(--text); line-height: var(--lh-lead); }
+.ia-schluss { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3) var(--sp-5); margin-top: var(--sp-6); }
+.ia-schluss p { margin: 0; font-weight: 600; color: var(--text); max-width: 52ch; }
+@media (max-width: 560px) {
+  .ia { padding: var(--sp-4); }
+  .ia-schluss .rs-btn { flex: 1 1 100%; justify-content: center; }
+}
