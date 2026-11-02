@@ -232,9 +232,9 @@ const PROGRAMME = [
         + 'Fristen, Akte, Geld und Berichte zu jeder vertretenen Person an einem Platz.',
     punkte: ['Alle Fristen mit Lämpchen', 'Kassa-Prüfung auf den Cent', 'Fahrtenbuch und Steuer-Übersicht'],
     status: 'einsatzbereit',
-    farbe: '#FFD200',
-    icon: 'assets/programme/vertretungsbuch.png',
-    bild: 'assets/programme/vertretungsbuch-bild.jpg',
+    farbe: '#BEDDE4',   // Eisblau seit 02.11.2026 (davor Gelb)
+    icon: 'assets/programme/vertretungsbuch.png?v=20261102',
+    bild: 'assets/programme/vertretungsbuch-bild.jpg?v=20261102',
     form: 'quer', hell: false,
     alt: 'Vertretungsbuch: Übersicht aller Fristen mit erfundenen Pseudonymen und das Ergebnis einer Kassa-Prüfung, '
        + 'Schriftzug „Jede Frist. Im Blick.“',
