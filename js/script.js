@@ -766,6 +766,7 @@ grossansichtAktivieren();
       feld.appendChild(document.createElement('br'));
     }
     feld.appendChild(document.createTextNode(text));
+    feld.style.whiteSpace = 'pre-line'; /* je Satz eine Zeile (Robert, 30.10.2026) */
     feld.className = 'rs-form__hinweis rs-form__hinweis--' + art;
     feld.setAttribute('data-an', '1');
   }
@@ -864,13 +865,13 @@ grossansichtAktivieren();
     if (status === 'ok') {
       formular.reset();
       zeitSetzen();
-      melden('Die Anfrage ist bei mir angekommen. Ich melde mich per E-Mail, '
-        + 'meist noch am selben Tag.', 'ok', 'Danke!');
+      melden('Danke, die Anfrage ist bei mir angekommen.\n'
+        + 'Ich melde mich per E-Mail, meist noch am selben Tag.', 'ok');
     } else if (status === 'spam') {
       melden('Das ging sehr schnell — bitte schick die Anfrage gleich noch einmal ab.', 'fehler');
     } else {
-      melden('Das hat leider nicht geklappt. Schreib mir bitte direkt an ' + MEINE_EMAIL
-        + ' — deine Eingaben stehen noch im Formular.', 'fehler');
+      melden('Das hat leider nicht geklappt, deine Eingaben stehen noch im Formular.\n'
+        + 'Schreib mir bitte direkt an ' + MEINE_EMAIL + '.', 'fehler');
     }
   });
 })();
